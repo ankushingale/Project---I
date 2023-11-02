@@ -6,5 +6,5 @@ def home(request):
     return render(request,'home.html')
 
 def ErgoAsiahome(request):
-    return render(request,'ErgoAsi_home.html')
+    return render(request,'ErgoAsia_app/home.html')
 
