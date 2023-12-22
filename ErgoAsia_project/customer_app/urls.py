@@ -20,5 +20,7 @@ from customer_app import views
 
 urlpatterns = [
     path('customerhome',views.customerhome,name="customerhome"),
+    path('customer-signup',views.customersignup,name="customersignup"),
+
 
 ]
