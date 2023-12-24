@@ -22,6 +22,10 @@ urlpatterns = [
     path('ErgoAsiahome',views.ErgoAsiahome,name="ErgoAsiahome"),
     path('home',views.home,name="home"),
     path('',views.home,name="home1"),
+    path('dashboard',views.dashboard,name="dashboard"),
+    path('registrationtable',views.registrationtable,name="registrationtable"),
+
+
 
 
    

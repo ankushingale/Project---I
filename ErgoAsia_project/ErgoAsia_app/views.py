@@ -8,3 +8,9 @@ def home(request):
 def ErgoAsiahome(request):
     return render(request,'ErgoAsia_app/home.html')
 
+def dashboard(request):
+    return render(request,'ErgoAsia_app/dashboard.html')
+
+def registrationtable(request):
+    return render(request,"ErgoAsia_app/tables.html")
+
