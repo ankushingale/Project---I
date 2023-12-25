@@ -24,6 +24,8 @@ urlpatterns = [
     path('',views.home,name="home1"),
     path('dashboard',views.dashboard,name="dashboard"),
     path('registrationtable',views.registrationtable,name="registrationtable"),
+    path('ergoasiasignin',views.ergoasiasignin,name="ergoasiasignin"),
+
 
 
 

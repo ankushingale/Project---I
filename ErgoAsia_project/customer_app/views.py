@@ -27,3 +27,22 @@ def customersignup(request):
         return render(request,'customer_app/signup.html',{'msg':message})
 
     return render(request,'customer_app/signup.html')
+
+@csrf_exempt
+def customersignin(request):
+    msg_valid=None
+    msg_invalid=None
+    if request.method=="POST":
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+
+        data=Customer.objects.filter(email=email,password=password)
+
+        if data.count()>0:
+            msg_valid="Authentication Successfull.....you will redirected to home page soon"
+        else:
+            msg_invalid="Invalid username and password"
+
+        return render(request,'customer_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
+
+    return render(request,'customer_app/sign-in.html')
