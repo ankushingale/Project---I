@@ -20,5 +20,9 @@ from manufacturer_app import views
 
 urlpatterns = [
     path('manufacturerhome',views.manufacturerhome,name="manufacturerhome"),
+    path('supplier-registration',views.supplierregistration,name="supplierregistration"),
+    path('supplier-signin',views.suppliersignin,name="suppliersignin"),
+
+
 
 ]
