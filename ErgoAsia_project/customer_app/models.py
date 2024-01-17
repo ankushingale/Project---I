@@ -12,5 +12,16 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Customerrequirements(models.Model):
+    first_name=models.CharField(max_length=50)
+    last_name=models.CharField(max_length=50)
+    company=models.CharField(max_length=50)
+    email=models.EmailField(max_length=50)
+    phone_no=models.CharField(max_length=50)
+    meal_preference=models.CharField(max_length=50)
+    Part_Name=models.CharField(max_length=50)
+    blank_name=models.CharField(max_length=50)
+    draft=models.CharField(max_length=50)
 
    

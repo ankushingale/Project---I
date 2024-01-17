@@ -46,3 +46,24 @@ def customersignin(request):
         return render(request,'customer_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
 
     return render(request,'customer_app/sign-in.html')
+
+def customerrequirements(request):
+    if request.method=="POST":
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        company=request.POST.get('company')
+        email=request.POST.get('email')
+        phone_no=request.POST.get('phone_number')
+        meal_preference=request.POST.get('meal_preference')
+        Part_Name=request.POST.get('Part_Name')
+        blank_name=request.POST.get('blank_name')
+        draft=request.POST.get('payable')
+
+        
+
+
+
+
+
+
+    return render(request,'customer_app/requirementsform.html')
