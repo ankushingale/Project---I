@@ -36,12 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
     'ErgoAsia_app.apps.ErgoasiaAppConfig',
     'manufacturer_app.apps.ManufacturerAppConfig',
-    'customer_app.apps.CustomerAppConfig' ,
+    'customer_app.apps.CustomerAppConfig',
 
 ]
 
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 DATABASES = {   
     'default': {   
         'ENGINE': 'django.db.backends.mysql',   
-        'NAME': 'ErgoAsia_Project',   
+        'NAME': 'ergoasia',   
         'USER': 'root',   
         'PASSWORD': 'mysqlroot',   
         'HOST': '127.0.0.1',   

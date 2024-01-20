@@ -58,17 +58,17 @@ def customerrequirements(request):
         # last_name=request.POST.get('last_name')
         cid=request.POST.get('cid')
         # email=request.POST.get('email')
-        phone_no=request.POST.get('phone_number')
+        # phone_no=request.POST.get('phone_number')
         meal_preference=request.POST.get('meal_preference')
         Part_Name=request.POST.get('Part_Name')
         blank_name=request.POST.get('blank_name')
         draft=request.POST.get('payable')
 
 
-        data=Customerrequirements(phone_no=phone_no,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,customer=cid,)
+        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         
-    customer_email = request.session.get('customer_email', None)
+    customer_email = request.session.get('cexitrustomer_email', None)
     customer_data=Customerdata.objects.filter(email=customer_email)
 
     for customer in customer_data:
