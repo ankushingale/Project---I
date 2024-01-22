@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def customerhome(request):
     return render(request,'customer_app/home.html')
@@ -51,6 +53,7 @@ def customersignin(request):
     return render(request,'customer_app/sign-in.html')
 
 @csrf_exempt
+# @login_required
 def customerrequirements(request):
     if request.method=="POST":
 
@@ -68,7 +71,7 @@ def customerrequirements(request):
         data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         
-    customer_email = request.session.get('cexitrustomer_email', None)
+    customer_email = request.session.get('customer_email', None)
     customer_data=Customerdata.objects.filter(email=customer_email)
 
     for customer in customer_data:
