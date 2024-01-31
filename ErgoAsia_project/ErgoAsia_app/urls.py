@@ -25,6 +25,8 @@ urlpatterns = [
     path('dashboard',views.dashboard,name="dashboard"),
     path('registrationtable',views.registrationtable,name="registrationtable"),
     path('ergoasiasignin',views.ergoasiasignin,name="ergoasiasignin"),
+    path('notifications',views.notifications,name="notifications"),
+
 
 
 

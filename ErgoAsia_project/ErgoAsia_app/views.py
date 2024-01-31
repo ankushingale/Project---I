@@ -39,3 +39,6 @@ def ergoasiasignin(request):
 
 
 
+
+def notifications(request):
+    return render(request,'ErgoAsia_app/notifications.html')
