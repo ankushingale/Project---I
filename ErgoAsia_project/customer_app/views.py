@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -38,26 +39,29 @@ def customersignin(request):
     if request.method=="POST":
         email=request.POST.get('email')
         password=request.POST.get('password')
-        
+
+        # Ensure login is called upon successful authentication
+
         request.session['customer_email'] = email
 
         data=Customerdata.objects.filter(email=email,password=password)
-
         if data.count()>0:
             msg_valid="Authentication Successfull.....you will redirected to home page soon"
+            # return redirect('customerrequirements')
+
         else:
             msg_invalid="Invalid username and password"
-
+            # return redirect('customersignin')
         return render(request,'customer_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
 
     return render(request,'customer_app/sign-in.html')
 
 @csrf_exempt
-# @login_required
+@login_required
 def customerrequirements(request):
+   
     if request.method=="POST":
-
-        # first_name=request.POST.get('first_name')
+                # first_name=request.POST.get('first_name')
         # last_name=request.POST.get('last_name')
         cid=request.POST.get('cid')
         # email=request.POST.get('email')

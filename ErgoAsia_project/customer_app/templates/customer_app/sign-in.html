@@ -125,13 +125,24 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
 
-                  
-                  <script>
-                    // Wait for 4 seconds (4000 milliseconds) and then redirect
-                    setTimeout(function() {
-                        window.location.href ="{% url 'customerrequirements' %}"
-                    }, 4000);
-                </script>
+                 
+                    <div id="redirect-container" data-redirect-url="{% url 'customerrequirements' %}"></div>
+
+                    <script>
+                      // Wait for 4 seconds (4000 milliseconds) and then redirect
+                      setTimeout(function() {
+                          // Retrieve the redirect URL from the data attribute
+                          var redirectUrl = document.getElementById('redirect-container').getAttribute('data-redirect-url');
+                          // Check if the redirect URL is not empty
+                          if (redirectUrl) {
+                              // Redirect to the specified URL
+                              window.location.href = redirectUrl;
+                          } else {
+                              // Log an error if the redirect URL is empty
+                              console.error('Redirect URL not found.');
+                          }
+                      }, 4000);
+                  </script>
                   </div>
                   {% endif %}
                   {% if msg_invalid %}
