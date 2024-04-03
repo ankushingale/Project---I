@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'ErgoAsia_app.apps.ErgoasiaAppConfig',
     'manufacturer_app.apps.ManufacturerAppConfig',
     'customer_app.apps.CustomerAppConfig',
+    # 'djongo',
+
 
 ]
 
@@ -91,19 +93,26 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {   
-    'default': {   
-        'ENGINE': 'django.db.backends.mysql',   
-        'NAME': 'ergoasia',   
-        'USER': 'root',   
-        'PASSWORD': 'mysqlroot',   
-        'HOST': '127.0.0.1',   
-        'PORT': '3306',   
-        'OPTIONS': {   
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"   
-        }   
-    }   
-} 
+DATABASES = {
+       'default': {
+           'ENGINE': 'djongo',
+           'NAME': 'ergoasia',
+       }
+   }
+
+# DATABASES = {   
+#     'default': {   
+#         'ENGINE': 'django.db.backends.mysql',   
+#         'NAME': 'ergoasia',   
+#         'USER': 'root',   
+#         'PASSWORD': 'mysqlroot',   
+#         'HOST': '127.0.0.1',   
+#         'PORT': '3306',   
+#         'OPTIONS': {   
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"   
+#         }   
+#     }   
+# } 
 
 
 # Password validation

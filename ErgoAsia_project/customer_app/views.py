@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -23,8 +25,9 @@ def customersignup(request):
         customer_id=random.randint(1000, 9999)
 
         data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
-
         data.save()
+        
+       
 
         message="Registration Done Sucessfully"
         
@@ -43,11 +46,17 @@ def customersignin(request):
         # Ensure login is called upon successful authentication
 
         request.session['customer_email'] = email
-
+        
         data=Customerdata.objects.filter(email=email,password=password)
+       
         if data.count()>0:
             msg_valid="Authentication Successfull.....you will redirected to home page soon"
-            # return redirect('customerrequirements')
+            # user=User.objects.create_user(email,password)
+            # user.save()
+            # user=authenticate(request,email=email,password=password)
+            # if user is not None:
+            #     login(request,user)
+            return redirect('customerrequirements')
 
         else:
             msg_invalid="Invalid username and password"
@@ -57,9 +66,8 @@ def customersignin(request):
     return render(request,'customer_app/sign-in.html')
 
 @csrf_exempt
-@login_required
-def customerrequirements(request):
-   
+# @login_required
+def customerrequirements(request): 
     if request.method=="POST":
                 # first_name=request.POST.get('first_name')
         # last_name=request.POST.get('last_name')

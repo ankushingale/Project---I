@@ -12,7 +12,7 @@ class Customerdata(models.Model):
         return self.name
 class Customerrequirements(models.Model):
     customer = models.ForeignKey(Customerdata, on_delete=models.CASCADE)
-    # phone_no = models.CharField(max_length=50, unique=True)
+    # phone_no =models.CharField(max_length=50, unique=True)
     meal_preference = models.CharField(max_length=50)
     Part_Name = models.CharField(max_length=50)
     blank_name = models.CharField(max_length=50)
