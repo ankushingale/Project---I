@@ -78,9 +78,19 @@ def customerrequirements(request):
         Part_Name=request.POST.get('Part_Name')
         blank_name=request.POST.get('blank_name')
         draft=request.POST.get('payable')
+        company_name=request.POST.get('cname')
+        project_name=request.POST.get('pname')
+        part_no=request.POST.get('cpno')
+        description=request.POST.get('desc')
+        Part_revision=request.POST.get('pr')
+        Anual_volume=request.POST.get('av')
+        Quote_submission=request.POST.get('qs')
+        target_value=request.POST.get('tv')
+        start_of_production=request.POST.get('sop')
+        
 
 
-        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,customer=Customerdata.objects.get(customer_id = cid))
+        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         
     customer_email = request.session.get('customer_email', None)
@@ -96,4 +106,4 @@ def customerrequirements(request):
         print("Last Name:", last_name)
         print("Email:", customer.email)
 
-    return render(request, 'customer_app/requirementsform.html', {'customer_data': customer_data, 'first_name': first_name, 'last_name': last_name})
+    return render(request, 'customer_app/requirementsform.html', {'customer_data': customer_data})

@@ -94,7 +94,10 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+<<<<<<< HEAD
 # ergoasia
+=======
+>>>>>>> b969ed38ea68467ee6f5ce7aa8a074ac9cc0db7f
 
 DATABASES = {
     'default': {
@@ -111,7 +114,7 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.mysql',   
 #         'NAME': 'ergoasia',   
 #         'USER': 'root',   
-#         'PASSWORD': 'mysqlroot',   
+#         'PASSWORD': 'Kavya@2004',   
 #         'HOST': '127.0.0.1',   
 #         'PORT': '3306',   
 #         'OPTIONS': {   
