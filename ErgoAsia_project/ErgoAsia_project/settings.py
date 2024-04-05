@@ -164,6 +164,9 @@ STATICFILES_DIRS = [
 
 LOGIN_URL='customersignin'
 LOGIN_REDIRECT_URL='customerrequirements'
+
+MEDIA_ROOT = r'C:\Users\ankus\OneDrive\Desktop\Project I\ErgoAsia_project\Drafts'
+MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

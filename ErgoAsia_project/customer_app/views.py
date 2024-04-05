@@ -50,9 +50,7 @@ def customersignin(request):
         data=Customerdata.objects.filter(email=email,password=password)
        
         if data.count()>0:
-            msg_valid="Authentication Successfull.....you will redirected to home page soon"
-            # user=User.objects.create_user(email,password)
-            # user.save()
+            msg_valid="Authentication Successfull.....you will redirected to home page soon"            # user.save()
             # user=authenticate(request,email=email,password=password)
             # if user is not None:
             #     login(request,user)
@@ -77,7 +75,7 @@ def customerrequirements(request):
         meal_preference=request.POST.get('meal_preference')
         Part_Name=request.POST.get('Part_Name')
         blank_name=request.POST.get('blank_name')
-        draft=request.POST.get('payable')
+        draft=request.FILES.get('pdf_file')
         company_name=request.POST.get('cname')
         project_name=request.POST.get('pname')
         part_no=request.POST.get('cpno')
@@ -88,9 +86,13 @@ def customerrequirements(request):
         target_value=request.POST.get('tv')
         start_of_production=request.POST.get('sop')
         
+        pdf_file_path = draft.name
 
+        with open(pdf_file_path, 'wb') as f:
+            for chunk in draft.chunks():
+                f.write(chunk)
 
-        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,draft=draft,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
+        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=draft,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         
     customer_email = request.session.get('customer_email', None)
