@@ -26,6 +26,7 @@ urlpatterns = [
     path('registrationtable',views.registrationtable,name="registrationtable"),
     path('ergoasiasignin',views.ergoasiasignin,name="ergoasiasignin"),
     path('notifications',views.notifications,name="notifications"),
+    path('supplier',views.supplier,name="supplier"),
 
 
 

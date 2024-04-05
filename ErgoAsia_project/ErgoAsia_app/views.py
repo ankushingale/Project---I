@@ -13,6 +13,12 @@ def ErgoAsiahome(request):
 def dashboard(request):
     return render(request,'ErgoAsia_app/dashboard.html')
 
+def supplier(request):
+    return render(request,'ErgoAsia_app/supplier.html')
+
+def notifications(request):
+    return render(request,'ErgoAsia_app/notifications.html')
+
 def registrationtable(request):
     customer_data=Customerdata.objects.all()
     supplier_data=SupplierRegistration.objects.all()
@@ -40,5 +46,3 @@ def ergoasiasignin(request):
 
 
 
-def notifications(request):
-    return render(request,'ErgoAsia_app/notifications.html')
