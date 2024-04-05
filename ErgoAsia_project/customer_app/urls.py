@@ -26,7 +26,4 @@ urlpatterns = [
     path('customer-signin',views.customersignin,name="customersignin"),
     path('customer-requirements',views.customerrequirements,name="customerrequirements"),
 
-
-
-
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

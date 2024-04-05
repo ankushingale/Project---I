@@ -94,11 +94,8 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-<<<<<<< HEAD
-# ergoasia
-=======
->>>>>>> b969ed38ea68467ee6f5ce7aa8a074ac9cc0db7f
 
+# ergoasia
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -162,14 +159,15 @@ STATIC_URL = 'static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
    
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static')
 ]
 
 LOGIN_URL='customersignin'
 LOGIN_REDIRECT_URL='customerrequirements'
 
-MEDIA_ROOT = r'C:\Users\ankus\OneDrive\Desktop\Project I\ErgoAsia_project\Drafts'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'customer_app','media')
+
+MEDIA_URL = "/media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
