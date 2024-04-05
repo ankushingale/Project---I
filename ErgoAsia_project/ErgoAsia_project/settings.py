@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import sys
 import os
-
+import djongo
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'ErgoAsia_app.apps.ErgoasiaAppConfig',
     'manufacturer_app.apps.ManufacturerAppConfig',
     'customer_app.apps.CustomerAppConfig',
-    # 'djongo',
+    'djongo',
 
 
 ]
@@ -93,13 +94,20 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+<<<<<<< HEAD
+# ergoasia
+=======
+>>>>>>> b969ed38ea68467ee6f5ce7aa8a074ac9cc0db7f
 
 DATABASES = {
-       'default': {
-           'ENGINE': 'djongo',
-           'NAME': 'ergoasia',
-       }
-   }
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'ergoasia',
+        # Other Djongo settings...
+    }
+}
+
+
 
 # DATABASES = {   
 #     'default': {   
