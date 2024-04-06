@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
@@ -6,6 +6,8 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 # Create your views here.
 def customerhome(request):
@@ -75,7 +77,7 @@ def customerrequirements(request):
         meal_preference=request.POST.get('meal_preference')
         Part_Name=request.POST.get('Part_Name')
         blank_name=request.POST.get('blank_name')
-        draft=request.FILES.get('pdf_file')
+        pdf_file=request.FILES.get('pdf_file')
         company_name=request.POST.get('cname')
         project_name=request.POST.get('pname')
         part_no=request.POST.get('cpno')
@@ -86,15 +88,21 @@ def customerrequirements(request):
         target_value=request.POST.get('tv')
         start_of_production=request.POST.get('sop')
         
-        pdf_file_path = draft.name
+        # def upload_pdf(request):
+        #     if request.method == 'POST':
+        #         pdf_file = request.FILES.get('pdf_file')
+        #         if pdf_file:
+        #             with open('media/' + pdf_file.name, 'wb') as f:
+        #                 for chunk in pdf_file.chunks():
+        #                     f.write(chunk)
+        #         return HttpResponse('File uploaded successfully!')
+        #     else:
+        #         return HttpResponse('No file uploaded!')
 
-        with open(pdf_file_path, 'wb') as f:
-            for chunk in draft.chunks():
-                f.write(chunk)
+        # upload_pdf(request)
 
-        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=draft,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
+        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
-        
     customer_email = request.session.get('customer_email', None)
     customer_data=Customerdata.objects.filter(email=customer_email)
 
