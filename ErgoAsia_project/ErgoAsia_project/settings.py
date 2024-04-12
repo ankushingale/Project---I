@@ -94,10 +94,8 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-<<<<<<< HEAD
 # ergoasia
-=======
->>>>>>> 40fcd3efa560e66df91155f1a612c3924dd90351
+
 
 # ergoasia
 DATABASES = {
