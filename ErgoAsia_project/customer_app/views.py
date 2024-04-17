@@ -33,9 +33,9 @@ def customersignup(request):
 
         message="Registration Done Sucessfully"
         
-        return render(request,'customer_app/signup.html',{'msg':message})
+        return render(request,'customer_app/signup1.html',{'msg':message})
 
-    return render(request,'customer_app/signup.html')
+    return render(request,'customer_app/signup1.html')
 
 @csrf_exempt
 def customersignin(request):
@@ -56,14 +56,14 @@ def customersignin(request):
             # user=authenticate(request,email=email,password=password)
             # if user is not None:
             #     login(request,user)
-            return redirect('customerrequirements')
+            return redirect('customerdashboard')
 
         else:
             msg_invalid="Invalid username and password"
             # return redirect('customersignin')
-        return render(request,'customer_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
+        return render(request,'customer_app/signinnew.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
 
-    return render(request,'customer_app/sign-in.html')
+    return render(request,'customer_app/signinnew.html')
 
 @csrf_exempt
 # @login_required
@@ -117,3 +117,12 @@ def customerrequirements(request):
         print("Email:", customer.email)
 
     return render(request, 'customer_app/requirementsform.html', {'customer_data': customer_data})
+
+
+# def customersign(request):
+#     return render(request,'customer_app/signinnew.html')
+#     # return render(request,'customer_app/profile.html')
+#     # return render(request,'customer_app/index.html')
+
+def customerdashboard(request):
+    return render(request,'customer_app/dashboard.html')

@@ -23,7 +23,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('customerhome',views.customerhome,name="customerhome"),
     path('customer-signup',views.customersignup,name="customersignup"),
-    path('customer-signin',views.customersignin,name="customersignin"),
+    # path('customer-signin',views.customersignin,name="customersignin"),
     path('customer-requirements',views.customerrequirements,name="customerrequirements"),
+    path('customer-sign',views.customersignin,name="customersign"),
+    path('customer-dashboard',views.customerdashboard,name="customerdashboard"),
 
 ]

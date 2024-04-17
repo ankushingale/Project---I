@@ -1,0 +1,209 @@
+<!--
+=========================================================
+* Argon Dashboard 2 - v2.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    {% comment %} <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../assets/img/apple-icon.png"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" /> {% endcomment %}
+    <title>hello ergo asia</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/argon-dashboard.min.css" rel="stylesheet">
+
+
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    {% comment %} <link href="{% static "css/Customer/css/nucleo-svg.css" %}" rel="stylesheet" /> {% endcomment %}
+    <!-- CSS Files -->
+    {% comment %} <link
+      id="pagestyle"
+      href="{% static "css/Customer/css/argon-dashboard.css?v=2.0.4" %}"
+      rel="stylesheet"
+    /> {% endcomment %}
+  </head>
+
+  <body class="">
+    <div class="container position-sticky z-index-sticky top-0">
+      <div class="row">
+        <div class="col-12">
+          <!-- Navbar -->
+         
+        </div>
+      </div>
+    </div>
+    <main class="main-content mt-0">
+      <section>
+        <div class="page-header min-vh-100">
+          <div class="container">
+            <div class="row">
+              <div
+                class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto"
+              >
+                <div class="card card-plain">
+                  <div class="card-header pb-0 text-start">
+                    <h4 class="font-weight-bolder">Sign In</h4>
+                    <p class="mb-0">Enter your email and password to sign in</p>
+                  </div>
+                  <div class="card-body">
+                    {% if msg_valid %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>{{msg_valid}}</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+  
+                   
+                      <div id="redirect-container" data-redirect-url="{% url 'customerrequirements' %}"></div>
+  
+                      <script>
+                        // Wait for 4 seconds (4000 milliseconds) and then redirect
+                        setTimeout(function() {
+                            // Retrieve the redirect URL from the data attribute
+                            var redirectUrl = document.getElementById('redirect-container').getAttribute('data-redirect-url');
+                            // Check if the redirect URL is not empty
+                            if (redirectUrl) {
+                                // Redirect to the specified URL
+                                window.location.href = redirectUrl;
+                            } else {
+                                // Log an error if the redirect URL is empty
+                                console.error('Redirect URL not found.');
+                            }
+                        }, 4000);
+                    </script>
+                    </div>
+                    {% endif %}
+                    {% if msg_invalid %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24 !important;">
+                      {{msg_invalid}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>                  
+                    </div>
+                    {% endif %}
+                   
+                    <form role="form" action="{% url "customersign" %}" method="post">
+                      <div class="mb-3">
+                        <input
+                          type="email"
+                          class="form-control form-control-lg"
+                          placeholder="Email"
+                          aria-label="Email"
+                          name="email"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          placeholder="Password"
+                          aria-label="Password"
+                          name="password"
+                        />
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="rememberMe"
+                        />
+                        <label class="form-check-label" for="rememberMe"
+                          >Remember me</label
+                        >
+                      </div>
+                      <div class="text-center">
+                        <button
+                          type="submit"
+                          class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                        >
+                          Sign in
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                    <p class="mb-4 text-sm mx-auto">
+                      Don't have an account?
+                      <a
+                        href="javascript:;"
+                        class="text-primary text-gradient font-weight-bold"
+                        >Sign up</a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column"
+              >
+                <div
+                  class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                  style="
+                    background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
+                    background-size: cover;
+                  "
+                >
+                  <span class="mask bg-gradient-primary opacity-6"></span>
+                  <h4
+                    class="mt-5 text-white font-weight-bolder position-relative"
+                  >
+                    "Attention is the new currency"
+                  </h4>
+                  <p class="text-white position-relative">
+                    The more effortless the writing looks, the more effort the
+                    writer actually put into the process.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="{% static "js/core/popper.min.js" %}"></script>
+    <script src="{% static "js/core/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/plugins/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "js/plugins/smooth-scrollbar.min.js" %}"></script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static "js/argon-dashboard.min.js?v=2.0.4" %}"></script>
+  </body>
+</html>

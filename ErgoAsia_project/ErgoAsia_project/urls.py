@@ -22,7 +22,7 @@ urlpatterns = [
     path('',include('customer_app.urls')),
     path('',include('ErgoAsia_app.urls')),
     path('',include('manufacturer_app.urls')),
-    path('',views.template,name="home")
+    path('',views.hometemplate,name="home")
 
 
 
