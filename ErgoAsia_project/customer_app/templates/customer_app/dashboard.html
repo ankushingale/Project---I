@@ -13,6 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -33,23 +34,28 @@
       rel="stylesheet"
     />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    {% comment %} <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" /> {% endcomment %}
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/argon-dashboard.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/nucleo-icons.min.css" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard-django/1.0.2/js/argon.js" rel="stylesheet">
+
 
     <script
       src="https://kit.fontawesome.com/42d5adcbca.js"
       crossorigin="anonymous"
     ></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    {% comment %} <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link
       id="pagestyle"
       href="../assets/css/argon-dashboard.css?v=2.0.4"
       rel="stylesheet"
     />
-  </head>
+  </head> {% endcomment %}
 
   <body class="g-sidenav-show bg-gray-100">
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -65,7 +71,7 @@
         ></i>
         <a class="navbar-brand m-0" href="" target="">
           <img
-            src="../assets/img/logo-ct-dark.png"
+            src="{% static "img/customer dashboard/logo-ct-dark.png" %}"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -154,8 +160,7 @@
     </aside>
     <main class="main-content position-relative border-radius-lg">
       <!-- Navbar -->
-      <nav
-        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
         id="navbarBlur"
         data-scroll="false"
       >
@@ -267,7 +272,7 @@
                       <div class="d-flex py-1">
                         <div class="my-auto">
                           <img
-                            src="../assets/img/small-logos/logo-spotify.svg"
+                            src="{% static "img/customer dashboard/logo-spotify.svg" %}"
                             class="avatar avatar-sm bg-gradient-dark me-3"
                           />
                         </div>
@@ -516,7 +521,7 @@
                   <div
                     class="carousel-item h-100 active"
                     style="
-                      background-image: url('../assets/img/carousel-1.jpg');
+                      background-image: url('{% static "img/customer dashboard/carousel-1.jpg" %}');
                       background-size: cover;
                     "
                   >
@@ -540,8 +545,8 @@
                   <div
                     class="carousel-item h-100"
                     style="
-                      background-image: url('../assets/img/carousel-2.jpg');
-                      background-size: cover;
+                    background-image: url('{% static "img/customer dashboard/carousel-2.jpg" %}');
+                    background-size: cover;
                     "
                   >
                     <div
@@ -564,8 +569,8 @@
                   <div
                     class="carousel-item h-100"
                     style="
-                      background-image: url('../assets/img/carousel-3.jpg');
-                      background-size: cover;
+                    background-image: url('{% static "img/customer dashboard/carousel-3.jpg" %}');
+                    background-size: cover;
                     "
                   >
                     <div
@@ -630,7 +635,7 @@
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
                             <img
-                              src="../assets/img/icons/flags/US.png"
+                              src="{% static "img/customer dashboard/flags/US.png" %}"
                               alt="Country flag"
                             />
                           </div>
@@ -666,8 +671,8 @@
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
                             <img
-                              src="../assets/img/icons/flags/DE.png"
-                              alt="Country flag"
+                            src="{% static "img/customer dashboard/flags/DE.png" %}"
+                            alt="Country flag"
                             />
                           </div>
                           <div class="ms-4">
@@ -702,8 +707,8 @@
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
                             <img
-                              src="../assets/img/icons/flags/GB.png"
-                              alt="Country flag"
+                            src="{% static "img/customer dashboard/flags/GB.png" %}"
+                            alt="Country flag"
                             />
                           </div>
                           <div class="ms-4">
@@ -738,8 +743,8 @@
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
                             <img
-                              src="../assets/img/icons/flags/BR.png"
-                              alt="Country flag"
+                            src="{% static "img/customer dashboard/flags/BR.png" %}"
+                            alt="Country flag"
                             />
                           </div>
                           <div class="ms-4">
@@ -889,11 +894,15 @@
     </main>
 
     <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
+    {% comment %} <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script> {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
       var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -996,10 +1005,10 @@
         };
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
       }
-    </script>
+    </>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    {% comment %} <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script> {% endcomment %}
   </body>
 </html>
