@@ -6,13 +6,15 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
-# from django.conf import settings
-# from django.conf.urls.static import static
 
+# from django.conf import settings.
+# from django.conf.urls.static import static.
 # Create your views here.
+
 def customerhome(request):
     return render(request,'customer_app/home.html')
 @csrf_exempt
+
 def customersignup(request):
     message=None
     if request.method=="POST":
@@ -28,9 +30,7 @@ def customersignup(request):
 
         data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
         data.save()
-        
-       
-
+               
         message="Registration Done Sucessfully"
         
         return render(request,'customer_app/signup1.html',{'msg':message})
@@ -103,8 +103,8 @@ def customerrequirements(request):
 
         data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
-    customer_email = request.session.get('customer_email', None)
-    customer_data=Customerdata.objects.filter(email=customer_email)
+        customer_email = request.session.get('customer_email', None)
+        customer_data=Customerdata.objects.filter(email=customer_email)
 
     for customer in customer_data:
         names = customer.name.split(" ", 1)
@@ -118,7 +118,6 @@ def customerrequirements(request):
 
     return render(request, 'customer_app/requirementsform.html', {'customer_data': customer_data})
 
-
 # def customersign(request):
 #     return render(request,'customer_app/signinnew.html')
 #     # return render(request,'customer_app/profile.html')
@@ -126,3 +125,6 @@ def customerrequirements(request):
 
 def customerdashboard(request):
     return render(request,'customer_app/dashboard.html')
+
+def customertables(request):
+    return render(request,'customer_app/tables.html')
