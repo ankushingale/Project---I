@@ -27,7 +27,7 @@ urlpatterns = [
     # path('customer-signin',views.customersignin,name="customersignin"),
     path('customer-requirements',views.customerrequirements,name="customerrequirements"),
     path('customer-sign',views.customersignin,name="customersign"),
-    path('customer-dashboard',views.customerdashboard,name="customerdashboard"),
+    path('customer-dashboard',views.customerdashboard,name="Cdashboard"),
     path('customer-tables', views.customertables,name="customertables")
 
 ]

@@ -124,7 +124,7 @@ def customerrequirements(request):
 #     # return render(request,'customer_app/index.html')
 
 def customerdashboard(request):
-    return render(request,'customer_app/dashboard.html')
+    return render(request,'customer_app/dashboard1.html')
 
 def customertables(request):
     return render(request,'customer_app/tables.html')
