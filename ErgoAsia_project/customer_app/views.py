@@ -128,3 +128,6 @@ def customerdashboard(request):
 
 def customertables(request):
     return render(request,'customer_app/tables.html')
+
+def customerprofile(request):
+    return render(request,'customer_app/profile.html')
