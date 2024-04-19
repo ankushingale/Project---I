@@ -7,7 +7,8 @@ display-flex, .signup-content, .form-row, .label-flex, .form-radio-group {
 list-type-ulli, ul {
   list-style-type: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+ }
 
 /* poppins-300 - latin */
 @font-face {
@@ -212,12 +213,13 @@ body {
  position: relative; }
 
 .container {
-  margin: 0;
-  height: 100vh;
+   margin: 0;
+  height: 200vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff; }
+  background-color: #fff; 
+} 
 
 .signup-img {
   position: relative;

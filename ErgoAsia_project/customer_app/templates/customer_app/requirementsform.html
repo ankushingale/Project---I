@@ -13,11 +13,19 @@
       href="{% static "fonts/material-icon/css/material-design-iconic-font.min.css" %}"
     />
     <link rel="stylesheet" href="{% static "vendor/nouislider/nouislider.min.css" %}" />
+
     <!-- Main css -->
     <link rel="stylesheet" href="{% static "css/Requirements Form/style.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/extend.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/fonts.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/global.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/main.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/minxi.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/responsive.css" %}" />
+    <link rel="stylesheet" href="{% static "css/scss Form/style.css" %}" />
+    
   </head>
   <body>
-  
     <div class="main">
       <div class="container">
         <div class="signup-content">
@@ -29,65 +37,105 @@
             </div>
           </div>
           <div class="signup-form">
-            <form method="POST" action ="{% url "customerrequirements" %}" class="register-form" id="register-form" enctype="multipart/form-data">
+            <form method="POST" action ="{% url "customerrequirements" %}" class="register-form" id="register-form">
               <div class="form-row">
                 <div class="form-group">
                   <div class="form-input">
-                                          
-                    
-                  <div class="form-input">
-                    <label for="last_name" class="required">Company name</label>
+                    <label for="first_name" class="required">Company name</label>
                     <input type="text"  value="" name="cname" id="last_name" />
-                  </div> 
+                  </div>
                   <div class="form-input">
-                  <label for="first_name" class="required">Project Name</label>
+                    <label for="last_name" class="required">Project Name</label>
                     <input type="text" value="" name="pname" id="first_name" />
                   </div>
                   <div class="form-input">
-                    <label for="last_name" class="required">Customer part no</label>
+                    <label for="company" class="required">Customer part no</label>
                     <input type="text"  value="" name="cpno" id="last_name" />
                   </div>
-                <div class="form-input">
-                  <label for="first_name" class="required">Decription</label>
-                  <input type="text" value="" name="desc" id="first_name" />
-                </div>
-                <div class="form-input">
-                  <label for="last_name" class="required"> part revision </label>
-                  <input type="text"  value="" name="pr" id="last_name" />
-                </div>
+                  <div class="form-input">
+                    <label for="email" class="required">Decription</label>
+                    <input type="text" value="" name="desc" id="first_name" />
+                  </div>
 
-                <div class="form-input">
-                  <label for="first_name" class="required">Annual Volume</label>
-                  <input type="number" value="" name="av" id="av" />
-                </div>
-                <div class="form-input">
-                  <label for="last_name" class="required"> Quote submission date </label>
-                  <input type="date"  value="" name="qs" id="last_name" />
-                </div>
-                <div class="form-input">
-                  <label for="last_name" class=""> target Value </label>
-                  <input type="number"  value="" name="tv" id="last_name" />
-                </div>
-                <div class="form-input">
-                  <label for="last_name" class="required"> SOP Date </label>
-                  <input type="date"  value="" name="sop" id="last_name" />
-                </div>
+                  <div class="form-input">
+                    <label for="email" class="required">part revision</label>
+                    <input type="text" value="" name="pr" id="last_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="email" class="required">Annual Volum</label>
+                    <input type="text" value="" name="av" id="first_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="email" class="required">Quote submission date</label>
+                    <input type="date" value="" name="ps" id="last_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="last_name" class=""> target Value </label>
+                    <input type="number"  value="" name="tv" id="first_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="last_name" class="">SOP Date </label>
+                    <input type="number"  value="" name="sop" id="last_name" />
+                  </div>
+
                   <div class="form-input">
                     <label for="company" class="required">Customer_id</label>
-                    <input type="text" value="{{customer_data.first.customer_id}}" name="cid" id="company" />
+                    <input type="text" value="{{customer_data.first.customer_id}}" name="cid" id="=first_name" />
                   </div>
+
                   <div class="form-input">
                     <label for="email" class="required">Email</label>
-                    <input type="text" value="{{customer_data.first.email}}" name="email" id="email" />
+                    <input type="text" value="{{customer_data.first.email}}" name="email" id="last_name" />
                   </div>
+
                   <div class="form-input">
                     <label for="phone_number" class="required"
                       >Phone number</label
                     >
-                    <input type="text"  value="{{customer_data.first.phno}}" name="phone_number" id="phone_number" />
+                    <input type="text"  value="{{customer_data.first.phno}}" name="phone_number" id="first_name" />
+                  </div>
+
+
+                  <div class="form-input">
+                    <label for="phone_number" class="required"
+                      >Phone number</label
+                    >
+                    <input type="text" name="phone_number" id="phone_number" />
                   </div>
                 </div>
                 <div class="form-group">
+                  <div class="form-input">
+                    <label for="company" class="required">Customer part no</label>
+                    <input type="text"  value="" name="cpno" id="last_name" />
+                  </div>
+                  
+                  <div class="form-input">
+                    <label for="email" class="required">part revision</label>
+                    <input type="text" value="" name="pr" id="last_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="chequeno">Part Name</label>
+                    <input type="text" name="Part_Name" id="Part_Name" />
+                  </div>
+                  <div class="form-input">
+                    <label for="last_name" class="">SOP Date </label>
+                    <input type="number"  value="" name="sop" id="last_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="company" class="required">Customer_id</label>
+                    <input type="text" value="{{customer_data.first.customer_id}}" name="cid" id="=first_name" />
+                  </div>
+
+                  <div class="form-input">
+                    <label for="email" class="required">Email</label>
+                    <input type="text" value="{{customer_data.first.email}}" name="email" id="last_name" />
+                  </div>
                   <div class="form-select">
                     <div class="label-flex">
                       <label for="meal_preference" class="required"
@@ -126,9 +174,10 @@
                       </div>
                     </div>
                   </div>
+                  
                   <div class="form-input">
-                    <label for="chequeno">Part Name</label>
-                    <input type="text" name="Part_Name" id="Part_Name" />
+                    <label for="email" class="required">Email</label>
+                    <input type="text" value="{{customer_data.first.email}}" name="email" id="last_name" />
                   </div>
                   <div class="form-input">
                     <label for="blank_name"
@@ -138,7 +187,7 @@
                   </div>
                   <div class="form-input">
                     <label for="payable" class="required">Drawing / Draf</label>
-                    <input type="file" name="pdf_file" id="payable" />
+                    <input type="file" name="payable" id="payable" />
                   </div>
                 </div>
               </div>
@@ -158,13 +207,13 @@
                   id="submit"
                   name="submit"
                 />
-                {% comment %} <input
+                <input
                   type="submit"
                   value="Reset"
                   class="submit"
                   id="reset"
                   name="reset"
-                /> {% endcomment %}
+                />
               </div>
             </form>
           </div>
@@ -178,7 +227,6 @@
     <script src="{% static "vendor/wnumb/wNumb.js" %}"></script>
     <script src="{% static "vendor/jquery-validation/dist/jquery.validate.min.js" %}"></script>
     <script src="{% static "vendor/jquery-validation/dist/additional-methods.min.js" %}"></script>
-    <script src="{% static "js/main.js" %}"></script>
-  </body>
+  </body><script src="{% static "js/main.js" %}"></script>
   <!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

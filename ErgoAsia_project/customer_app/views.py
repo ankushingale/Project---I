@@ -56,7 +56,7 @@ def customersignin(request):
             # user=authenticate(request,email=email,password=password)
             # if user is not None:
             #     login(request,user)
-            return redirect('Cdashboard')
+            return redirect('customerrequirements')
 
         else:
             msg_invalid="Invalid username and password"
