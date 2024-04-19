@@ -28,6 +28,8 @@ urlpatterns = [
     path('customer-requirements',views.customerrequirements,name="customerrequirements"),
     path('customer-sign',views.customersignin,name="customersign"),
     path('customer-dashboard',views.customerdashboard,name="Cdashboard"),
-    path('customer-tables', views.customertables,name="customertables")
+    path('customer-tables', views.customertables,name="customertables"),
+    path('customer-profile', views.customerprofile,name="customerprofile")
+
 
 ]
