@@ -56,7 +56,7 @@ def customersignin(request):
             # user=authenticate(request,email=email,password=password)
             # if user is not None:
             #     login(request,user)
-            return redirect('customerrequirements')
+            return redirect('Cdashboard')
 
         else:
             msg_invalid="Invalid username and password"
@@ -103,6 +103,8 @@ def customerrequirements(request):
 
         data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
+        return redirect('Cdashboard')
+    
     customer_email = request.session.get('customer_email', None)
     customer_data=Customerdata.objects.filter(email=customer_email)
 
