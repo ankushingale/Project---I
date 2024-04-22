@@ -27,6 +27,9 @@ urlpatterns = [
     path('ergoasiasignin',views.ergoasiasignin,name="ergoasiasignin"),
     path('notifications',views.notifications,name="notifications"),
     path('supplier',views.supplier,name="supplier"),
+    path('edit/<int:pk>',views.DisplayModel,name="supplier"),
+
+
 
 
 

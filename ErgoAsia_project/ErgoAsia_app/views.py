@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from customer_app.models import Customerdata
+from customer_app.models import Customerdata,Customerrequirements
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -11,7 +11,11 @@ def ErgoAsiahome(request):
     return render(request,'ErgoAsia_app/home.html')
 
 def dashboard(request):
-    return render(request,'ErgoAsia_app/dashboard.html')
+
+    data=Customerrequirements.objects.all()
+    count = Customerrequirements.objects.count()
+
+    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count})
 
 def supplier(request):
     return render(request,'ErgoAsia_app/supplier.html')
@@ -44,5 +48,10 @@ def ergoasiasignin(request):
     return render(request,'ErgoAsia_app/sign-in.html')
 
 
+def DisplayModel(request,pk):
+
+    customer_data=Customerrequirements.objects.filter(customer_id=pk)
+    
+    return render(request,'ErgoAsia_app/editmodel.html',{'customer_data':customer_data})
 
 

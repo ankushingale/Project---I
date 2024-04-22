@@ -113,7 +113,7 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.mysql',   
 #         'NAME': 'ergoasia',   
 #         'USER': 'root',   
-#         'PASSWORD': 'Kavya@2004',   
+#         'PASSWORD': 'mysqlroot',   
 #         'HOST': '127.0.0.1',   
 #         'PORT': '3306',   
 #         'OPTIONS': {   

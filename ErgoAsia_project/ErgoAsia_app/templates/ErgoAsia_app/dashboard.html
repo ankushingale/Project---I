@@ -562,10 +562,10 @@
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
-                    <h6>Projects</h6>
+                    <h6>Projects list</h6>
                     <p class="text-sm mb-0">
                       <i class="fa fa-check text-info" aria-hidden="true"></i>
-                      <span class="font-weight-bold ms-1">30 done</span> this
+                      <span class="font-weight-bold ms-1">{{cnt}} Customer request</span> this
                       month
                     </p>
                   </div>
@@ -617,27 +617,97 @@
                         <th
                           class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Companies
+                        Company Name 
                         </th>
                         <th
                           class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                         >
-                          Members
+                        Project Name
+
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Budget
+                          Part Name
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Completion
+                          Part Preference
                         </th>
+                        <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Details
+                      </th>
                       </tr>
                     </thead>
                     <tbody>
+                      {% for i in req %}
                       <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="{% static "img/small-logos/logo-xd.svg" %}"
+                                class="avatar avatar-sm me-3"
+                                alt="xd" />
+                            </div>
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">{{i.cname}}</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="{% static "img/small-logos/logo-xd.svg" %}"
+                                class="avatar avatar-sm me-3"
+                                alt="xd" />
+                            </div>
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">{{i.pname}}</h6>
+                            </div>
+                          </div>
+                        </td>
+                       
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="{% static "img/small-logos/logo-xd.svg" %}"
+                                class="avatar avatar-sm me-3"
+                                alt="xd" />
+                            </div>
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">{{i.Part_Name}}</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="{% static "img/small-logos/logo-xd.svg" %}"
+                                class="avatar avatar-sm me-3"
+                                alt="xd" />
+                            </div>
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">{{i.meal_preference}}</h6>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <a href="/edit/{{i.customer_id}}"><button type="button" class="btn btn-primary">View</button></a>
+                        </td>                       
+                      </tr>
+                      {% endfor %}                    {% comment %} <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
@@ -717,8 +787,8 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
-                      <tr>
+                      </tr> {% endcomment %}
+                      {% comment %} <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
@@ -1051,7 +1121,7 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
+                      </tr> {% endcomment %}
                     </tbody>
                   </table>
                 </div>

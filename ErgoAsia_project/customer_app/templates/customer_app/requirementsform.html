@@ -49,10 +49,10 @@
                     <label for="last_name" class="required">Project Name</label>
                     <input type="text" value="" name="pname" id="first_name" />
                   </div>
-                  <div class="form-input">
+                  {% comment %} <div class="form-input">
                     <label for="company" class="required">Customer part no</label>
                     <input type="text"  value="" name="cpno" id="last_name" />
-                  </div>
+                  </div> {% endcomment %}
                   <div class="form-input">
                     <label for="email" class="required">Decription</label>
                     <input type="text" value="" name="desc" id="first_name" />
@@ -80,7 +80,7 @@
 
                   <div class="form-input">
                     <label for="last_name" class="">SOP Date </label>
-                    <input type="number"  value="" name="sop" id="last_name" />
+                    <input type="date"  value="" name="sop" id="last_name" />
                   </div>
 
                   <div class="form-input">
@@ -97,16 +97,16 @@
                     <label for="phone_number" class="required"
                       >Phone number</label
                     >
-                    <input type="text"  value="{{customer_data.first.phno}}" name="phone_number" id="first_name" />
+                    <input type="text"  value="{{customer_data.phno}}" name="phone_number" id="first_name" />
                   </div>
 
 
-                  <div class="form-input">
+                  {% comment %} <div class="form-input">
                     <label for="phone_number" class="required"
                       >Phone number</label
                     >
                     <input type="text" name="phone_number" id="phone_number" />
-                  </div>
+                  </div> {% endcomment %}
                 </div>
                 <div class="form-group">
                   <div class="form-input">
@@ -114,21 +114,21 @@
                     <input type="text"  value="" name="cpno" id="last_name" />
                   </div>
                   
-                  <div class="form-input">
+                  {% comment %} <div class="form-input">
                     <label for="email" class="required">part revision</label>
                     <input type="text" value="" name="pr" id="last_name" />
-                  </div>
+                  </div> {% endcomment %}
 
                   <div class="form-input">
                     <label for="chequeno">Part Name</label>
                     <input type="text" name="Part_Name" id="Part_Name" />
                   </div>
-                  <div class="form-input">
+                  {% comment %} <div class="form-input">
                     <label for="last_name" class="">SOP Date </label>
                     <input type="number"  value="" name="sop" id="last_name" />
-                  </div>
+                  </div> {% endcomment %}
 
-                  <div class="form-input">
+                  {% comment %} <div class="form-input">
                     <label for="company" class="required">Customer_id</label>
                     <input type="text" value="{{customer_data.first.customer_id}}" name="cid" id="=first_name" />
                   </div>
@@ -136,7 +136,7 @@
                   <div class="form-input">
                     <label for="email" class="required">Email</label>
                     <input type="text" value="{{customer_data.first.email}}" name="email" id="last_name" />
-                  </div>
+                  </div> {% endcomment %}
                   <div class="form-select">
                     <div class="label-flex">
                       <label for="meal_preference" class="required"

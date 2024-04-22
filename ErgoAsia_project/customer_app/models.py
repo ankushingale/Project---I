@@ -31,8 +31,7 @@ class Customerrequirements(models.Model):
     pr=models.CharField(max_length=50)
     av=models.IntegerField(default=123)
     qs=models.DateField() 
-    tv=models.IntegerField(
-            )
+    tv=models.IntegerField()
     sop=models.DateField()
     def __str__(self):
         return f"{self.customer.name} - {self.phone_no}"
