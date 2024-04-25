@@ -631,6 +631,8 @@
               <div class="table-responsive">
                 <table class="table align-items-center">
                   <tbody>
+                    {% for i in cdata %}
+                    
                     <tr>
                       <td class="w-30">
                         <div class="d-flex px-2 py-1 align-items-center">
@@ -648,7 +650,26 @@
                           </div>
                         </div>
                       </td>
-                      <td>
+                    
+                    {% endfor %}
+                    {% comment %} <tr>
+                      <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div>
+                            <img
+                              src="{% static "img/customer dashboard/flags/US.png" %}"
+                              alt="Country flag"
+                            />
+                          </div>
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">
+                              Country:
+                            </p>
+                            <h6 class="text-sm mb-0">United States</h6>
+                          </div>
+                        </div>
+                      </td> {% endcomment %}
+                      {% comment %} <td>
                         <div class="text-center">
                           <p class="text-xs font-weight-bold mb-0">PROJECT NAME:</p>
                           <h6 class="text-sm mb-0">2500</h6>
@@ -774,7 +795,7 @@
                           <h6 class="text-sm mb-0">32.14%</h6>
                         </div>
                       </td>
-                    </tr>
+                    </tr> {% endcomment %}
                   </tbody>
                 </table>
               </div>
