@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
+from .models import Customerrequirements
 
 # from django.conf import settings.
 # from django.conf.urls.static import static.
@@ -48,8 +49,11 @@ def customersignin(request):
         # Ensure login is called upon successful authentication
 
         request.session['customer_email'] = email
-        
+
         data=Customerdata.objects.filter(email=email,password=password)
+        # customer_id=data.first()
+        # request.session['customer_id'] = customer_id
+
        
         if data.count()>0:
             msg_valid="Authentication Successfull.....you will redirected to home page soon"            # user.save()
@@ -126,9 +130,15 @@ def customerrequirements(request):
 #     # return render(request,'customer_app/index.html')
 
 def customerdashboard(request):
+    
+    # customer_id = request.session.get('customer_id', None)
+
+    # customer_data=Customerrequirements.objects.filter(customer_id=customer_id)
+
     return render(request,'customer_app/Cdashboard.html')
 
 def customertables(request):
+
     return render(request,'customer_app/tables.html')
 
 def customerprofile(request):

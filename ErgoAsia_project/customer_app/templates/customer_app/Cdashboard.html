@@ -636,13 +636,34 @@
             <div class="card">
               <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Sales by Country</h6>
+                  <h6 class="mb-2">Placed Orders</h6>
                 </div>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center">
                   <tbody>
+                    {% for i in cdata %}
+                    
                     <tr>
+                      <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div>
+                            <img
+                              src="{% static "img/customer dashboard/flags/US.png" %}"
+                              alt="Country flag"
+                            />
+                          </div>
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">
+                              Country:
+                            </p>
+                            <h6 class="text-sm mb-0">{{i.Part_Name}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                    
+                    {% endfor %}
+                    {% comment %} <tr>
                       <td class="w-30">
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
@@ -658,8 +679,8 @@
                             <h6 class="text-sm mb-0">United States</h6>
                           </div>
                         </div>
-                      </td>
-                      <td>
+                      </td> {% endcomment %}
+                      {% comment %} <td>
                         <div class="text-center">
                           <p class="text-xs font-weight-bold mb-0">Sales:</p>
                           <h6 class="text-sm mb-0">2500</h6>
@@ -785,7 +806,7 @@
                           <h6 class="text-sm mb-0">32.14%</h6>
                         </div>
                       </td>
-                    </tr>
+                    </tr> {% endcomment %}
                   </tbody>
                 </table>
               </div>
