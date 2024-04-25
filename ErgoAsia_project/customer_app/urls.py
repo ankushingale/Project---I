@@ -29,7 +29,9 @@ urlpatterns = [
     path('customer-sign',views.customersignin,name="customersign"),
     path('customer-dashboard',views.customerdashboard,name="Cdashboard"),
     path('customer-tables', views.customertables,name="customertables"),
-    path('customer-profile', views.customerprofile,name="customerprofile")
+    path('customer-profile', views.customerprofile,name="customerprofile"),
+    path('edit/<int:pk>',views.displayModel,name="customereditmodel"),
+
 
 
 ]

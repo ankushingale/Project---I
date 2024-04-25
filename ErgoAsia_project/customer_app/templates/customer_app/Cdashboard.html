@@ -625,12 +625,19 @@
             <div class="card">
               <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Recent Order</h6>
+                  <h6 class="mb-2">Your Order</h6>
                 </div>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center">
                   <tbody>
+                    {% if cdata.count == 0 %}
+                    <div class="card-header pb-0 p-3">
+                      <div class="d-flex justify-content-between">
+                        <h6 class="mb-2">No Order Placed Yet</h6>
+                      </div>
+                    </div>
+                    {% endif %}
                     {% for i in cdata %}
                     
                     <tr>
@@ -644,158 +651,40 @@
                           </div>
                           <div class="ms-4">
                             <p class="text-xs font-weight-bold mb-0">
-                              COMPANY NAME:
+                              Project Name:
                             </p>
-                            <h6 class="text-sm mb-0">Google</h6>
+                            <h6 class="text-sm mb-0">{{i.pname}}</h6>
                           </div>
                         </div>
-                      </td>
-                    
-                    {% endfor %}
-                    {% comment %} <tr>
-                      <td class="w-30">
-                        <div class="d-flex px-2 py-1 align-items-center">
-                          <div>
-                            <img
-                              src="{% static "img/customer dashboard/flags/US.png" %}"
-                              alt="Country flag"
-                            />
-                          </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">
-                              Country:
-                            </p>
-                            <h6 class="text-sm mb-0">United States</h6>
-                          </div>
-                        </div>
-                      </td> {% endcomment %}
-                      {% comment %} <td>
+                      </td> 
+                      <td>
                         <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">PROJECT NAME:</p>
-                          <h6 class="text-sm mb-0">2500</h6>
+                          <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                          <h6 class="text-sm mb-0">{{i.Part_Name}}
+                          </h6>
                         </div>
                       </td>
                       <td>
                         <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">PART NAME:</p>
-                          <h6 class="text-sm mb-0">$230,900</h6>
+                          <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                          <h6 class="text-sm mb-0">{{i.sop}}</h6>
                         </div>
                       </td>
                       <td class="align-middle text-sm">
                         <div class="col text-center">
-                          <p class="text-xs font-weight-bold mb-0">PART PREFERENCE:</p>
-                          <h6 class="text-sm mb-0">29.9%</h6>
+                          <p class="text-xs font-weight-bold mb-0">Category</p>
+                          <h6 class="text-sm mb-0">{{i.meal_preference}}</h6>
+                        </div>
+                      </td>
+                      <td class="align-middle text-sm">
+                        <div class="col text-center">
+                          <a href="/edit/{{i.customer_id}}"><button type="button" class="btn btn-primary">View</button></a>
+
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="w-30">
-                        <div class="d-flex px-2 py-1 align-items-center">
-                          <div>
-                            <img
-                            src="{% static "img/customer dashboard/flags/DE.png" %}"
-                            alt="Country flag"
-                            />
-                          </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">
-                              Country:
-                            </p>
-                            <h6 class="text-sm mb-0">Germany</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                          <h6 class="text-sm mb-0">3.900</h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Value:</p>
-                          <h6 class="text-sm mb-0">$440,000</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <div class="col text-center">
-                          <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                          <h6 class="text-sm mb-0">40.22%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-30">
-                        <div class="d-flex px-2 py-1 align-items-center">
-                          <div>
-                            <img
-                            src="{% static "img/customer dashboard/flags/GB.png" %}"
-                            alt="Country flag"
-                            />
-                          </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">
-                              Country:
-                            </p>
-                            <h6 class="text-sm mb-0">Great Britain</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                          <h6 class="text-sm mb-0">1.400</h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Value:</p>
-                          <h6 class="text-sm mb-0">$190,700</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <div class="col text-center">
-                          <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                          <h6 class="text-sm mb-0">23.44%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-30">
-                        <div class="d-flex px-2 py-1 align-items-center">
-                          <div>
-                            <img
-                            src="{% static "img/customer dashboard/flags/BR.png" %}"
-                            alt="Country flag"
-                            />
-                          </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">
-                              Country:
-                            </p>
-                            <h6 class="text-sm mb-0">Brasil</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                          <h6 class="text-sm mb-0">562</h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Value:</p>
-                          <h6 class="text-sm mb-0">$143,960</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <div class="col text-center">
-                          <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                          <h6 class="text-sm mb-0">32.14%</h6>
-                        </div>
-                      </td>
-                    </tr> {% endcomment %}
+                  {% endfor %}
+                     
                   </tbody>
                 </table>
               </div>
