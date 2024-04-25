@@ -35,3 +35,4 @@ class Customerrequirements(models.Model):
     sop=models.DateField()
     def __str__(self):
         return f"{self.customer.name} - {self.phone_no}"
+    
