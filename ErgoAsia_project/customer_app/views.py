@@ -49,17 +49,16 @@ def customersignin(request):
         # Ensure login is called upon successful authentication
 
         request.session['customer_email'] = email
-
-        data=Customerdata.objects.filter(email=email,password=password)
-        # customer_id=data.first()
-        # request.session['customer_id'] = customer_id
-
+        data = Customerdata.objects.filter(email=email, password=password)
        
         if data.count()>0:
             msg_valid="Authentication Successfull.....you will redirected to home page soon"            # user.save()
             # user=authenticate(request,email=email,password=password)
             # if user is not None:
             #     login(request,user)
+            data_values = Customerdata.objects.filter(email=email, password=password).first()
+            request.session['customer_id'] = data_values.customer_id
+
             return redirect('Cdashboard')
 
         else:
@@ -131,11 +130,11 @@ def customerrequirements(request):
 
 def customerdashboard(request):
     
-    # customer_id = request.session.get('customer_id', None)
+    customer_id = request.session.get('customer_id', None)
 
-    # customer_data=Customerrequirements.objects.filter(customer_id=customer_id)
+    customer_data=Customerrequirements.objects.filter(customer_id=customer_id)
 
-    return render(request,'customer_app/Cdashboard.html')
+    return render(request,'customer_app/Cdashboard.html',{'cdata':customer_data})
 
 def customertables(request):
 
@@ -143,3 +142,9 @@ def customertables(request):
 
 def customerprofile(request):
     return render(request,'customer_app/profile.html')
+
+
+def displayModel(request,pk):
+    customer_data=Customerrequirements.objects.filter(customer_id=pk)
+    
+    return render(request,'customer_app/editmodel.html',{'customer_data':customer_data})
