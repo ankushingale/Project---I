@@ -708,8 +708,13 @@
                           class="ni ni-mobile-button text-white opacity-10"
                         ></i>
                       </div>
+                      {% for i in cdata %}
+
                       <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Electronics</h6>
+                        {% comment %} <a href="/model_category/{{i.customer_id}}">electrical</></a> {% endcomment %}
+                        <a href="{% url 'model_category' customer_id=i.customer_id category='electrical' %} ">Electrical</a>
+
+                        {% comment %} <h6 class="mb-1 te  xt-dark text-sm">Electronics</h6> {% endcomment %}
                         <span class="text-xs"
                           >250 in stock,
                           <span class="font-weight-bold">346+ sold</span></span
@@ -734,7 +739,7 @@
                         <i class="ni ni-tag text-white opacity-10"></i>
                       </div>
                       <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Mechanical</h6>
+                        <a href="{% url 'model_category' customer_id=i.customer_id category='mechanical' %} ">Mechanical</a>
                         <span class="text-xs"
                           >123 closed,
                           <span class="font-weight-bold">15 open</span></span
@@ -759,35 +764,15 @@
                         <i class="ni ni-box-2 text-white opacity-10"></i>
                       </div>
                       <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Hardware</h6>
+                        <a href="{% url 'model_category' customer_id=i.customer_id category='hardware' %} ">Hardware</a>
                         <span class="text-xs"
                           >1 is active,
                           <span class="font-weight-bold">40 closed</span></span
                         >
                       </div>
                     </div>
-                    <div class="d-flex">
-                      <button
-                        class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
-                      >
-                        <i class="ni ni-bold-right" aria-hidden="true"></i>
-                      </button>
-                    </div>
-                  </li>
-                  <li
-                    class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg"
-                  >
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center"
-                      >
-                        <i class="ni ni-satisfied text-white opacity-10"></i>
-                      </div>
-                      <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Electrical</h6>
-                        <span class="text-xs font-weight-bold">+ 430</span>
-                      </div>
-                    </div>
+                    {% endfor %}
+                  
                     <div class="d-flex">
                       <button
                         class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"

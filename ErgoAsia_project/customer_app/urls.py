@@ -31,6 +31,10 @@ urlpatterns = [
     path('customer-tables', views.customertables,name="customertables"),
     path('customer-profile', views.customerprofile,name="customerprofile"),
     path('edit/<int:pk>',views.displayModel,name="customereditmodel"),
+    # path('model_category/<int:pk>',views.categorymodel,name="categorymodel"),
+    path('model_category/<int:customer_id>/<str:category>/', views.categorymodel, name='model_category'),
+
+
 
 
 

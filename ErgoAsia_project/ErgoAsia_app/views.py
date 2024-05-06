@@ -54,4 +54,14 @@ def DisplayModel(request,pk):
     
     return render(request,'ErgoAsia_app/editmodel.html',{'customer_data':customer_data})
 
+def sortby(request):
+    print('inside sortby')
+    if request.method == 'POST':
+        category = request.POST.get('category')  # Retrieve the 'category' value from POST data
+        customer_requirements_data = Customerrequirements.objects.filter(meal_preference=category)
 
+        print("hello")
+        for requirement in customer_requirements_data:
+            print(requirement.first.pname)
+        
+            

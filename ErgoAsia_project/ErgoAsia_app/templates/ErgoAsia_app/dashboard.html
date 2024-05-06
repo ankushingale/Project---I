@@ -13,7 +13,7 @@
       href="{% static "img/apple-icon.png" %}"
     />
     <link rel="icon" type="image/png" href='{% static "img/favicon.png" %}'/>
-    <title>Material Dashboard 2 by Creative Tim</title>
+    <title>ErgoAsia | Dashboard</title>
     <!--     Fonts and icons     -->
     <link
       rel="stylesheet"
@@ -586,15 +586,15 @@
                         <li>
                           <a
                             class="dropdown-item border-radius-md"
-                            href="javascript:;"
-                            >Action</a
+                            href=""
+                            >Electrical</a
                           >
                         </li>
                         <li>
                           <a
                             class="dropdown-item border-radius-md"
-                            href="javascript:;"
-                            >Another action</a
+                            href="" 
+                            >Hardware</a
                           >
                         </li>
                         <li>
@@ -1374,6 +1374,39 @@
     <script src="{% static "js/plugins/smooth-scrollbar.min.js" %}"></script>
     <script src="{% static "js/plugins/chartjs.min.js" %}"></script>
     <script>
+      // JavaScript code to send AJAX request with CSRF token included
+$(document).ready(function() {
+  // Function to handle click event on dropdown items
+  $(".dropdown-item").click(function(event) {
+      // Prevent default behavior of anchor tag
+      event.preventDefault();
+      
+      // Get the category value from the clicked anchor tag
+      var category = $(this).text().trim();
+
+      // Send AJAX request to the Django view
+      $.ajax({
+          url: "{% url 'sortbycategory' %}",
+          type: "POST",
+          headers: {
+              "X-CSRFToken": "{{ csrf_token }}"
+          },
+          data: {
+              category: category
+          },
+          success: function(response) {
+              console.log(response);
+              // Handle success response here
+          },
+          error: function(xhr, textStatus, errorThrown) {
+              console.error(xhr.responseText);
+              // Handle error response here
+          }
+      });
+  });
+});
+
+
       var ctx = document.getElementById("chart-bars").getContext("2d");
 
       new Chart(ctx, {

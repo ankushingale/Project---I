@@ -28,6 +28,8 @@ urlpatterns = [
     path('notifications',views.notifications,name="notifications"),
     path('supplier',views.supplier,name="supplier"),
     path('edit/<int:pk>',views.DisplayModel,name="supplier"),
+    path('sortbycategory',views.sortby,name="sortbycategory"),
+    
 
 
 
