@@ -35,7 +35,7 @@
                       {% endif %} {% endcomment %}
                       {% for i in customer_data %}
                       <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{forloop.counter}}</th>
                         <td>{{i.Part_Name}}</td>
                         <td>{{i.cname}}</td>
                         <td>{{i.pname}}</td>
