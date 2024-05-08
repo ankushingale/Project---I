@@ -63,7 +63,7 @@ def basic_elementsV(request):
 
 def basic_tableV(request):
     # Your view logic here
-    return render(request, 'manufacturer_app/basic_elements.html')
+    return render(request, 'manufacturer_app/basic-table.html')
 
 def loginV(request):
     # Your view logic here
