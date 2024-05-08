@@ -67,9 +67,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'customer_app', 'templates'), 
             os.path.join(BASE_DIR, 'ErgoAsia_app', 'templates'),  
             os.path.join(BASE_DIR, 'manufacturer_app', 'templates'),  
-            BASE_DIR / 'Templates'
-    
-            ],
+            os.path.join(BASE_DIR, 'Templates'),  # Corrected this line
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,6 +80,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 

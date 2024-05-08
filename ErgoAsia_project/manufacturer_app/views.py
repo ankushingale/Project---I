@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def manufacturerhome(request):
-    return render(request,'manufacturer_app/home.html')
+    return render(request,'manufacturer_app/index.html')
 
 @csrf_exempt
 def supplierregistration(request):
@@ -52,5 +52,34 @@ def suppliersignin(request):
 def displaySuppliers(request):
 
     data=SupplierRegistration.objects.all()
+
+def error404V(request):
+    # Your view logic here
+    return render(request, 'manufacturer_app/error-404.html')
+
+def basic_elementsV(request):
+    # Your view logic here
+    return render(request, 'manufacturer_app/basic_elements.html')
+
+def basic_tableV(request):
+    # Your view logic here
+    return render(request, 'manufacturer_app/basic_elements.html')
+
+def loginV(request):
+    # Your view logic here
+    return render(request, 'manufacturer_app/login.html')
+
+def registerV(request):
+    # Your view logic here
+    return render(request, 'manufacturer_app/register.html')
+
+# def signinV(request):
+#     # Your view logic here
+#     return render(request, 'manufacturer_app/sign-in.html')
+
+# def signupV(request):
+#     # Your view logic here
+#     return render(request, 'manufacturer_app/signup.html')
+
 
     

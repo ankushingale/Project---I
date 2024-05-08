@@ -746,22 +746,21 @@
                 <i class="ni ni-box-2 text-white opacity-10"></i>
             </div>
             <div class="d-flex flex-column">
-                <a href="{% url 'model_category' customer_id=i.customer_id category='hardware' %} ">Hardware</a>
+                <a href="{% url 'model_category' customer_id=i.customer_id category='hardware' category='Hardware' %} ">Hardware</a>
                 <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
             </div>
         </div>
+        <div class="d-flex">
+          <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+              <i class="ni ni-bold-right" aria-hidden="true"></i>
+          </button>
+      </div>
     </li>
     {% endif %}
 {% endfor %} 
 
                   
-                    <div class="d-flex">
-                      <button
-                        class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
-                      >
-                        <i class="ni ni-bold-right" aria-hidden="true"></i>
-                      </button>
-                    </div>
+                    
                   </li>
                 </ul>
               </div>
