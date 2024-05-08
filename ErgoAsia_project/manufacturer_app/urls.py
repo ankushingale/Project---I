@@ -23,12 +23,12 @@ urlpatterns = [
     path('supplier-registration',views.supplierregistration,name="supplierregistration"),
     path('supplier-signin',views.suppliersignin,name="suppliersignin"),
     path('error404', views.error404V, name='error404N'),
-    path('basic_elements', views.basic_elementsV, name='basic_elementsN'),
-    path('basic_table', views.basic_tableV, name='basic_tableN'),
-    path('supplierlogin', views.loginV, name='loginN'),
-    path('supplierregister', views.registerV, name='registerN'),
-    # path('signin/', views.signinV, name='signinN'),
-    # path('signup/', views.signupV, name='signupN'),
+    path('basic_elements', views.basic_elements, name='basic_elementsN'),
+    path('basic_table', views.basic_table, name='basic_tableN'),
+    path('supplierlogin', views.login, name='loginN'),
+    path('supplierregister', views.register, name='registerN'),
+    # path('signin/', views.login, name='signinN'),
+    # path('signup/', views.signup, name='signupN'),
     
 
 ]

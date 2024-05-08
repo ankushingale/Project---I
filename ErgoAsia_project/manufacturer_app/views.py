@@ -57,19 +57,19 @@ def error404V(request):
     # Your view logic here
     return render(request, 'manufacturer_app/error-404.html')
 
-def basic_elementsV(request):
+def basic_elements(request):
     # Your view logic here
     return render(request, 'manufacturer_app/basic_elements.html')
 
-def basic_tableV(request):
+def basic_table(request):
     # Your view logic here
     return render(request, 'manufacturer_app/basic-table.html')
 
-def loginV(request):
+def login(request):
     # Your view logic here
     return render(request, 'manufacturer_app/login.html')
 
-def registerV(request):
+def register(request):
     # Your view logic here
     return render(request, 'manufacturer_app/register.html')
 
