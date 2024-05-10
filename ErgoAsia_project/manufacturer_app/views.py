@@ -12,7 +12,7 @@ def supplierregistration(request):
     message=None
     if request.method=="POST":
         full_name=request.POST.get('fullname')
-        company_name=request.POST.get('cname')
+        # company_name=request.POST.get('cname')
         contact=request.POST.get('cno')
         email=request.POST.get('email')
         password=request.POST.get('pass')
@@ -20,14 +20,14 @@ def supplierregistration(request):
 
         supplier_id=random.randint(1000, 9999)
 
-        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,company_name=company_name,contact_no=contact,email=email,password=password,address=address)
+        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,contact_no=contact,email=email,password=password,address=address)
 
         data.save()
 
         message="Registration Done Sucessfully"
         
-        return render(request,'manufacturer_app/signup.html',{'msg':message})
-    return render(request,'manufacturer_app/signup.html')
+        return render(request,'manufacturer_app/register.html',{'msg':message})
+    return render(request,'manufacturer_app/register.html')
 
 
 @csrf_exempt
@@ -36,18 +36,20 @@ def suppliersignin(request):
     msg_invalid=None
     if request.method=="POST":
         email=request.POST.get('email')
-        password=request.POST.get('password')
+        password=request.POST.get('pass')
+        
+        request.session['email'] = email
 
         data=SupplierRegistration.objects.filter(email=email,password=password)
 
         if data.count()>0:
-            msg_valid="Authentication Successfull.....you will redirected to home page soon"
+            msg_valid="Authentication Successfull.....you will redirected to dashboard soon"
         else:
             msg_invalid="Invalid username and password"
 
-        return render(request,'manufacturer_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
+        return render(request,'manufacturer_app/login.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
 
-    return render(request,'manufacturer_app/sign-in.html')
+    return render(request,'manufacturer_app/login.html')
 
 def displaySuppliers(request):
 
@@ -65,13 +67,13 @@ def basic_table(request):
     # Your view logic here
     return render(request, 'manufacturer_app/basic-table.html')
 
-def login(request):
-    # Your view logic here
-    return render(request, 'manufacturer_app/login.html')
+# def login(request):
+#     # Your view logic here
+#     return render(request, 'manufacturer_app/login.html')
 
-def register(request):
-    # Your view logic here
-    return render(request, 'manufacturer_app/register.html')
+# def register(request):
+#     # Your view logic here
+#     return render(request, 'manufacturer_app/register.html')
 
 # def signinV(request):
 #     # Your view logic here
