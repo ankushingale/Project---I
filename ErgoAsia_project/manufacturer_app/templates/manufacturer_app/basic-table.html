@@ -8,7 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Skydash Admin</title>
+    <title>Supplier</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://unpkg.com/@icon/themify-icons/themify-icons.css">
     {% comment %} <link rel="stylesheet" href="{% static "css/vendor.bundle.base.css" %} "> {% endcomment %}
@@ -440,7 +440,7 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url "basic_elementsN" %}">
+              <a class="nav-link" href="{% url "manufacturerhome" %}">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
@@ -463,7 +463,7 @@
               <a
                 class="nav-link"
                 data-toggle="collapse"
-                href="#form-elements"
+                href="{% url "basic_elementsN" %}"
                 aria-expanded="false"
                 aria-controls="form-elements"
               >
