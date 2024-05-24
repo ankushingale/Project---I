@@ -151,7 +151,7 @@ def displayModel(request,pk):
 
 def categorymodel(request,customer_id,category):
     # category = request.GET.get('category')  # Get the category value from URL parameter
-
+    
     customer_data=Customerrequirements.objects.filter(customer_id=customer_id,meal_preference=category)
     return render(request,'customer_app/customer_caategoory_modee.html',{'customer_data':customer_data})
 

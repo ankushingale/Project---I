@@ -35,7 +35,4 @@ urlpatterns = [
     path('model_category/<int:customer_id>/<str:category>/', views.categorymodel, name='model_category'),
 
 
-
-
-
 ]

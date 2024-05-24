@@ -18,6 +18,8 @@ class PDFFileField(djongo_models.FileField):
     def __init__(self, *args, **kwargs):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
+
+
 class Customerrequirements(models.Model):
     customer = models.ForeignKey(Customerdata, on_delete=models.CASCADE)
     meal_preference = models.CharField(max_length=50)
