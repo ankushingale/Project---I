@@ -137,8 +137,12 @@ def customerdashboard(request):
     return render(request,'customer_app/Cdashboard.html',{'cdata':customer_data})
 
 def customertables(request):
+    
+    customer_id = request.session.get('customer_id', None)
 
-    return render(request,'customer_app/tables.html')
+    customer_data=Customerrequirements.objects.filter(customer_id=customer_id)
+
+    return render(request,'customer_app/tables.html',{'cdata':customer_data})
 
 def customerprofile(request):
     return render(request,'customer_app/profile.html')
@@ -154,4 +158,5 @@ def categorymodel(request,customer_id,category):
     
     customer_data=Customerrequirements.objects.filter(customer_id=customer_id,meal_preference=category)
     return render(request,'customer_app/customer_caategoory_modee.html',{'customer_data':customer_data})
+
 
