@@ -91,6 +91,8 @@ def customerrequirements(request):
         target_value=request.POST.get('tv')
         start_of_production=request.POST.get('sop')
         
+        project_id=random.randint(1000, 9999)
+
         # def upload_pdf(request):
         #     if request.method == 'POST':
         #         pdf_file = request.FILES.get('pdf_file')
@@ -104,7 +106,7 @@ def customerrequirements(request):
 
         # upload_pdf(request)
 
-        data=Customerrequirements(meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
+        data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         return redirect('Cdashboard')
     

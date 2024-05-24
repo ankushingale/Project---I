@@ -21,6 +21,7 @@ class PDFFileField(djongo_models.FileField):
 
 
 class Customerrequirements(models.Model):
+    project_id=models.IntegerField(primary_key=True)
     customer = models.ForeignKey(Customerdata, on_delete=models.CASCADE)
     meal_preference = models.CharField(max_length=50)
     Part_Name = models.CharField(max_length=50)
