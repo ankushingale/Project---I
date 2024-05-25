@@ -20,8 +20,8 @@ from manufacturer_app import views
 
 urlpatterns = [
     path('manufacturerhome',views.manufacturerhome,name="manufacturerhome"),
-    path('supplier-registration',views.supplierregistration,name="supplierregistration"),
-    path('supplier-signin',views.suppliersignin,name="suppliersignin"),
+    # path('supplier-registration',views.supplierregistration,name="supplierregistration"),
+    # path('supplier-signin',views.suppliersignin,name="suppliersignin"),
     path('error404', views.error404V, name='error404N'),
     path('basic_elements', views.basic_elements, name='basic_elements'),
     path('basic_table', views.basic_table, name='basic_table'),

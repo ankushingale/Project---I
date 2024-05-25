@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="{% static "css/style.css" %} ">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
+
+  <style>
+    .custom-black-text {
+      color: black !important;
+  }
+</style>
 </head>
 
 <body>
@@ -72,6 +78,16 @@
                 <div class="form-group">
                   <input type="text" name="addr" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Address">
                 </div>
+
+                  
+    <div class="form-group">
+      <select name="category" id="categorySelect" class="form-control form-control-lg custom-black-text">
+          <option value="">Select Category</option>
+          <option value="electrical">Electrical</option>
+          <option value="mechanical">Mechanical</option>
+          <option value="hardware">Hardware</option>
+      </select>
+  </div>
                 <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">

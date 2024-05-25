@@ -17,10 +17,11 @@ def supplierregistration(request):
         email=request.POST.get('email')
         password=request.POST.get('pass')
         address = request.POST.get('addr')
-
+        supplier_category=request.POST.get('category')
+       
         supplier_id=random.randint(1000, 9999)
 
-        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,contact_no=contact,email=email,password=password,address=address)
+        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,contact_no=contact,email=email,password=password,address=address,supplier_category=supplier_category)
 
         data.save()
 
