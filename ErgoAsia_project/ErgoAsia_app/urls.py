@@ -29,6 +29,9 @@ urlpatterns = [
     path('supplier',views.supplier,name="supplier"),
     path('edit/<int:pk>',views.DisplayModel,name="supplier"),
     path('sortbycategory',views.sortby,name="sortbycategory"),
+    path('edit/<int:customer_id>/', views.edit_customer, name='edit_customer'),
+    path('delete/<int:customer_id>/', views.delete_customer, name='delete_customer'),
+    path('registrationtable/', views.registrationtable, name='registrationtable'),  # Add this if it's not already
     
 
 

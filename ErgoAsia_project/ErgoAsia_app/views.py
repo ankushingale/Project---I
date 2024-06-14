@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata,Customerrequirements
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 def home(request):
@@ -14,8 +15,9 @@ def dashboard(request):
 
     data=Customerrequirements.objects.all()
     count = Customerrequirements.objects.count()
+    total_coustomer=Customerdata.objects.count()
 
-    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count})
+    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer})
 
 def supplier(request):
     return render(request,'ErgoAsia_app/supplier.html')
@@ -65,3 +67,28 @@ def sortby(request):
             print(requirement.first.pname)
         
             
+def edit_customer(request, customer_id):
+    customer = get_object_or_404(Customerdata, customer_id=customer_id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phno = request.POST.get('phno')
+        address = request.POST.get('address')
+        
+        customer.name = name
+        customer.email = email
+        customer.phno = phno
+        customer.address = address
+        customer.save()
+        
+        return redirect('registrationtable')  # Redirect to dashboard after saving
+    
+    return render(request, 'ErgoAsia_app/edit_customer.html', {'customer': customer})
+
+@csrf_exempt
+def delete_customer(request, customer_id):
+    customer = get_object_or_404(Customerdata, customer_id=customer_id)
+    if request.method == "POST":
+        customer.delete()
+        return redirect('registrationtable')
+    return render(request, 'ErgoAsia_app/delete_confirm.html', {'customer': customer})

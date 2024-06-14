@@ -10,7 +10,7 @@ class Customerdata(models.Model):
     address = models.CharField(max_length=100)
     
 
-    def __str__(self):
+    def __str__(self):  
         return self.name
 class PDFFileField(djongo_models.FileField):
     description = "PDF File"

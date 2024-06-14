@@ -368,16 +368,14 @@
                   <div class="col-8">
                     <div class="numbers">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                        Today's Money
+                          Total Orders
                       </p>
-                      <h5 class="font-weight-bolder">$53,000</h5>
+                      <h5 class="font-weight-bolder">{{ total_orders }}</h5>
                       <p class="mb-0">
-                        <span class="text-success text-sm font-weight-bolder"
-                          >+55%</span
-                        >
-                        since yesterday
+                          <span class="text-success text-sm font-weight-bolder">.</span>
+                          since yesterday
                       </p>
-                    </div>
+                  </div>  
                   </div>
                   <div class="col-4 text-end">
                     <div
@@ -400,9 +398,9 @@
                   <div class="col-8">
                     <div class="numbers">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                        Today's Users
+                        Order in Working
                       </p>
-                      <h5 class="font-weight-bolder">2,300</h5>
+                      <h5 class="font-weight-bolder">6</h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder"
                           >+3%</span
@@ -432,14 +430,14 @@
                   <div class="col-8">
                     <div class="numbers">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                        New Clients
+                        Order completed
                       </p>
-                      <h5 class="font-weight-bolder">+3,462</h5>
+                      <h5 class="font-weight-bolder">5</h5>
                       <p class="mb-0">
                         <span class="text-danger text-sm font-weight-bolder"
-                          >-2%</span
+                          >.</span
                         >
-                        since last quarter
+                        since yesterday
                       </p>
                     </div>
                   </div>
@@ -464,12 +462,12 @@
                   <div class="col-8">
                     <div class="numbers">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                        Sales
+                        New Order
                       </p>
-                      <h5 class="font-weight-bolder">$103,430</h5>
+                      <h5 class="font-weight-bolder">2</h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder"
-                          >+5%</span
+                          >.</span
                         >
                         than last month
                       </p>
@@ -490,7 +488,7 @@
             </div>
           </div>
         </div>
-        <div class="row mt-4">
+        {% comment %} <div class="row mt-4">
           <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
@@ -619,7 +617,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> {% endcomment %}
         <div class="row mt-4">
           <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card">
@@ -644,10 +642,10 @@
                       <td class="w-30">
                         <div class="d-flex px-2 py-1 align-items-center">
                           <div>
-                            <img
+                            {% comment %} <img
                               src="{% static "img/customer dashboard/flags/US.png" %}"
                               alt="Country flag"
-                            />
+                            /> {% endcomment %}
                           </div>
                           <div class="ms-4">
                             <p class="text-xs font-weight-bold mb-0">

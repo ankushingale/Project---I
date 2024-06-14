@@ -131,12 +131,32 @@ def customerrequirements(request):
 #     # return render(request,'customer_app/index.html')
 
 def customerdashboard(request):
-    
+    # Retrieve customer ID from session
     customer_id = request.session.get('customer_id', None)
 
-    customer_data=Customerrequirements.objects.filter(customer_id=customer_id)
+    # Initialize context dictionary
+    context = {}
 
-    return render(request,'customer_app/Cdashboard.html',{'cdata':customer_data})
+    if customer_id:
+        # Query to retrieve customer data
+        customer_data = Customerrequirements.objects.filter(customer_id=customer_id)
+
+        # Count total orders for the customer
+        total_orders = customer_data.count()
+
+        # Update context with customer_data and total_orders
+        context.update({
+            'cdata': customer_data,
+            'total_orders': total_orders,
+        })
+    else:
+        # Handle case where customer_id is not found in session
+        return redirect('login')  # Redirect to login page or handle appropriately
+
+    # Render template with updated context
+    return render(request, 'customer_app/Cdashboard.html', context)
+
+
 
 def customertables(request):
     
