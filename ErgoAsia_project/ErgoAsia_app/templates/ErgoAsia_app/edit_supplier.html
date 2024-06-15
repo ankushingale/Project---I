@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Supplier</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 50px;
+        max-width: 600px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-control {
+        border-radius: 0;
+      }
+      .btn-primary,
+      .btn-secondary {
+        border-radius: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Edit Supplier</h2>
+          <form method="post" class="mb-4">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="fullname">Full Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fullname"
+                name="fullname"
+                value="{{ supplier.full_name }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                value="{{ supplier.email }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cno">Contact Number:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="cno"
+                name="cno"
+                value="{{ supplier.contact_no }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="addr">Address:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="addr"
+                name="addr"
+                value="{{ supplier.address }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="company">Company Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="company"
+                name="company"
+                value="{{ supplier.company_name }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="category">Supplier Category:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="category"
+                name="category"
+                value="{{ supplier.supplier_category }}"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" onclick="goBack()">
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

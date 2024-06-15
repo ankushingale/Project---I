@@ -1,3 +1,4 @@
+from datetime import timezone
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata,Customerrequirements
@@ -17,8 +18,12 @@ def dashboard(request):
     data=Customerrequirements.objects.all()
     count = Customerrequirements.objects.count()
     total_coustomer=Customerdata.objects.count()
+    supplier_count=SupplierRegistration.objects.count()
+    # today = timezone.now().date()
+    # new_suppliers = SupplierRegistration.objects.filter(created_at__date=today)
+    # new_supplier_count = new_suppliers.count()
 
-    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer})
+    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count})
 
 def supplier(request):
     return render(request,'ErgoAsia_app/supplier.html')
@@ -125,9 +130,12 @@ def supplierregistration(request):
         email = request.POST.get('email')
         password = request.POST.get('pass')
         address = request.POST.get('addr')
+        company_name = request.POST.get('company')
         supplier_category = request.POST.get('category')
 
         supplier_id = random.randint(1000, 9999)
+
+        print(f"Company Name: {company_name}")  # Debugging line
 
         data = SupplierRegistration(
             supplier_id=supplier_id,
@@ -136,6 +144,7 @@ def supplierregistration(request):
             email=email,
             password=password,
             address=address,
+            company_name=company_name,
             supplier_category=supplier_category
         )
 
@@ -146,3 +155,31 @@ def supplierregistration(request):
         return render(request, 'ErgoAsia_app/new_supplier.html', {'msg': message})
 
     return render(request, 'ErgoAsia_app/new_supplier.html')
+
+def edit_supplier(request, supplier_id):
+    supplier = get_object_or_404(SupplierRegistration, supplier_id=supplier_id)
+    if request.method == 'POST':
+        supplier.full_name = request.POST.get('fullname')
+        supplier.contact_no = request.POST.get('cno')
+        supplier.email = request.POST.get('email')
+        supplier.password = request.POST.get('pass')
+        supplier.address = request.POST.get('addr')
+        supplier.company_name = request.POST.get('company')
+        supplier.supplier_category = request.POST.get('category')
+        supplier.save()
+        return redirect('registrationtable')  # Adjust this to your actual supplier list view name
+
+    return render(request, 'ErgoAsia_app/edit_supplier.html', {'supplier': supplier})
+
+def delete_supplier(request, supplier_id):
+    supplier = get_object_or_404(SupplierRegistration, supplier_id=supplier_id)
+    if request.method == 'POST':
+        supplier.delete()
+        return redirect('registrationtable')  # Adjust this to your actual supplier list view name
+
+    return render(request, 'ErgoAsia_app/confirm_delete.html', {'supplier': supplier})
+
+def supplier_list(request):
+    suppliers = SupplierRegistration.objects.all()
+    supplier_count = suppliers.count()
+    return render(request, 'ErgoAsia_app/dashboard.html', {'suppliers': suppliers, 'supplier_count': supplier_count})    

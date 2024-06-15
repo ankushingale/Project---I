@@ -1,5 +1,6 @@
 from django.db import models
 from djongo import models as djongo_models
+from django.utils import timezone
 
 class Customerdata(models.Model):
     customer_id = models.IntegerField(primary_key=True, unique=True, default=123)
@@ -8,6 +9,7 @@ class Customerdata(models.Model):
     phno = models.CharField(max_length=25)
     password = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):  

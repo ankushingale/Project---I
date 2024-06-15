@@ -12,7 +12,7 @@ def supplierregistration(request):
     message=None
     if request.method=="POST":
         full_name=request.POST.get('fullname')
-        # company_name=request.POST.get('cname')
+        company_name=request.POST.get('cname')
         contact=request.POST.get('cno')
         email=request.POST.get('email')
         password=request.POST.get('pass')
@@ -21,7 +21,7 @@ def supplierregistration(request):
        
         supplier_id=random.randint(1000, 9999)
 
-        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,contact_no=contact,email=email,password=password,address=address,supplier_category=supplier_category)
+        data=SupplierRegistration(supplier_id=supplier_id,full_name=full_name,company_name=company_name,contact_no=contact,email=email,password=password,address=address,supplier_category=supplier_category)
 
         data.save()
 
