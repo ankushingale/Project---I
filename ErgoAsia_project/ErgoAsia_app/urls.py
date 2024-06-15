@@ -32,7 +32,8 @@ urlpatterns = [
     path('edit/<int:customer_id>/', views.edit_customer, name='edit_customer'),
     path('delete/<int:customer_id>/', views.delete_customer, name='delete_customer'),
     path('registrationtable/', views.registrationtable, name='registrationtable'),  # Add this if it's not already
-    
+    path('register/', views.customersignup, name='register'),
+    path('supplier/register/', views.supplierregistration, name='supplier_register'),  
 
 
 

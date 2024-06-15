@@ -14,6 +14,7 @@
       }
       .container {
         margin-top: 50px;
+        max-width: 600px;
       }
       .form-group {
         margin-bottom: 15px;
@@ -29,61 +30,75 @@
   </head>
   <body>
     <div class="container">
-      <h2 class="mb-4">Edit Customer</h2>
-      <form method="post" class="mb-4">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            value="{{ customer.name }}"
-          />
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Edit Customer</h2>
+          <form method="post" class="mb-4">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value="{{ customer.name }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                value="{{ customer.email }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phno">Phone Number:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phno"
+                name="phno"
+                value="{{ customer.phno }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                name="address"
+                value="{{ customer.address }}"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" onclick="goBack()">
+              Cancel
+            </button>
+          </form>
+          <hr />
+          <form method="POST">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">
+              Save Changes
+            </button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            value="{{ customer.email }}"
-          />
-        </div>
-        <div class="form-group">
-          <label for="phno">Phone Number:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phno"
-            name="phno"
-            value="{{ customer.phno }}"
-          />
-        </div>
-        <div class="form-group">
-          <label for="address">Address:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            name="address"
-            value="{{ customer.address }}"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </form>
-      <hr />
-      <form method="POST">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="btn btn-secondary">Save Changes</button>
-      </form>
+      </div>
     </div>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Customer Registration</title>
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+      }
+      .form-group label {
+        font-weight: bold;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
+      .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+      .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+      h2 {
+        margin-bottom: 20px;
+        color: #343a40;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Customer Registration</h2>
+      {% if msg %}
+      <div class="alert alert-success" role="alert">{{ msg }}</div>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fname"
+            name="fname"
+            maxlength="50"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lname"
+            name="lname"
+            maxlength="50"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phno">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phno"
+            name="phno"
+            maxlength="25"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            maxlength="50"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="addr">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="addr"
+            name="addr"
+            maxlength="100"
+            required
+          />
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Register</button>
+          <a href="{% url 'registrationtable' %}" class="btn btn-secondary"
+            >Cancel</a
+          >
+        </div>
+      </form>
+    </div>
+    <!-- Include Bootstrap JS and dependencies (Optional for Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

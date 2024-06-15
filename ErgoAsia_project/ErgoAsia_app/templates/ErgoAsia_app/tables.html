@@ -38,6 +38,26 @@
     <link href="{% static "css/nucleo-icons.css" %}" rel="stylesheet" />
     <link href="{% static "css/nucleo-svg.css" %}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
+    <style>
+      .rounded-button {
+        border-radius: 50%;
+        margin-left: 20px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black; /* Icon color */
+        background-color: white; /* Button background color */
+        border: 2px solid #007bff; /* Optional: Border color */
+        outline: none;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .button-container {
+      padding-right: 15px; /* Adjust padding as needed */
+    }
+    </style>
     <script
       src="https://kit.fontawesome.com/42d5adcbca.js"
       crossorigin="anonymous"
@@ -391,17 +411,19 @@
         <div class="row">
           <div class="col-12">
             <div class="card my-4">
-              <div
-                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-              >
-                <div
-                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
-                >
-                  <h6 class="text-white text-capitalize ps-3">
-                    Customer table
-                  </h6>
-                </div>
-              </div>
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center"
+    >
+      <h6 class="text-white text-capitalize ps-3">
+        Customer table
+      </h6>
+      <div class="button-container">
+        <a href="{% url 'register' %}"><button class="rounded-button">
+          <i class="fas fa-plus"></i>
+        </button></a>
+      </div>
+    </div>
+  </div>
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
 <!-- customer_app/tables.html or similar template -->
@@ -465,7 +487,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card my-4">
-              <div
+              <!-- <div
                 class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
               >
                 <div
@@ -474,8 +496,28 @@
                   <h6 class="text-white text-capitalize ps-3">
                     Supplier table
                   </h6>
+                  <div class="button-container">
+                    <a href="{% url 'supplier_register' %}">
+                        <button class="rounded-button">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </a>
                 </div>
-              </div>
+                </div>
+              </div> -->
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center"
+    >
+      <h6 class="text-white text-capitalize ps-3">
+        Supplier table
+      </h6>
+      <div class="button-container">
+        <a href="{% url 'supplier_register' %}"><button class="rounded-button">
+          <i class="fas fa-plus"></i>
+        </button></a>
+      </div>
+    </div>
+  </div>
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
                   <table class="table align-items-center mb-0">
@@ -532,6 +574,24 @@
                           <strong>  {{i.supplier_id}}</strong>
                           </p>
                         </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0"></p>
+                          <p class="text-xs text-secondary mb-0">
+                          <strong>  {{i.email}}</strong>
+                          </p>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0"></p>
+                          <p class="text-xs text-secondary mb-0">
+                          <strong>  {{i.address}}</strong>
+                          </p>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0"></p>
+                          <p class="text-xs text-secondary mb-0">
+                          <strong>  {{i.supplier_category}}</strong>
+                          </p>
+                        </td>
                         <td class="align-middle text-center text-sm">
                           <span class="badge badge-sm bg-gradient-success"
                             > {{i.company_name}}</span
@@ -542,23 +602,19 @@
                             > {{i.contact_no}}</span
                           >
                         </td>
-                        {% comment %} <td class="align-middle">
-                          <a
-                            href="javascript:;"
-                            class="text-secondary font-weight-bold text-xs"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
-                          >
-                            Edit
-                          </a>
-                        </td> {% endcomment %}
+                        <td class="align-middle text-center">
+                          <!-- Edit link -->
+                          <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
+                          <!-- Delete link -->
+                          <a href="" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
+                      </td>
                       </tr>
                       {% endfor %}
                      
                     </tbody>
                   </table>
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
         </div>
@@ -1077,6 +1133,9 @@
     <script src="{% static "js/core/bootstrap.min.js" %}"></script>
     <script src="{% static "js/plugins/perfect-scrollbar.min.js" %}"></script>
     <script src="{% static "js/plugins/smooth-scrollbar.min.js" %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {

@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata,Customerrequirements
 from manufacturer_app.models import SupplierRegistration
@@ -92,3 +93,56 @@ def delete_customer(request, customer_id):
         customer.delete()
         return redirect('registrationtable')
     return render(request, 'ErgoAsia_app/delete_confirm.html', {'customer': customer})
+
+
+def customersignup(request):
+    message = None
+    if request.method == "POST":
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        phno = request.POST.get('phno')
+        password = request.POST.get('password')
+        address = request.POST.get('addr')
+        name = f"{fname} {lname}"
+
+        customer_id = random.randint(1000, 9999)
+
+        data = Customerdata(customer_id=customer_id, name=name, email=email, phno=phno, password=password, address=address)
+        data.save()
+               
+        message = "Registration Done Successfully"
+        
+    return render(request, 'ErgoAsia_app/new_customer.html', {'msg': message})
+
+import random
+
+def supplierregistration(request):
+    message = None
+    if request.method == "POST":
+        full_name = request.POST.get('fullname')
+        contact = request.POST.get('cno')
+        email = request.POST.get('email')
+        password = request.POST.get('pass')
+        address = request.POST.get('addr')
+        supplier_category = request.POST.get('category')
+
+        supplier_id = random.randint(1000, 9999)
+
+        data = SupplierRegistration(
+            supplier_id=supplier_id,
+            full_name=full_name,
+            contact_no=contact,
+            email=email,
+            password=password,
+            address=address,
+            supplier_category=supplier_category
+        )
+
+        data.save()
+
+        message = "Registration Done Successfully"
+
+        return render(request, 'ErgoAsia_app/new_supplier.html', {'msg': message})
+
+    return render(request, 'ErgoAsia_app/new_supplier.html')
