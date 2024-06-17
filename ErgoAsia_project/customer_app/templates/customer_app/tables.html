@@ -1,17 +1,4 @@
-<!--
-=========================================================
-* Argon Dashboard 2 - v2.0.4
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -102,7 +89,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'customertables' %}">
+            <a class="nav-link active" href="{% url 'customer-tables' %}">
               <div
                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -114,7 +101,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url "customerrequirements" %}">
+            <a class="nav-link" href="{% url "customer-requirements" %}">
               <div
                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -771,50 +758,46 @@
                       Status
                     </th>
                         
-                        {% for i in cdata  %}
-                      </tr>
+                        
                     </thead>
                     <tbody>
+                      {% for i in cdata %}
                       <tr>
                         <td>
                           <div class="d-flex px-2">
-                            <div>
-                              
-                            </div>
+                            <div></div>
                             <div class="my-auto">
-                              <h6 class="mb-0 text-sm">{{i.cname}}</h6>
+                              <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
                             </div>
                           </div>
                         </td>
                         <td>
-                          <p class="text-sm font-weight-bold mb-0">{{i.Part_Name}}</p>
-                        </td>
-                       
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">{{i.av}}</p>
+                          <p class="text-sm font-weight-bold mb-0">{{ i.Part_Name }}</p>
                         </td>
                         <td>
-                          <p class="text-sm font-weight-bold mb-0">{{i.meal_preference}}</p>
+                          <p class="text-sm font-weight-bold mb-0">{{ i.av }}</p>
                         </td>
                         <td>
-                          <p class="text-sm font-weight-bold mb-0">{{i.sop}}</p>
+                          <p class="text-sm font-weight-bold mb-0">{{ i.meal_preference }}</p>
                         </td>
                         <td>
-                          <span class="text-xs font-weight-bold">working</span>
+                          <p class="text-sm font-weight-bold mb-0">{{ i.sop }}</p>
                         </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">{{i.status}}</span>
                         </td>
                         <td class="align-middle">
-                          <button
-                            class="btn btn-link text-secondary mb-0"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <i class="fa fa-ellipsis-v text-xs"></i>
-                          </button>
+                          <a href="{% url 'edit_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
+                            <i class="fa fa-edit text-xs"></i>
+                          </a>
+                          <a href="{% url 'delete_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
+                            <i class="fa fa-trash text-xs"></i>
+                          </a>
                         </td>
                       </tr>
                       {% endfor %}
                     </tbody>
+                    
                   </table>
                 </div>
               </div>

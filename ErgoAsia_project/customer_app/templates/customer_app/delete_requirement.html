@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Requirement</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Delete Customer Requirement</h2>
+      <p>
+        Are you sure you want to delete the requirement for project "{{
+        requirement.pname }}"?
+      </p>
+      <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'Cdashboard' %}" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+  </body>
+</html>

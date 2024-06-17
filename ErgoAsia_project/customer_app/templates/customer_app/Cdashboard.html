@@ -92,7 +92,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'customertables' %}">
+            <a class="nav-link" href="{% url 'customer-tables' %}">
               <div
                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -106,7 +106,7 @@
           
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url "customerrequirements" %}">
+            <a class="nav-link" href="{% url "customer-requirements" %}">
               <div
                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -400,7 +400,7 @@
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
                         Order in Working
                       </p>
-                      <h5 class="font-weight-bolder">6</h5>
+                      <h5 class="font-weight-bolder">{{ working_orders }}</h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder"
                           >+3%</span
@@ -432,7 +432,7 @@
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
                         Order completed
                       </p>
-                      <h5 class="font-weight-bolder">5</h5>
+                      <h5 class="font-weight-bolder">{{completed_orders}}</h5>
                       <p class="mb-0">
                         <span class="text-danger text-sm font-weight-bolder"
                           >.</span
@@ -487,283 +487,180 @@
               </div>
             </div>
           </div>
+          
         </div>
-        {% comment %} <div class="row mt-4">
-          <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card z-index-2 h-100">
-              <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Sales overview</h6>
-                <p class="text-sm mb-0">
-                  <i class="fa fa-arrow-up text-success"></i>
-                  <span class="font-weight-bold">4% more</span> in 2021
-                </p>
-              </div>
-              <div class="card-body p-3">
-                <div class="chart">
-                  <canvas
-                    id="chart-line"
-                    class="chart-canvas"
-                    height="300"
-                  ></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="card card-carousel overflow-hidden h-100 p-0">
-              <div
-                id="carouselExampleCaptions"
-                class="carousel slide h-100"
-                data-bs-ride="carousel"
-              >
-                <div class="carousel-inner border-radius-lg h-100">
-                  <div
-                    class="carousel-item h-100 active"
-                    style="
-                      background-image: url('{% static "img/customer dashboard/carousel-1.jpg" %}');
-                      background-size: cover;
-                    "
-                  >
-                    <div
-                      class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-                    >
-                      <div
-                        class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-                      >
-                        <i
-                          class="ni ni-camera-compact text-dark opacity-10"
-                        ></i>
-                      </div>
-                      <h5 class="text-white mb-1">Get started with Argon</h5>
-                      <p>
-                        There’s nothing I really wanted to do in life that I
-                        wasn’t able to get good at.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="carousel-item h-100"
-                    style="
-                    background-image: url('{% static "img/customer dashboard/carousel-2.jpg" %}');
-                    background-size: cover;
-                    "
-                  >
-                    <div
-                      class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-                    >
-                      <div
-                        class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-                      >
-                        <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                      </div>
-                      <h5 class="text-white mb-1">
-                        Faster way to create web pages
-                      </h5>
-                      <p>
-                        That’s my skill. I’m not really specifically talented at
-                        anything except for the ability to learn.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="carousel-item h-100"
-                    style="
-                    background-image: url('{% static "img/customer dashboard/carousel-3.jpg" %}');
-                    background-size: cover;
-                    "
-                  >
-                    <div
-                      class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-                    >
-                      <div
-                        class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-                      >
-                        <i class="ni ni-trophy text-dark opacity-10"></i>
-                      </div>
-                      <h5 class="text-white mb-1">
-                        Share with us your design tips!
-                      </h5>
-                      <p>
-                        Don’t be afraid to be wrong because you can’t learn
-                        anything from a compliment.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  class="carousel-control-prev w-5 me-3"
-                  type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                  class="carousel-control-next w-5 me-3"
-                  type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide="next"
-                >
-                  <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> {% endcomment %}
+        
         <div class="row mt-4">
-          <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card">
-              <div class="card-header pb-0 p-3">
-                <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Your Order</h6>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center">
-                  <tbody>
-                    {% if cdata.count == 0 %}
-                    <div class="card-header pb-0 p-3">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">No Order Placed Yet</h6>
-                      </div>
-                    </div>
-                    {% endif %}
-                    {% for i in cdata %}
-                    
-                    <tr>
-                      <td class="w-30">
-                        <div class="d-flex px-2 py-1 align-items-center">
-                          <div>
-                            {% comment %} <img
-                              src="{% static "img/customer dashboard/flags/US.png" %}"
-                              alt="Country flag"
-                            /> {% endcomment %}
-                          </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">
-                              Project Name:
-                            </p>
-                            <h6 class="text-sm mb-0">{{i.pname}}</h6>
-                          </div>
-                        </div>
-                      </td> 
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">Part Name</p>
-                          <h6 class="text-sm mb-0">{{i.Part_Name}}
-                          </h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
-                          <h6 class="text-sm mb-0">{{i.sop}}</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <div class="col text-center">
-                          <p class="text-xs font-weight-bold mb-0">Category</p>
-                          <h6 class="text-sm mb-0">{{i.meal_preference}}</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <div class="col text-center">
-                          <a href="/edit/{{i.customer_id}}"><button type="button" class="btn btn-primary">View</button></a>
-
-                        </div>
-                      </td>
-                    </tr>
-                  {% endfor %}
-                     
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="card">
-              <div class="card-header pb-0 p-3">
-                <h6 class="mb-0">Categories</h6>
-              </div>
-              <div class="card-body p-3">
-                <ul class="list-group">
-                  <li
-                    class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
-                  >
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center"
-                      >
-                        <i
-                          class="ni ni-mobile-button text-white opacity-10"
-                        ></i>
-                      </div>
-
-                      
-                    
-      {% for i in cdata %}
-    {% if forloop.first %}
-        <div class="d-flex flex-column">
-            <a href="{% url 'model_category' customer_id=i.customer_id category='electrical' %} ">Electrical</a>
-            <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
-        </div>
-        </div>
-        <div class="d-flex">
-            <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                <i class="ni ni-bold-right" aria-hidden="true"></i>
-            </button>
-        </div>
-    </li>
-    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-        <div class="d-flex align-items-center">
-            <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                <i class="ni ni-tag text-white opacity-10"></i>
-            </div>
-            <div class="d-flex flex-column">
-                <a href="{% url 'model_category' customer_id=i.customer_id category='mechanical' %} ">Mechanical</a>
-                <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
-            </div>
-        </div>
-        <div class="d-flex">
-            <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                <i class="ni ni-bold-right" aria-hidden="true"></i>
-            </button>
-        </div>
-    </li>
-    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-        <div class="d-flex align-items-center">
-            <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                <i class="ni ni-box-2 text-white opacity-10"></i>
-            </div>
-            <div class="d-flex flex-column">
-              <a href="{% url 'model_category' i.customer_id 'Hardware' %}">Hardware</a>
-                <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
-            </div>
-        </div>
-        <div class="d-flex">
-          <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-              <i class="ni ni-bold-right" aria-hidden="true"></i>
-          </button>
+  <!-- Column 1: Your Order and Something is coming! -->
+  <div class="col-lg-7 mb-lg-0 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-0">Your Order</h6>
       </div>
-    </li>
-    {% endif %}
-{% endfor %} 
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-items-center">
+            <tbody>
+              {% if cdata.count == 0 %}
+              <tr>
+                <td colspan="5">
+                  <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                      <h6 class="mb-2">No Order Placed Yet</h6>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {% endif %}
+              {% for i in cdata %}
+              <tr>
+                <td class="w-30">
+                  <div class="d-flex px-2 py-1 align-items-center">
+                    <div>
+                      <!-- <img src="{% static "img/customer dashboard/flags/US.png" %}" alt="Country flag" /> -->
+                    </div>
+                    <div class="ms-4">
+                      <p class="text-xs font-weight-bold mb-0">Project Name:</p>
+                      <h6 class="text-sm mb-0">{{ i.pname }}</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                    <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                    <h6 class="text-sm mb-0">{{ i.sop }}</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-sm">
+                  <div class="col text-center">
+                    <p class="text-xs font-weight-bold mb-0">Category</p>
+                    <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-sm">
+                  <div class="col text-center">
+                    <a href="/edit/{{ i.customer_id }}"><button type="button" class="btn btn-primary">View</button></a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-                  
-                    
-                  </li>
-                </ul>
+    <!-- Something is coming! -->
+    <div class="card mt-4">
+      <div class="card-body">
+        <h6 class="card-title mb-0">Something is coming!</h6>
+        <p class="card-text">Stay tuned for updates.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column 2: Notifications, Categories, and Additional Content -->
+  <div class="col-lg-5">
+    <!-- Notifications Card -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h6 class="card-title mb-0">Notifications</h6>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info" role="alert">
+          New notification: Your order status has been updated.
+        </div>
+        <div class="alert alert-warning" role="alert">
+          Attention: Please review your project details.
+        </div>
+        <!-- Add more alerts for additional notifications -->
+      </div>
+    </div>
+
+    <!-- Categories Card -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h6 class="card-title mb-0">Categories</h6>
+      </div>
+      <div class="card-body">
+        <ul class="list-group mb-4">
+          <!-- Electrical Category -->
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+            <div class="d-flex align-items-center">
+              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                <i class="ni ni-mobile-button text-white opacity-10"></i>
+              </div>
+              <div class="d-flex flex-column">
+                <a href="{% url 'model_category' customer_id=cdata.0.customer_id category='electrical' %}">Electrical</a>
+                <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
               </div>
             </div>
-          </div>
+            <div class="d-flex">
+              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                <i class="ni ni-bold-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </li>
+
+          <!-- Mechanical Category -->
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+            <div class="d-flex align-items-center">
+              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                <i class="ni ni-tag text-white opacity-10"></i>
+              </div>
+              <div class="d-flex flex-column">
+                <a href="{% url 'model_category' customer_id=cdata.0.customer_id category='mechanical' %}">Mechanical</a>
+                <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
+              </div>
+            </div>
+            <div class="d-flex">
+              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                <i class="ni ni-bold-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </li>
+
+          <!-- Hardware Category -->
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+            <div class="d-flex align-items-center">
+              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                <i class="ni ni-box-2 text-white opacity-10"></i>
+              </div>
+              <div class="d-flex flex-column">
+                <a href="{% url 'model_category' customer_id=cdata.0.customer_id category='Hardware' %}">Hardware</a>
+                <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
+              </div>
+            </div>
+            <div class="d-flex">
+              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                <i class="ni ni-bold-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Additional Content -->
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-0">Additional Content</h6>
+      </div>
+      <div class="card-body">
+        <p>This is some additional content below the Categories section.</p>
+        <p>Feel free to customize this content as needed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
         </div>
       </div>
     </main>
