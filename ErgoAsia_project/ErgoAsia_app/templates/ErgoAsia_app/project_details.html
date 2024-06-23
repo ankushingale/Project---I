@@ -1,0 +1,219 @@
+<!-- ErgoAsia_app/templates/ErgoAsia_app/project_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project Details</title>
+    <!-- Bootstrap CSS (assuming Bootstrap is used for styling) -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        margin-top: 20px;
+      }
+      .card {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Project Details for {{ customer.name }}</h1>
+      <br>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Project Information</h5>
+          <div class="form-group">
+            <label for="project_id">Project ID</label>
+            <input
+              type="text"
+              id="project_id"
+              class="form-control"
+              value="{{ project.project_id }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="project_name">Project Name</label>
+            <input
+              type="text"
+              id="project_name"
+              class="form-control"
+              value="{{ project.pname }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+
+            {% comment %} <label for="details">Details</label>
+            <textarea id="details" class="form-control" rows="3" readonly>
+{{ project.details }}</textarea {% endcomment %}
+            
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input
+              type="text"
+              id="status"
+              class="form-control"
+              value="{% if project.approved %}Approved{% else %}Pending{% endif %}"
+              readonly
+            />
+          </div>
+
+          <!-- Displaying all other fields -->
+          <div class="form-group">
+            <label for="meal_preference">Meal Preference</label>
+            <input
+              type="text"
+              id="meal_preference"
+              class="form-control"
+              value="{{ project.meal_preference }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="Part_Name">Part Name</label>
+            <input
+              type="text"
+              id="Part_Name"
+              class="form-control"
+              value="{{ project.Part_Name }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="blank_name">Category</label>
+            <input
+              type="text"
+              id="blank_name"
+              class="form-control"
+              value="{{ project.blank_name }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="cname">Company Name</label>
+            <input
+              type="text"
+              id="cname"
+              class="form-control"
+              value="{{ project.cname }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="pname">Project Name</label>
+            <input
+              type="text"
+              id="pname"
+              class="form-control"
+              value="{{ project.pname }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="cpno">Part Number</label>
+            <input
+              type="text"
+              id="cpno"
+              class="form-control"
+              value="{{ project.cpno }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="desc">Description</label>
+            <input
+              type="text"
+              id="desc"
+              class="form-control"
+              value="{{ project.desc }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="pr">Part Revision</label>
+            <input
+              type="text"
+              id="pr"
+              class="form-control"
+              value="{{ project.pr }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="av">Annual Volume</label>
+            <input
+              type="text"
+              id="av"
+              class="form-control"
+              value="{{ project.av }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="qs">Quote Submission</label>
+            <input
+              type="text"
+              id="qs"
+              class="form-control"
+              value="{{ project.qs }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="tv">Target Value</label>
+            <input
+              type="text"
+              id="tv"
+              class="form-control"
+              value="{{ project.tv }}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="sop">Start of Production</label>
+            <input
+              type="text"
+              id="sop"
+              class="form-control"
+              value="{{ project.sop }}"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload File Section -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Upload File</h5>
+          <div class="form-group">
+            {% if project.upload_file %}
+            <p>
+              <a href="{{ project.upload_file.url }}"
+                >{{ project.upload_file.name }}</a
+              >
+            </p>
+            {% else %}
+            <button type="button" class="btn btn-primary">View File</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- View Button -->
+      <a href="{% url 'registrationtable' %}" class="btn btn-primary mt-3"
+        >Back to Customer List</a
+      >
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

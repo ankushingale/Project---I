@@ -11,16 +11,15 @@ class Customerdata(models.Model):
     address = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     
-
-    def __str__(self):  
+    def __str__(self):
         return self.name
+
 class PDFFileField(djongo_models.FileField):
     description = "PDF File"
 
     def __init__(self, *args, **kwargs):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
-
 
 class Customerrequirements(models.Model):
     STATUS_CHOICES = (
@@ -47,3 +46,4 @@ class Customerrequirements(models.Model):
 
     def __str__(self):
         return f"{self.project_id} - {self.cname}"
+

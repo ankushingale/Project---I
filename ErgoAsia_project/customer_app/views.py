@@ -10,6 +10,7 @@ from .models import Customerrequirements
 from django.utils import timezone
 from datetime import datetime
 
+
 # from django.conf import settings.
 # from django.conf.urls.static import static.
 # Create your views here.
@@ -205,11 +206,14 @@ def displayModel(request,pk):
     
     return render(request,'customer_app/editmodel.html',{'customer_data':customer_data})
 
-def categorymodel(request,customer_id,category):
-    # category = request.GET.get('category')  # Get the category value from URL parameter
-    
-    customer_data=Customerrequirements.objects.filter(customer_id=customer_id,meal_preference=category)
-    return render(request,'customer_app/customer_caategoory_modee.html',{'customer_data':customer_data})
+# views.py
+
+def categorymodel(request, customer_id, category):
+    try:
+        customer_data = Customerrequirements.objects.filter(customer_id=customer_id, meal_preference=category)
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
+    except Customerrequirements.DoesNotExist:
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
 
 def edit_customer_requirement(request, project_id):
@@ -272,3 +276,5 @@ def categorymodel(request, customer_id, category):
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
     except Customerrequirements.DoesNotExist:
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
+
+
