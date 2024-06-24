@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Project Details</title>
+    <title>Final Project Details</title>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,11 +14,19 @@
       .card {
         margin-bottom: 20px;
       }
+      .approved-status {
+        color: green;
+      }
+      .icon {
+        font-size: 18px;
+        margin-left: 5px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Project Details for {{ customer.name }}</h1>
+      <h1>Final Project Details for {{ project.cname }}</h1>
+      <h2>Customer Name: {{ customer_name }}</h2>
       <br />
 
       <div class="card">
@@ -45,17 +53,32 @@
             />
           </div>
           <div class="form-group">
-            <label for="status">Status</label>
+            <label for="working_status">Working Status</label>
             <input
               type="text"
-              id="status"
+              id="working_status"
               class="form-control"
-              value="{% if project.status == 'approved' %}Approved{% else %}Pending{% endif %}"
+              value="{{ project.working_status }}"
               readonly
             />
           </div>
-
-          <!-- Displaying all other fields -->
+          <div class="form-group">
+            <label for="approval_status">Approval Status</label>
+            <div>
+              <input
+                type="text"
+                id="approval_status"
+                class="form-control"
+                value="{{ project.approval_status }}"
+                readonly
+              />
+              {% if project.approval_status == 'approved' %}
+              <div class="approved-status">
+                Approved <span class="icon">&#10004;</span>
+              </div>
+              {% endif %}
+            </div>
+          </div>
           <div class="form-group">
             <label for="meal_preference">Meal Preference</label>
             <input
@@ -179,77 +202,32 @@
         </div>
       </div>
 
-      <!-- Upload File Section -->
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Upload File</h5>
           <div class="form-group">
+            <label for="upload_file">File</label>
             {% if project.upload_file %}
-            <p>
-              <a href="{{ project.upload_file.url }}"
-                >{{ project.upload_file.name }}</a
-              >
-            </p>
+            <a
+              href="{{ project.upload_file.url }}"
+              class="btn btn-primary"
+              download
+              >Download File</a
+            >
             {% else %}
-            <button type="button" class="btn btn-primary">View File</button>
+            <p>No file uploaded</p>
             {% endif %}
           </div>
         </div>
       </div>
 
-      <!-- Approval Section -->
-      <!-- Approval Section -->
-      <form method="POST">
-        {% csrf_token %}
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Approval</h5>
-            <div class="form-group">
-              <label>Approve:</label>
-              <div>
-                <input
-                  type="radio"
-                  id="approve_yes"
-                  name="approve"
-                  value="yes"
-                  {%
-                  if
-                  is_approved
-                  %}checked{%
-                  endif
-                  %}
-                />
-                <label for="approve_yes">Yes</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="approve_no"
-                  name="approve"
-                  value="no"
-                  {%
-                  if
-                  not
-                  is_approved
-                  %}checked{%
-                  endif
-                  %}
-                />
-                <label for="approve_no">No</label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </form>
+      <div class="approved-status">
+        Green Approve <span class="icon">&#10004;</span>
+      </div>
 
-      <!-- View Button -->
-      <a href="{% url 'registrationtable' %}" class="btn btn-primary mt-3"
-        >Back to Customer List</a
+      <a href="{% url 'registrationtable' %}" class="btn btn-secondary"
+        >Back to Registration Table</a
       >
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
