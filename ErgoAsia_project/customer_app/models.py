@@ -38,6 +38,8 @@ class Customerrequirements(models.Model):
     qs=models.DateField() 
     tv=models.IntegerField()
     sop=models.DateField()
+    request_date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"{self.customer.name} - {self.phone_no}"
     

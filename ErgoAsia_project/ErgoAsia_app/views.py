@@ -1,9 +1,10 @@
-from datetime import timezone
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata,Customerrequirements
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+
 
 # Create your views here.
 
@@ -14,16 +15,21 @@ def ErgoAsiahome(request):
     return render(request,'ErgoAsia_app/home.html')
 
 def dashboard(request):
-
-    data=Customerrequirements.objects.all()
+    
+    today_date = datetime.now().date()
+    formatted_today = today_date.strftime("%Y-%m-%d")
+    print(formatted_today)
+    data=Customerrequirements.objects.filter(request_date=formatted_today)
     count = Customerrequirements.objects.count()
     total_coustomer=Customerdata.objects.count()
     supplier_count=SupplierRegistration.objects.count()
-    # today = timezone.now().date()
-    # new_suppliers = SupplierRegistration.objects.filter(created_at__date=today)
+    
+
     # new_supplier_count = new_suppliers.count()
 
-    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count})
+
+
+    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count,'todays_date': today_date})
 
 def supplier(request):
     return render(request,'ErgoAsia_app/supplier.html')

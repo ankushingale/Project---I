@@ -1,11 +1,8 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
-from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
-from django.contrib.auth.decorators import login_required
+from datetime import datetime
 from .models import Customerrequirements
 
 # from django.conf import settings.
@@ -92,6 +89,15 @@ def customerrequirements(request):
         start_of_production=request.POST.get('sop')
         
         project_id=random.randint(1000, 9999)
+        today_date = datetime.now().date()
+        formatted_today = today_date.strftime("%Y-%m-%d")
+        date_only = formatted_today.date()
+
+
+        
+
+
+
 
         # def upload_pdf(request):
         #     if request.method == 'POST':
@@ -106,7 +112,7 @@ def customerrequirements(request):
 
         # upload_pdf(request)
 
-        data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,customer=Customerdata.objects.get(customer_id = cid))
+        data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,request_date=date_only ,customer=Customerdata.objects.get(customer_id = cid))
         data.save()
         return redirect('Cdashboard')
     
