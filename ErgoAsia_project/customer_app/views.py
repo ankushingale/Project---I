@@ -1,9 +1,13 @@
 from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
 from datetime import datetime
 from .models import Customerrequirements
+from django.utils import timezone
+from datetime import datetime
+
 
 # from django.conf import settings.
 # from django.conf.urls.static import static.
@@ -65,8 +69,8 @@ def customersignin(request):
 
     return render(request,'customer_app/signinnew.html')
 
+
 @csrf_exempt
-# @login_required
 def customerrequirements(request): 
     if request.method=="POST":
                 # first_name=request.POST.get('first_name')
@@ -113,11 +117,56 @@ def customerrequirements(request):
         # upload_pdf(request)
 
         data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,request_date=date_only ,customer=Customerdata.objects.get(customer_id = cid))
+    if request.method == "POST":
+        cid = request.POST.get('cid')
+        if not cid:
+            return HttpResponse("Customer ID is missing.", status=400)
+
+        meal_preference = request.POST.get('meal_preference')
+        Part_Name = request.POST.get('Part_Name')
+        blank_name = request.POST.get('blank_name')
+        pdf_file = request.FILES.get('pdf_file')
+        company_name = request.POST.get('cname')
+        project_name = request.POST.get('pname')
+        part_no = request.POST.get('cpno')
+        description = request.POST.get('desc')
+        Part_revision = request.POST.get('pr')
+        Anual_volume = request.POST.get('av')
+        Quote_submission = request.POST.get('qs')
+        target_value = request.POST.get('tv')
+        start_of_production = request.POST.get('sop')
+        status = request.POST.get('status')
+
+        project_id = random.randint(1000, 9999)
+
+        try:
+            customer = Customerdata.objects.get(customer_id=cid)
+        except Customerdata.DoesNotExist:
+            return HttpResponse("Customer not found.", status=404)
+
+        data = Customerrequirements(
+            project_id=project_id,
+            meal_preference=meal_preference,
+            Part_Name=Part_Name,
+            blank_name=blank_name,
+            upload_file=pdf_file,
+            cname=company_name,
+            pname=project_name,
+            cpno=part_no,
+            desc=description,
+            pr=Part_revision,
+            av=Anual_volume,
+            qs=Quote_submission,
+            tv=target_value,
+            sop=start_of_production,
+            status=status,
+            customer=customer
+        )
         data.save()
-        return redirect('Cdashboard')
-    
+        return redirect('customer-tables')  # Ensure this matches your URL pattern name
+
     customer_email = request.session.get('customer_email', None)
-    customer_data=Customerdata.objects.filter(email=customer_email)
+    customer_data = Customerdata.objects.filter(email=customer_email)
 
     for customer in customer_data:
         names = customer.name.split(" ", 1)
@@ -129,16 +178,20 @@ def customerrequirements(request):
         print("Last Name:", last_name)
         print("Email:", customer.email)
 
-    return render(request, 'customer_app/requirementsform.html', {'customer_data': customer_data})
+    return render(request, 'customer_app/tablescopy.html', {'customer_data': customer_data})
 
 # def customersign(request):
 #     return render(request,'customer_app/signinnew.html')
 #     # return render(request,'customer_app/profile.html')
 #     # return render(request,'customer_app/index.html')
 
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from .models import Customerrequirements
+
 def customerdashboard(request):
     # Retrieve customer ID from session
-    customer_id = request.session.get('customer_id', None)
+    customer_id = request.session.get('customer_id')
 
     # Initialize context dictionary
     context = {}
@@ -150,10 +203,26 @@ def customerdashboard(request):
         # Count total orders for the customer
         total_orders = customer_data.count()
 
-        # Update context with customer_data and total_orders
+        # Count completed orders
+        completed_orders = customer_data.filter(status='completed').count()
+
+        # Count pending orders
+        pending_orders = customer_data.filter(status='pending').count()
+
+        # Calculate new orders received today
+        # today = datetime.now().date()
+        # new_orders_today = customer_data.filter(qs__date=today).count()
+
+        # Count working orders
+        working_orders = customer_data.filter(status='working').count()
+
+        # Update context with customer_data and counts
         context.update({
             'cdata': customer_data,
             'total_orders': total_orders,
+            'completed_orders': completed_orders,
+            'pending_orders': pending_orders,
+            'working_orders': working_orders,
         })
     else:
         # Handle case where customer_id is not found in session
@@ -161,7 +230,6 @@ def customerdashboard(request):
 
     # Render template with updated context
     return render(request, 'customer_app/Cdashboard.html', context)
-
 
 
 def customertables(request):
@@ -181,10 +249,75 @@ def displayModel(request,pk):
     
     return render(request,'customer_app/editmodel.html',{'customer_data':customer_data})
 
-def categorymodel(request,customer_id,category):
-    # category = request.GET.get('category')  # Get the category value from URL parameter
-    
-    customer_data=Customerrequirements.objects.filter(customer_id=customer_id,meal_preference=category)
-    return render(request,'customer_app/customer_caategoory_modee.html',{'customer_data':customer_data})
+# views.py
+
+def categorymodel(request, customer_id, category):
+    try:
+        customer_data = Customerrequirements.objects.filter(customer_id=customer_id, meal_preference=category)
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
+    except Customerrequirements.DoesNotExist:
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
+
+
+def edit_customer_requirement(request, project_id):
+    requirement = get_object_or_404(Customerrequirements, project_id=project_id)
+
+    if request.method == "POST":
+        # Extract all fields from POST data
+        meal_preference = request.POST.get('meal_preference')
+        part_name = request.POST.get('Part_Name')
+        blank_name = request.POST.get('blank_name')
+        pdf_file = request.FILES.get('pdf_file')
+        company_name = request.POST.get('cname')
+        project_name = request.POST.get('pname')
+        part_no = request.POST.get('cpno')
+        description = request.POST.get('desc')
+        part_revision = request.POST.get('pr')
+        annual_volume = request.POST.get('av')
+        quote_submission = request.POST.get('qs')
+        target_value = request.POST.get('tv')
+        start_of_production = request.POST.get('sop')
+        status = request.POST.get('status')  # Get the status value
+
+        # Update the requirement object with new values
+        requirement.meal_preference = meal_preference
+        requirement.Part_Name = part_name
+        requirement.blank_name = blank_name
+        if pdf_file:
+            requirement.upload_file = pdf_file
+        requirement.cname = company_name
+        requirement.pname = project_name
+        requirement.cpno = part_no
+        requirement.desc = description
+        requirement.pr = part_revision
+        requirement.av = annual_volume
+        requirement.qs = quote_submission
+        requirement.tv = target_value
+        requirement.sop = start_of_production
+        requirement.status = status  # Update the status field
+        requirement.save()  # Save the updated requirement object
+
+        return redirect('customer-tables')  # Redirect to Cdashboard URL after saving
+
+    # If request method is GET, render the edit form with current requirement data
+    return render(request, 'customer_app/edit_requirement.html', {'requirement': requirement})
+
+def delete_customer_requirement(request, project_id):
+    customer_requirement = get_object_or_404(Customerrequirements, project_id=project_id)
+
+    if request.method == "POST":
+        customer_requirement.delete()
+        # Notify admin or log the deletion here
+        return redirect('customer-tables')
+
+    return render(request, 'customer_app/delete_requirement.html', {'requirement': customer_requirement})
+
+
+def categorymodel(request, customer_id, category):
+    try:
+        customer_data = Customerrequirements.objects.filter(customer_id=customer_id, meal_preference=category)
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
+    except Customerrequirements.DoesNotExist:
+        return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
 

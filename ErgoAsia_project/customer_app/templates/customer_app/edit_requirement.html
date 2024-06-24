@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer Requirement</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .form-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Edit Customer Requirement</h2>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="cid" value="{{ requirement.customer.customer_id }}">
+
+                <div class="row">
+                    <div class="col-md-6 form-section">
+                        <div class="form-group">
+                            <label for="meal_preference">Meal Preference</label>
+                            <input type="text" class="form-control" id="meal_preference" name="meal_preference" value="{{ requirement.meal_preference }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="Part_Name">Part Name</label>
+                            <input type="text" class="form-control" id="Part_Name" name="Part_Name" value="{{ requirement.Part_Name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="blank_name">Blank Name</label>
+                            <input type="text" class="form-control" id="blank_name" name="blank_name" value="{{ requirement.blank_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="pdf_file">Upload File</label>
+                            <input type="file" class="form-control" id="pdf_file" name="pdf_file">
+                        </div>
+                        <div class="form-group">
+                            <label for="cname">Company Name</label>
+                            <input type="text" class="form-control" id="cname" name="cname" value="{{ requirement.cname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="pname">Project Name</label>
+                            <input type="text" class="form-control" id="pname" name="pname" value="{{ requirement.pname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="cpno">Part Number</label>
+                            <input type="text" class="form-control" id="cpno" name="cpno" value="{{ requirement.cpno }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 form-section">
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <input type="text" class="form-control" id="desc" name="desc" value="{{ requirement.desc }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="pr">Part Revision</label>
+                            <input type="text" class="form-control" id="pr" name="pr" value="{{ requirement.pr }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="av">Annual Volume</label>
+                            <input type="number" class="form-control" id="av" name="av" value="{{ requirement.av }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="qs">Quote Submission</label>
+                            <input type="date" class="form-control" id="qs" name="qs" value="{{ requirement.qs|date:'Y-m-d' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tv">Target Value</label>
+                            <input type="number" class="form-control" id="tv" name="tv" value="{{ requirement.tv }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="sop">Start of Production</label>
+                            <input type="date" class="form-control" id="sop" name="sop" value="{{ requirement.sop|date:'Y-m-d' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="working" {% if requirement.status == 'working' %}selected{% endif %}>Working</option>
+                                <option value="pending" {% if requirement.status == 'pending' %}selected{% endif %}>Pending</option>
+                                {% if user.is_staff %}
+                                <option value="completed" {% if requirement.status == 'completed' %}selected{% endif %}>Completed</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

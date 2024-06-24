@@ -1,6 +1,6 @@
 import random
 from django.shortcuts import render, redirect, get_object_or_404
-from customer_app.models import Customerdata,Customerrequirements
+from customer_app.models import Customerdata, Customerrequirements
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
@@ -9,10 +9,10 @@ from datetime import datetime
 # Create your views here.
 
 def home(request):
-    return render(request,'home.html')
+    return render(request, 'home.html')
 
 def ErgoAsiahome(request):
-    return render(request,'ErgoAsia_app/home.html')
+    return render(request, 'ErgoAsia_app/home.html')
 
 def dashboard(request):
     
@@ -30,43 +30,74 @@ def dashboard(request):
 
 
     return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count,'todays_date': today_date})
+    # Querying all customer requirements
+    data = Customerrequirements.objects.all()
+    
+    # Counting the total number of customer requirements
+    count = Customerrequirements.objects.count()
+    
+    # Counting the total number of customers
+    total_customer = Customerdata.objects.count()
+    
+    # Counting the total number of suppliers
+    supplier_count = SupplierRegistration.objects.count()
+
+    # Rendering the dashboard template with data
+    return render(request, 'ErgoAsia_app/dashboard.html', {
+        'req': data,  # Passing customer requirements queryset
+        'cnt': count,  # Passing count of customer requirements
+        'total_customer': total_customer,  # Passing total number of customers
+        'supplier_count': supplier_count  # Passing total number of suppliers
+    })
 
 def supplier(request):
-    return render(request,'ErgoAsia_app/supplier.html')
+    return render(request, 'ErgoAsia_app/supplier.html')
 
 def notifications(request):
-    return render(request,'ErgoAsia_app/notifications.html')
+    customer_data = Customerrequirements.objects.all()
+    supplier_data = SupplierRegistration.objects.all()
+
+    return render(request, 'ErgoAsia_app/notifications.html', {
+        'customer_data': customer_data,
+        'supplier_data': supplier_data
+    })
 
 def registrationtable(request):
-    customer_data=Customerdata.objects.all()
-    supplier_data=SupplierRegistration.objects.all()
-    return render(request,'ErgoAsia_app/tables.html',{'customer_data':customer_data,'supplier_data':supplier_data})
+    customer_data = Customerdata.objects.all()
+    supplier_data = SupplierRegistration.objects.all()
+    return render(request, 'ErgoAsia_app/tables.html', {
+        'customer_data': customer_data,
+        'supplier_data': supplier_data
+    })
 
 @csrf_exempt
 def ergoasiasignin(request):
-    msg_valid=None
-    msg_invalid=None
-    if request.method=='POST':
+    msg_valid = None
+    msg_invalid = None
+    if request.method == 'POST':
+        username = request.POST.get('uname')
+        password = request.POST.get('pass')
 
-        username=request.POST.get('uname')
-        password=request.POST.get('pass')
-
-        if username=="Admin" and password=="Admin":
-            msg_valid="Authentication Successfull.....you will redirected to dashboard page soon"
+        if username == "Admin" and password == "Admin":
+            msg_valid = "Authentication Successfull.....you will be redirected to the dashboard page soon"
         else:
-            msg_invalid="Invalid username and password"
+                        msg_invalid = "Invalid username and password"
 
-        return render(request,'ErgoAsia_app/sign-in.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
+        return render(request, 'ErgoAsia_app/sign-in.html', {
+            'msg_valid': msg_valid,
+            'msg_invalid': msg_invalid
+        })
 
-        
-    return render(request,'ErgoAsia_app/sign-in.html')
+    return render(request, 'ErgoAsia_app/sign-in.html')
 
 
-def DisplayModel(request,pk):
-
-    customer_data=Customerrequirements.objects.filter(customer_id=pk)
+def DisplayModel(request, pk):
+    customer_data = Customerrequirements.objects.filter(customer_id=pk)
     
-    return render(request,'ErgoAsia_app/editmodel.html',{'customer_data':customer_data})
+    return render(request, 'ErgoAsia_app/editmodel.html', {
+        'customer_data': customer_data
+    })
+
 
 def sortby(request):
     print('inside sortby')
@@ -77,8 +108,8 @@ def sortby(request):
         print("hello")
         for requirement in customer_requirements_data:
             print(requirement.first.pname)
-        
-            
+
+
 def edit_customer(request, customer_id):
     customer = get_object_or_404(Customerdata, customer_id=customer_id)
     if request.method == 'POST':
@@ -96,6 +127,7 @@ def edit_customer(request, customer_id):
         return redirect('registrationtable')  # Redirect to dashboard after saving
     
     return render(request, 'ErgoAsia_app/edit_customer.html', {'customer': customer})
+
 
 @csrf_exempt
 def delete_customer(request, customer_id):
@@ -126,7 +158,6 @@ def customersignup(request):
         
     return render(request, 'ErgoAsia_app/new_customer.html', {'msg': message})
 
-import random
 
 def supplierregistration(request):
     message = None
@@ -140,8 +171,6 @@ def supplierregistration(request):
         supplier_category = request.POST.get('category')
 
         supplier_id = random.randint(1000, 9999)
-
-        print(f"Company Name: {company_name}")  # Debugging line
 
         data = SupplierRegistration(
             supplier_id=supplier_id,
@@ -162,6 +191,7 @@ def supplierregistration(request):
 
     return render(request, 'ErgoAsia_app/new_supplier.html')
 
+
 def edit_supplier(request, supplier_id):
     supplier = get_object_or_404(SupplierRegistration, supplier_id=supplier_id)
     if request.method == 'POST':
@@ -177,6 +207,7 @@ def edit_supplier(request, supplier_id):
 
     return render(request, 'ErgoAsia_app/edit_supplier.html', {'supplier': supplier})
 
+
 def delete_supplier(request, supplier_id):
     supplier = get_object_or_404(SupplierRegistration, supplier_id=supplier_id)
     if request.method == 'POST':
@@ -185,7 +216,32 @@ def delete_supplier(request, supplier_id):
 
     return render(request, 'ErgoAsia_app/confirm_delete.html', {'supplier': supplier})
 
+
 def supplier_list(request):
     suppliers = SupplierRegistration.objects.all()
     supplier_count = suppliers.count()
-    return render(request, 'ErgoAsia_app/dashboard.html', {'suppliers': suppliers, 'supplier_count': supplier_count})    
+    return render(request, 'ErgoAsia_app/dashboard.html', {'suppliers': suppliers, 'supplier_count': supplier_count})
+
+
+def customer_detail(request, customer_id):
+    customer = get_object_or_404(Customerdata, customer_id=customer_id)
+    customer_requirements = Customerrequirements.objects.filter(customer_id=customer_id)
+
+    context = {
+        'customer': customer,
+        'customer_requirements': customer_requirements,
+    }
+
+    return render(request, 'ErgoAsia_app/customer_detail.html', context)
+
+           
+def project_details(request, customer_id, project_id):
+    customer = get_object_or_404(Customerdata, customer_id=customer_id)
+    project = get_object_or_404(Customerrequirements, project_id=project_id, customer_id=customer_id)
+
+    context = {
+        'customer': customer,
+        'project': project,
+    }
+
+    return render(request, 'ErgoAsia_app/project_details.html', context)

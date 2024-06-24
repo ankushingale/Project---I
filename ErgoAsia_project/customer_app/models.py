@@ -11,9 +11,9 @@ class Customerdata(models.Model):
     address = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     
-
-    def __str__(self):  
+    def __str__(self):
         return self.name
+
 class PDFFileField(djongo_models.FileField):
     description = "PDF File"
 
@@ -21,9 +21,13 @@ class PDFFileField(djongo_models.FileField):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
 
-
 class Customerrequirements(models.Model):
-    project_id=models.IntegerField(primary_key=True)
+    STATUS_CHOICES = (
+        ('working', 'Working'),
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+    )
+    project_id = models.IntegerField(primary_key=True)
     customer = models.ForeignKey(Customerdata, on_delete=models.CASCADE)
     meal_preference = models.CharField(max_length=50)
     Part_Name = models.CharField(max_length=50)
@@ -39,7 +43,17 @@ class Customerrequirements(models.Model):
     tv=models.IntegerField()
     sop=models.DateField()
     request_date = models.DateTimeField(auto_now_add=True)
+    cname = models.CharField(max_length=50)
+    pname = models.CharField(max_length=50)
+    cpno = models.CharField(max_length=50)
+    desc = models.CharField(max_length=50)
+    pr = models.CharField(max_length=50)
+    av = models.IntegerField(default=123)
+    qs = models.DateField()
+    tv = models.IntegerField()
+    sop = models.DateField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='working')
 
     def __str__(self):
-        return f"{self.customer.name} - {self.phone_no}"
-    
+        return f"{self.project_id} - {self.cname}"
+
