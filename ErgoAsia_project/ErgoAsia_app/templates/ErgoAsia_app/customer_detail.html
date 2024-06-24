@@ -76,7 +76,7 @@
       <input
         type="text"
         id="searchInput"
-        class="form-control mb-3"
+        class="search form-control mb-3"
         placeholder="Search..."
       />
 
@@ -279,7 +279,7 @@
         </form>
       </div>
 
-      <div class="table-responsive">
+      <div id="requirementsTableContainer" class="table-responsive">
         <table id="requirementsTable" class="table table-bordered">
           <thead class="thead-dark">
             <tr>
@@ -331,7 +331,7 @@
             "status",
           ],
         };
-        var requirementsTable = new List("requirementsTable", options);
+        var requirementsTable = new List("requirementsTableContainer", options);
 
         // Toggle form display
         document
@@ -388,6 +388,13 @@
               console.error("Error occurred during form submission:", error);
               // Optionally display an error message to the user
             });
+        });
+
+        // Search functionality
+        var searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("keyup", function () {
+          var searchString = searchInput.value.toLowerCase();
+          requirementsTable.search(searchString);
         });
       });
     </script>

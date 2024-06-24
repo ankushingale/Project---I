@@ -1,6 +1,6 @@
 import random
-from django.shortcuts import render, redirect, get_object_or_404
-from customer_app.models import Customerdata, Customerrequirements
+from django.shortcuts import get_list_or_404, render, redirect, get_object_or_404
+from customer_app.models import Customerdata, Customerrequirements, FinalRequirement
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
@@ -15,6 +15,7 @@ def ErgoAsiahome(request):
     return render(request, 'ErgoAsia_app/home.html')
 
 def dashboard(request):
+<<<<<<< HEAD
     
     today_date = datetime.now().date()
     formatted_today = today_date.strftime("%Y-%m-%d")
@@ -31,23 +32,20 @@ def dashboard(request):
 
     return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count,'todays_date': today_date})
     # Querying all customer requirements
+=======
+    approved_projects = FinalRequirement.objects.filter(approval_status='approved')
+>>>>>>> b6c4de62aced5f8d8b5d561ab144b042768af6f5
     data = Customerrequirements.objects.all()
-    
-    # Counting the total number of customer requirements
     count = Customerrequirements.objects.count()
-    
-    # Counting the total number of customers
     total_customer = Customerdata.objects.count()
-    
-    # Counting the total number of suppliers
     supplier_count = SupplierRegistration.objects.count()
 
-    # Rendering the dashboard template with data
     return render(request, 'ErgoAsia_app/dashboard.html', {
-        'req': data,  # Passing customer requirements queryset
-        'cnt': count,  # Passing count of customer requirements
-        'total_customer': total_customer,  # Passing total number of customers
-        'supplier_count': supplier_count  # Passing total number of suppliers
+        'approved_projects': approved_projects,
+        'req': data,
+        'cnt': count,
+        'total_customer': total_customer,
+        'supplier_count': supplier_count
     })
 
 def supplier(request):
@@ -81,7 +79,7 @@ def ergoasiasignin(request):
         if username == "Admin" and password == "Admin":
             msg_valid = "Authentication Successfull.....you will be redirected to the dashboard page soon"
         else:
-                        msg_invalid = "Invalid username and password"
+            msg_invalid = "Invalid username and password"
 
         return render(request, 'ErgoAsia_app/sign-in.html', {
             'msg_valid': msg_valid,
@@ -234,14 +232,54 @@ def customer_detail(request, customer_id):
 
     return render(request, 'ErgoAsia_app/customer_detail.html', context)
 
-           
+
 def project_details(request, customer_id, project_id):
-    customer = get_object_or_404(Customerdata, customer_id=customer_id)
-    project = get_object_or_404(Customerrequirements, project_id=project_id, customer_id=customer_id)
+    customer = get_object_or_404(Customerdata, pk=customer_id)
+    project = get_object_or_404(Customerrequirements, pk=project_id, customer=customer)
 
-    context = {
+    if request.method == 'POST' and 'approve' in request.POST and request.POST['approve'] == 'yes':
+        # Create a FinalRequirement entry
+        FinalRequirement.objects.create(
+            project_id=project.project_id,
+            customer=project.customer,
+            meal_preference=project.meal_preference,
+            Part_Name=project.Part_Name,
+            blank_name=project.blank_name,
+            upload_file=project.upload_file,
+            cname=project.cname,
+            pname=project.pname,
+            cpno=project.cpno,
+            desc=project.desc,
+            pr=project.pr,
+            av=project.av,
+            qs=project.qs,
+            tv=project.tv,
+            sop=project.sop,
+            working_status=project.working_status,
+            approval_status='approved'  # Set the approval status to 'approved'
+        )
+        # Delete the project from Customerrequirements
+        project.delete()
+
+        return redirect('registrationtable')  # Redirect after processing
+    
+    return render(request, 'ErgoAsia_app/project_details.html', {
         'customer': customer,
-        'project': project,
-    }
+        'project': project
+    })
 
-    return render(request, 'ErgoAsia_app/project_details.html', context)
+
+
+    
+    
+
+def final_project_details(request, project_id):
+    project = get_object_or_404(FinalRequirement, project_id=project_id)
+    customer_name = project.customer.name  # Assuming 'customer' is a ForeignKey to Customerdata
+
+    return render(request, 'ErgoAsia_app/final_project_details.html', {
+        'project': project,
+        'customer_name': customer_name,
+    })
+
+

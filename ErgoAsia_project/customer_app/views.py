@@ -117,6 +117,7 @@ def customerrequirements(request):
         # upload_pdf(request)
 
         data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,request_date=date_only ,customer=Customerdata.objects.get(customer_id = cid))
+def customerrequirements(request):
     if request.method == "POST":
         cid = request.POST.get('cid')
         if not cid:
@@ -135,7 +136,7 @@ def customerrequirements(request):
         Quote_submission = request.POST.get('qs')
         target_value = request.POST.get('tv')
         start_of_production = request.POST.get('sop')
-        status = request.POST.get('status')
+        working_status = request.POST.get('working_status')
 
         project_id = random.randint(1000, 9999)
 
@@ -159,11 +160,11 @@ def customerrequirements(request):
             qs=Quote_submission,
             tv=target_value,
             sop=start_of_production,
-            status=status,
+            working_status=working_status,
             customer=customer
         )
         data.save()
-        return redirect('customer-tables')  # Ensure this matches your URL pattern name
+        return redirect('customer-tables')
 
     customer_email = request.session.get('customer_email', None)
     customer_data = Customerdata.objects.filter(email=customer_email)
@@ -204,17 +205,17 @@ def customerdashboard(request):
         total_orders = customer_data.count()
 
         # Count completed orders
-        completed_orders = customer_data.filter(status='completed').count()
+        completed_orders = customer_data.filter(working_status='completed').count()
 
         # Count pending orders
-        pending_orders = customer_data.filter(status='pending').count()
+        pending_orders = customer_data.filter(working_status='pending').count()
 
         # Calculate new orders received today
         # today = datetime.now().date()
         # new_orders_today = customer_data.filter(qs__date=today).count()
 
         # Count working orders
-        working_orders = customer_data.filter(status='working').count()
+        working_orders = customer_data.filter(working_status='working').count()
 
         # Update context with customer_data and counts
         context.update({
