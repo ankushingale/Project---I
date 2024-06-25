@@ -25,6 +25,7 @@ class PDFFileField(djongo_models.FileField):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
 
+
 class Customerrequirements(models.Model):
     WORKING_STATUS_CHOICES = (
         ('working', 'Working'),
