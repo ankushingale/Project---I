@@ -517,12 +517,82 @@
     </div>
 
     <!-- Something is coming! -->
+    <!-- customer_app/Cdashboard.html -->
     <div class="card mt-4">
-      <div class="card-body">
-        <h6 class="card-title mb-0">Something is coming!</h6>
-        <p class="card-text">Stay tuned for updates.</p>
+      <div class="card-header">
+          <h6 class="card-title mb-0">Your Order</h6>
       </div>
-    </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table align-items-center">
+                  <tbody>
+                      {% if final_cdata.count == 0 %}
+                          <tr>
+                              <td colspan="5">
+                                  <div class="card-header pb-0 p-3">
+                                      <div class="d-flex justify-content-between">
+                                          <h6 class="mb-2">No Order Placed Yet</h6>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                      {% endif %}
+                      {% for i in final_cdata %}
+                          <tr>
+                              <td>
+                                  <div class="d-flex px-2 py-1 align-items-center">
+                                      <div class="ms-4">
+                                          <p class="text-xs font-weight-bold mb-0">Project Name:</p>
+                                          <h6 class="text-sm mb-0">{{ i.pname }}</h6>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <div class="text-center">
+                                      <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                                      <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
+                                  </div>
+                              </td>
+                              <td>
+                                  <div class="text-center">
+                                      <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                                      <h6 class="text-sm mb-0">{{ i.sop }}</h6>
+                                  </div>
+                              </td>
+                              <td class="align-middle text-sm">
+                                  <div class="col text-center">
+                                      <p class="text-xs font-weight-bold mb-0">Category</p>
+                                      <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
+                                  </div>
+                              </td>
+                              <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        {% if i.approval_status == 'approved' %}
+                                            <i class="fa fa-check-circle text-success"> Approve</i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                              <td class="align-middle text-sm">
+                                  <div class="col text-center">
+                                      <a href="/edit/{{ i.customer_id }}" class="btn btn-primary">View</a>
+                                  </div>
+                              </td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+
+
+
   </div>
 
   <!-- Column 2: Notifications, Categories, and Additional Content -->

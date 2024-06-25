@@ -204,10 +204,12 @@ def supplier_list(request):
 def customer_detail(request, customer_id):
     customer = get_object_or_404(Customerdata, customer_id=customer_id)
     customer_requirements = Customerrequirements.objects.filter(customer_id=customer_id)
+    customer_requirements_final = FinalRequirement.objects.filter(customer_id=customer_id)
 
     context = {
         'customer': customer,
         'customer_requirements': customer_requirements,
+        'customer_requirements_final': customer_requirements_final,
     }
 
     return render(request, 'ErgoAsia_app/customer_detail.html', context)
@@ -255,11 +257,13 @@ def project_details(request, customer_id, project_id):
 
 def final_project_details(request, project_id):
     project = get_object_or_404(FinalRequirement, project_id=project_id)
-    customer_name = project.customer.name  # Assuming 'customer' is a ForeignKey to Customerdata
+    customer_name = project.customer.name
+    customer_id = project.customer.customer_id # Assuming 'customer' is a ForeignKey to Customerdata
 
     return render(request, 'ErgoAsia_app/final_project_details.html', {
         'project': project,
         'customer_name': customer_name,
+        'customer_id' : customer_id
     })
 
 
