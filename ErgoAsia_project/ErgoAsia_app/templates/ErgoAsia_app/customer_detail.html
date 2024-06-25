@@ -8,6 +8,16 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
     <!-- List.js CSS -->
     <link
       rel="stylesheet"
@@ -81,6 +91,10 @@
       />
 
       <button class="btn btn-primary mb-3" id="newOrderBtn">New Order</button>
+      <button class="btn btn-secondary mb-3" id="recentOrderBtn">
+        Recent Orders
+      </button>
+      <button class="btn btn-secondary mb-3" id="approvedBtn">Approved</button>
       <button
         class="btn btn-secondary mb-3"
         id="cancelBtn"
@@ -157,7 +171,7 @@
                   type="file"
                   class="form-control"
                   id="pdf_file"
-                  name="payable"
+                  name="pdf_file"
                 />
               </div>
               <div class="form-group">
@@ -284,9 +298,9 @@
           <thead class="thead-dark">
             <tr>
               <th class="project-id">Project ID</th>
-              <th class="meal-preference">Meal Preference</th>
+              <th class="meal-preference">CATEGORY</th>
               <th class="part-name">Part Name</th>
-              <th class="blank-name">Blank Name</th>
+              <th class="blank-name">Project Name</th>
               <th>File</th>
               <th class="status">Status</th>
             </tr>
@@ -297,7 +311,7 @@
               <td class="project-id">{{ requirement.project_id }}</td>
               <td class="meal-preference">{{ requirement.meal_preference }}</td>
               <td class="part-name">{{ requirement.Part_Name }}</td>
-              <td class="blank-name">{{ requirement.blank_name }}</td>
+              <td class="blank-name">{{ requirement.pname}}</td>
               <td>
                 {% if requirement.upload_file %}
                 <a
@@ -307,7 +321,57 @@
                 >
                 {% else %} No file {% endif %}
               </td>
-              <td class="status">{{ requirement.status }}</td>
+              <td class="status">{{ requirement.working_status }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Copy of the requirements table container -->
+      <div
+        id="approvedTableContainer"
+        class="table-responsive"
+        style="display: none"
+      >
+        <table id="approvedTable" class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th class="project-id">Project ID1</th>
+              <th class="meal-preference">CATEGORY</th>
+              <th class="part-name">Part Name</th>
+              <th class="blank-name">Project Name</th>
+              <th>File</th>
+              <th class="status">Status</th>
+              <th class="status">Approved</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            {% for requirement in customer_requirements_final %}
+            <tr>
+              <td class="project-id">{{ requirement.project_id }}</td>
+              <td class="meal-preference">{{ requirement.meal_preference }}</td>
+              <td class="part-name">{{ requirement.Part_Name }}</td>
+              <td class="blank-name">{{ requirement.pname}}</td>
+              <td>
+                {% if requirement.upload_file %}
+                <a
+                  href="{{ requirement.upload_file.url }}"
+                  class="btn btn-sm btn-primary"
+                  >Download</a
+                >
+                {% else %} No file {% endif %}
+              </td>
+              <td class="status">{{ requirement.working_status }}</td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    {% if requirement.approval_status == 'approved' %}
+                    <i class="fa fa-check-circle text-success"> Approve</i>
+                    {% endif %}
+                  </div>
+                </div>
+              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -332,6 +396,7 @@
           ],
         };
         var requirementsTable = new List("requirementsTableContainer", options);
+        var approvedTable = new List("approvedTableContainer", options);
 
         // Toggle form display
         document
@@ -350,6 +415,28 @@
             document.getElementById("newOrderBtn").style.display =
               "inline-block";
             this.style.display = "none";
+          });
+
+        // Handle Recent Orders button
+        document
+          .getElementById("recentOrderBtn")
+          .addEventListener("click", function () {
+            document.getElementById(
+              "requirementsTableContainer"
+            ).style.display = "block";
+            document.getElementById("approvedTableContainer").style.display =
+              "none";
+          });
+
+        // Handle Approved button
+        document
+          .getElementById("approvedBtn")
+          .addEventListener("click", function () {
+            document.getElementById(
+              "requirementsTableContainer"
+            ).style.display = "none";
+            document.getElementById("approvedTableContainer").style.display =
+              "block";
           });
 
         // AJAX form submission
@@ -383,6 +470,13 @@
                 "blank-name": data.blank_name,
                 status: data.status,
               });
+              approvedTable.add({
+                "project-id": data.project_id,
+                "meal-preference": data.meal_preference,
+                "part-name": data.Part_Name,
+                "blank-name": data.blank_name,
+                status: data.status,
+              });
             })
             .catch((error) => {
               console.error("Error occurred during form submission:", error);
@@ -395,9 +489,9 @@
         searchInput.addEventListener("keyup", function () {
           var searchString = searchInput.value.toLowerCase();
           requirementsTable.search(searchString);
+          approvedTable.search(searchString);
         });
       });
     </script>
   </body>
 </html>
-{% comment %} hell {% endcomment %}
