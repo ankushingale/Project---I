@@ -58,7 +58,6 @@ class Customerrequirements(models.Model):
     def __str__(self):
         return f"{self.project_id} - {self.cname}"
     
-
 class FinalRequirement(models.Model):
     WORKING_STATUS_CHOICES = (
         ('working', 'Working'),
