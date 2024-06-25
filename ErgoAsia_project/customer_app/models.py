@@ -21,6 +21,7 @@ class PDFFileField(djongo_models.FileField):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
 
+
 class Customerrequirements(models.Model):
     STATUS_CHOICES = (
         ('working', 'Working'),
@@ -56,4 +57,16 @@ class Customerrequirements(models.Model):
 
     def __str__(self):
         return f"{self.project_id} - {self.cname}"
+    
+class FinalRequirement(models.Model):
+    WORKING_STATUS_CHOICES = (
+        ('working', 'Working'),
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+    )
+
+    APPROVAL_STATUS_CHOICES = (
+        ('approved', 'Approved'),
+        ('not_approved', 'Not Approved'),
+    )
 
