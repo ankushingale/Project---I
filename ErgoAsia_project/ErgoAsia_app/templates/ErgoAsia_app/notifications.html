@@ -483,7 +483,7 @@
 {% for customer in customer_data %}
 <div class="alert alert-primary alert-dismissible text-white" role="alert">
     <span class="text-sm">
-        Project Name: {{ customer.project_name }}, Project ID: {{ customer.project_id }}.
+        Project Name: {{ customer.project_name }} {{customer.customer_id}}, Project ID: {{ customer.project_id }}.
         <a href="{% url 'project_details' customer_id=customer.customer_id project_id=customer.project_id %}" class="alert-link text-white">See more</a>
     </span>
     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">

@@ -66,6 +66,34 @@
     .breadcrumb-item a {
       color: rgba(255, 255, 255, 0.5);
     }
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      border-radius: 8px;
+  }
+  
+  .card-body {
+      padding: 20px;
+  }
+  
+  .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+  }
+  
+  .profile-item {
+      margin-bottom: 15px;
+  }
+  
+  .item-label {
+      font-weight: bold;
+  }
+  
+  .item-value {
+      color: #555;
+  }
+  
   </style>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -294,29 +322,57 @@
       <!-- Sign In Modal -->
       <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password">
+                <div class="modal-body">
+                   
+                   
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Profile</h5>
+                        <div class="row">
+                            {% for i in customer_profil_data %}
+                            <div class="col-md-6">
+                                <div class="profile-item">
+                                    <div class="item-label">Customer ID:</div>
+                                    <div class="item-value">{{ i.customer_id }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Customer Name:</div>
+                                    <div class="item-value">{{ i.name }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Location:</div>
+                                    <div class="item-value">{{ i.address }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile-item">
+                                    <div class="item-label">Phone Number:</div>
+                                    <div class="item-value">{{ i.phno }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Email address:</div>
+                                    <div class="item-value">{{ i.email }}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign In</button>
-              </form>
+                
+                
+                    
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    
       </nav>
       <!-- End Navbar -->
       <div class="container-fluid py-4">

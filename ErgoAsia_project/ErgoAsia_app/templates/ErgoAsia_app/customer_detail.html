@@ -307,11 +307,11 @@
           </thead>
           <tbody class="list">
             {% for requirement in customer_requirements %}
-            <tr>
+            <tr class="requirement-row">
               <td class="project-id">{{ requirement.project_id }}</td>
               <td class="meal-preference">{{ requirement.meal_preference }}</td>
               <td class="part-name">{{ requirement.Part_Name }}</td>
-              <td class="blank-name">{{ requirement.pname}}</td>
+              <td class="blank-name">{{ requirement.pname }}</td>
               <td>
                 {% if requirement.upload_file %}
                 <a
@@ -326,6 +326,9 @@
             {% endfor %}
           </tbody>
         </table>
+        <button id="toggleRequirements" class="btn btn-primary btn-sm">
+          See More
+        </button>
       </div>
 
       <!-- Copy of the requirements table container -->
@@ -348,11 +351,11 @@
           </thead>
           <tbody class="list">
             {% for requirement in customer_requirements_final %}
-            <tr>
+            <tr class="approved-row">
               <td class="project-id">{{ requirement.project_id }}</td>
               <td class="meal-preference">{{ requirement.meal_preference }}</td>
               <td class="part-name">{{ requirement.Part_Name }}</td>
-              <td class="blank-name">{{ requirement.pname}}</td>
+              <td class="blank-name">{{ requirement.pname }}</td>
               <td>
                 {% if requirement.upload_file %}
                 <a
@@ -376,6 +379,9 @@
             {% endfor %}
           </tbody>
         </table>
+        <button id="toggleApproved" class="btn btn-primary btn-sm">
+          See More
+        </button>
       </div>
     </div>
 
@@ -490,6 +496,63 @@
           var searchString = searchInput.value.toLowerCase();
           requirementsTable.search(searchString);
           approvedTable.search(searchString);
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const requirementsTable = document.querySelectorAll(
+          "#requirementsTable .requirement-row"
+        );
+        const approvedTable = document.querySelectorAll(
+          "#approvedTable .approved-row"
+        );
+
+        const toggleRequirementsButton =
+          document.getElementById("toggleRequirements");
+        const toggleApprovedButton = document.getElementById("toggleApproved");
+
+        let requirementsDisplayed = 5;
+        let approvedDisplayed = 5;
+        let requirementsExpanded = false;
+        let approvedExpanded = false;
+
+        function hideExtraRows(rows, displayed) {
+          rows.forEach((row, index) => {
+            if (index >= displayed) {
+              row.style.display = "none";
+            }
+          });
+        }
+
+        function showAllRows(rows) {
+          rows.forEach((row) => {
+            row.style.display = "";
+          });
+        }
+
+        hideExtraRows(requirementsTable, requirementsDisplayed);
+        hideExtraRows(approvedTable, approvedDisplayed);
+
+        toggleRequirementsButton.addEventListener("click", function () {
+          if (requirementsExpanded) {
+            hideExtraRows(requirementsTable, requirementsDisplayed);
+            toggleRequirementsButton.textContent = "See More";
+          } else {
+            showAllRows(requirementsTable);
+            toggleRequirementsButton.textContent = "See Less";
+          }
+          requirementsExpanded = !requirementsExpanded;
+        });
+
+        toggleApprovedButton.addEventListener("click", function () {
+          if (approvedExpanded) {
+            hideExtraRows(approvedTable, approvedDisplayed);
+            toggleApprovedButton.textContent = "See More";
+          } else {
+            showAllRows(approvedTable);
+            toggleApprovedButton.textContent = "See Less";
+          }
+          approvedExpanded = !approvedExpanded;
         });
       });
     </script>

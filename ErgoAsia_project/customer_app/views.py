@@ -152,6 +152,7 @@ def customerdashboard(request):
         # Query to retrieve customer data
         customer_data = Customerrequirements.objects.filter(customer_id=customer_id)
         FinalRequirement_data = FinalRequirement.objects.filter(customer_id=customer_id)
+        customer_profil_data = Customerdata.objects.filter(customer_id=customer_id)
 
         # Count total orders for the customer
         total_orders = FinalRequirement_data.filter(approval_status='approved').count()
@@ -179,6 +180,7 @@ def customerdashboard(request):
             'completed_orders': completed_orders,
             'pending_orders': pending_orders,
             'working_orders': working_orders,
+            'customer_profil_data':customer_profil_data,
         })
     else:
         # Handle case where customer_id is not found in session
