@@ -21,27 +21,47 @@ def customerhome(request):
     return render(request,'customer_app/home.html')
 @csrf_exempt
 
+# def customersignup(request):
+#     message=Nonegit 
+#     if request.method=="POST":
+#         fname=request.POST.get('fname')
+#         lname=request.POST.get('lname')
+#         email=request.POST.get('email')
+#         phno=request.POST.get('phno')
+#         password=request.POST.get('password')
+#         address=request.POST.get('addr')
+#         name = f"{fname} {lname}"
+
+#         customer_id=random.randint(1000, 9999)
+
+#         data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
+#         data.save()
+               
+#         message="Registration Done Sucessfully"
+        
+#         return render(request,'customer_app/signup1.html',{'msg':message})
+
+#     return render(request,'customer_app/signup1.html')
+
 def customersignup(request):
-    message=None
-    if request.method=="POST":
-        fname=request.POST.get('fname')
-        lname=request.POST.get('lname')
-        email=request.POST.get('email')
-        phno=request.POST.get('phno')
-        password=request.POST.get('password')
-        address=request.POST.get('addr')
+    message = None
+    if request.method == "POST":
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        phno = request.POST.get('phno')
+        password = request.POST.get('password')
+        address = request.POST.get('addr')
         name = f"{fname} {lname}"
 
-        customer_id=random.randint(1000, 9999)
+        customer_id = random.randint(1000, 9999)
 
-        data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
+        data = Customerdata(customer_id=customer_id, name=name, email=email, phno=phno, password=password, address=address)
         data.save()
                
-        message="Registration Done Sucessfully"
+        message = "Registration Done Successfully"
         
-        return render(request,'customer_app/signup1.html',{'msg':message})
-
-    return render(request,'customer_app/signup1.html')
+    return render(request, 'customer_app/signup1.html', {'msg': message})
 
 @csrf_exempt
 def customersignin(request):
