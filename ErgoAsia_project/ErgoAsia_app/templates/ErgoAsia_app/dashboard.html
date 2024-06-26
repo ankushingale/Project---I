@@ -481,9 +481,15 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        customer Id
+                                    </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Company Name
+                                            Project Id
                                         </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                          Company Name
+                                      </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Project Name
                                         </th>
@@ -503,21 +509,37 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd" />
+                                                <div class="avatar avatar-sm ">
+                                                    {% comment %} <img src=""  alt="xd" /> {% endcomment %}
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ i.customer_id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ i.pname }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
+                                          <div class="d-flex px-2 py-1">
+                                              <div class="d-flex flex-column justify-content-center">
+                                                  <h6 class="mb-0 text-sm">{{ i.project_id }}</h6>
+                                              </div>
+                                          </div>
+                                      </td>
+                                        <td>
+                                          <div class="d-flex px-2 py-1">
+                                              
+                                              <div class="d-flex flex-column justify-content-center">
+                                                  <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
+                                              </div>
+                                          </div>
+                                      </td>
+                                        
+                                        <td>
+                                          <div class="d-flex px-2 py-1">
+                                              <div class="d-flex flex-column justify-content-center">
+                                                  <h6 class="mb-0 text-sm">{{ i.pname }}</h6>
+                                              </div>
+                                          </div>
+                                      </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -575,6 +597,10 @@
                       <thead>
                           <tr>
                             
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Project Id
+                        </th>
+                            
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                   Company Name
                               </th>
@@ -599,38 +625,42 @@
                           {% for project in approved_projects %}
                           <tr>
                               <td>
-                                  <div class="d-flex px-2 py-1">
-                                      <div>
-                                          <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd" />
-                                      </div>
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-sm">{{ project.cname }}</h6>
-                                      </div>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ project.project_id }}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                              <div class="d-flex px-2 py-1">
+                                  <div class="d-flex flex-column justify-content-center">
+                                      <h6 class="mb-0 text-sm">{{ project.cname }}</h6>
                                   </div>
-                              </td>
+                              </div>
+                          </td>
                               <td>
-                                  <div class="d-flex px-2 py-1">
+                                  <div class="d-flex px-1 py-1">
                                       <div class="d-flex flex-column justify-content-center">
                                           <h6 class="mb-0 text-sm">{{ project.pname }}</h6>
                                       </div>
                                   </div>
                               </td>
                               <td>
-                                  <div class="d-flex px-2 py-1">
+                                  <div class="d-flex px-1 py-1">
                                       <div class="d-flex flex-column justify-content-center">
                                           <h6 class="mb-0 text-sm">{{ project.Part_Name }}</h6>
                                       </div>
                                   </div>
                               </td>
                               <td>
-                                  <div class="d-flex px-2 py-1">
+                                  <div class="d-flex px-1 py-1">
                                       <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-sm">{{ project.meal_preference }}</h6>
+                                          <h6 class="py-1 text-sm">{{ project.meal_preference }}</h6>
                                       </div>
                                   </div>
                               </td>
                               <td>
-                                  <div class="d-flex px-2 py-1">
+                                  <div class="d-flex px-1 py-1">
                                       <div class="d-flex flex-column justify-content-center">
                                           {% if project.approval_status == 'approved' %}
                                               <i class="fa fa-check-circle text-success"> Approve</i>
