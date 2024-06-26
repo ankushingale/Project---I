@@ -186,7 +186,7 @@ def customerdashboard(request):
 
         # Calculate new orders received today
         # today = datetime.now().date()
-        # new_orders_today = customer_data.filter(qs__date=today).count()
+        new_order = customer_data.all().count()
 
         # Count working orders
         working_orders = FinalRequirement_data.filter(working_status='working').count()
@@ -201,6 +201,7 @@ def customerdashboard(request):
             'pending_orders': pending_orders,
             'working_orders': working_orders,
             'customer_profil_data':customer_profil_data,
+            'new_order':new_order,
         })
     else:
         # Handle case where customer_id is not found in session
@@ -231,9 +232,9 @@ def displayModel(request,pk):
 
 def categorymodel(request, customer_id, category):
     try:
-        customer_data = Customerrequirements.objects.filter(customer_id=customer_id, meal_preference=category)
+        customer_data = FinalRequirement.objects.filter(customer_id=customer_id, meal_preference=category)
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
-    except Customerrequirements.DoesNotExist:
+    except FinalRequirement.DoesNotExist:
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
 
