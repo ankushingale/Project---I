@@ -502,15 +502,23 @@
                             <tr>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1" />
-                                        </div>
+                                      <div>
+                                        <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg {% if customer.is_logged_in %}online{% else %}offline{% endif %}" alt="user1" />
+                                        {% if customer.is_logged_in %}
+                                        <span class="online-dot"></span> <!-- Green dot for online status -->
+                                        {% endif %}
+                                    </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">
                                                 <a href="{% url 'customer_detail' customer.customer_id %}">{{ customer.name }}</a>
                                             </h6>
                                             <p class="text-xs text-secondary mb-0">{{ customer.email }}</p>
-                                            <p class="text-xs text-secondary mb-0">{{ customer.password }}</p>
+                                            {% if customer.is_logged_in %}
+                                            <p class="text-xs text-success mb-0">Online</p>
+                                            {% else %}
+                                            <p class="text-xs text-danger mb-0">Offline</p>
+                                            {% endif %}
+
                                         </div>
                                     </div>
                                 </td>

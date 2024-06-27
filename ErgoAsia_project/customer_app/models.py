@@ -13,6 +13,7 @@ class Customerdata(models.Model):
     password = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_logged_in = models.BooleanField(default=False)  # New field to track login status
 
     def __str__(self):
         return self.name

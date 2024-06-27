@@ -37,5 +37,6 @@ urlpatterns = [
     path('edit_requirement/<int:project_id>/', views.edit_customer_requirement, name='edit_customer_requirement'),
     path('delete_requirement/<int:project_id>/', views.delete_customer_requirement, name='delete_customer_requirement'),
     path('customer-final-requirements/', views.customer_final_requirements, name='customer_final_requirements'),
+    path('logout/', views.custom_logout, name='logout'),
 
 ]

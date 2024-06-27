@@ -11,6 +11,10 @@ from .models import FinalRequirement, Customerdata
 from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import datetime
+# customer_app/views.py
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 # from django.conf import settings.
@@ -78,6 +82,8 @@ def customersignin(request):
             msg_valid = "Authentication Successful... you will be redirected to the home page soon"
             data_values = data.first()
             request.session['customer_id'] = data_values.customer_id
+            data_values.is_logged_in = True  # Set is_logged_in to True
+            data_values.save()
 
             return redirect('Cdashboard')
         else:
@@ -299,9 +305,6 @@ def categorymodel(request, customer_id, category):
     except Customerrequirements.DoesNotExist:
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
-
-
-
 def customer_final_requirements(request):
     try:
         # Retrieve customer ID from the session
@@ -321,3 +324,14 @@ def customer_final_requirements(request):
     except Exception as e:
         print(f"Error fetching final requirements: {str(e)}")
         return render(request, 'customer_app/dashboard.html', {'final_requirements': None})
+    
+
+def custom_logout(request):
+    customer_id = request.session.get('customer_id')
+    if customer_id:
+        customer = Customerdata.objects.get(customer_id=customer_id)
+        customer.is_logged_in = False
+        customer.save()
+    logout(request)
+    # Redirect to a different path after logout
+    return redirect('/customer-sign') 
