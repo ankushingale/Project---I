@@ -1,0 +1,65 @@
+<!-- notification.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Include Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <!-- Include Google Fonts -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <!-- List.js CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      .notification-card {
+        max-width: 400px; /* Adjust max-width as needed */
+        margin: auto; /* Center the card horizontally */
+        margin-top: 100px; /* Add margin-top for spacing */
+        padding: 20px; /* Padding inside the card */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="notification-card">
+        <div class="alert alert-success" role="alert">
+          Working status updated successfully.
+          <a href="#" class="close" aria-label="Close">&times;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Bootstrap JS and any additional scripts -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Optionally, include your custom JavaScript -->
+    <script>
+      // Function to navigate away from the notification page
+      document
+        .querySelector(".close")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default behavior of the anchor tag
+          window.location.href = "/some-url"; // Replace '/some-url' with the URL you want to navigate to
+        });
+    </script>
+  </body>
+</html>

@@ -54,7 +54,7 @@ class Customerrequirements(models.Model):
     qs = models.DateField()
     tv = models.IntegerField()
     sop = models.DateField()
-    working_status = models.CharField(max_length=20, choices=WORKING_STATUS_CHOICES, default='working')
+    working_status = models.CharField(max_length=20, choices=WORKING_STATUS_CHOICES, default='pending')
     approval_status = models.CharField(max_length=20, choices=APPROVAL_STATUS_CHOICES, default='not_approved')
 
     def __str__(self):

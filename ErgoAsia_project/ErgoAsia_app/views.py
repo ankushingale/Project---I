@@ -1,9 +1,11 @@
 from datetime import timezone
+from django.contrib import messages
 import random
-from django.shortcuts import get_list_or_404, render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata, Customerrequirements, FinalRequirement
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -266,4 +268,17 @@ def final_project_details(request, project_id):
         'customer_id' : customer_id
     })
 
+def final_requirements_view(request):
+    msg_valid = None
+    if request.method == 'POST':
+        # customer_id=customer_id.POST.get('customer_id')
+        project_id = request.POST.get('project_id')
+        working_status = request.POST.get('working_status')
+        requirement = get_object_or_404(FinalRequirement, project_id=project_id)
+        requirement.working_status = working_status
+        requirement.save()
+        msg_valid = "succ"
+        return redirect('final_requirements_view')  # Redirect back to the same view after update
+    
+    return render(request, 'ErgoAsia_app/result.html', {'msg_valid': msg_valid})
 

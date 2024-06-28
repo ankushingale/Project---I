@@ -40,7 +40,7 @@ urlpatterns = [
     path('customer-detail/<int:customer_id>/', views.customer_detail, name='customer_detail'),
     path('project_details/<int:customer_id>/<int:project_id>/', views.project_details, name='project_details'),
     path('final_project_details/<int:project_id>/', views.final_project_details, name='final_project_details'),
-    
+    path('final-requirements/', views.final_requirements_view, name='final_requirements_view'),
     
 
 

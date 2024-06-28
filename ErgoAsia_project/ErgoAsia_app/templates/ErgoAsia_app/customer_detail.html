@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -29,6 +30,29 @@
       body {
         background-color: #f8f9fa; /* Light grey background for body */
       }
+      .form-select {
+        border: none;
+        box-shadow: none;
+    }
+
+    .btn-submit-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+    .btn-submit-icon svg {
+        color: #0d6efd; /* Optional: Change color to match your theme */
+    }
+       /* Custom CSS for increasing badge size and rounding corners */
+       .badge {
+        font-size: 14px; /* Increase font size */
+        border-radius: 20px; /* Rounded corners */
+        padding: 8px 12px; /* Adjust padding */
+    }
       .card {
         border: none; /* Remove border from card */
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add subtle shadow to card */
@@ -303,6 +327,8 @@
               <th class="blank-name">Project Name</th>
               <th>File</th>
               <th class="status">Status</th>
+              <th class="status">Status</th>
+
             </tr>
           </thead>
           <tbody class="list">
@@ -321,7 +347,27 @@
                 >
                 {% else %} No file {% endif %}
               </td>
-              <td class="status">{{ requirement.working_status }}</td>
+              <td>
+                {% if requirement.working_status == 'working' %}
+                <span class="badge badge-warning">{{ requirement.working_status }}</span>
+                {% elif requirement.working_status == 'pending' %}
+                <span class="badge badge-danger">{{ requirement.working_status }}</span>
+                {% elif requirement.working_status == 'completed' %}
+                <span class="badge badge-success">{{ requirement.working_status }}</span>
+                {% else %}
+                <span>{{ requirement.working_status }}</span>
+                {% endif %}
+            </td>
+            <td>
+              {% if requirement.approval_status == 'approved' %}
+              <i class="fa fa-check-circle text-success"> Approve</i>
+          {% elif requirement.approval_status == 'not_approved' %}
+              <i class="fa fa-times-circle text-danger"> Not Approve</i>
+          {% else %}
+              <span>{{ requirement.approval_status }}</span>
+          {% endif %}
+          
+            </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -365,7 +411,23 @@
                 >
                 {% else %} No file {% endif %}
               </td>
-              <td class="status">{{ requirement.working_status }}</td>
+              <td class="status">
+                <form method="post" action="{% url 'final_requirements_view' %}" class="status-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="project_id" value="{{ requirement.project_id }}">
+                  <div class="input-group">
+                      <select name="working_status" class="form-select form-select-sm rounded">
+                          <option value="working" {% if requirement.working_status == 'working' %}selected{% endif %}>Working</option>
+                          <option value="pending" {% if requirement.working_status == 'pending' %}selected{% endif %}>Pending</option>
+                          <option value="completed" {% if requirement.working_status == 'completed' %}selected{% endif %}>Completed</option>
+                      </select>
+                      <button type="submit" class="btn btn-sm btn-success rounded-end">
+                          save
+                      </button>
+                  </div>
+              </form>
+              
+            </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
@@ -383,6 +445,14 @@
           See More
         </button>
       </div>
+      {% if messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -555,6 +625,7 @@
           approvedExpanded = !approvedExpanded;
         });
       });
+
     </script>
   </body>
 </html>
