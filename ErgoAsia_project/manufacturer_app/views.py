@@ -1,11 +1,33 @@
 from django.shortcuts import render
-import random
-from manufacturer_app.models import SupplierRegistration
+from .models import SupplierRegistration
+from customer_app.models import FinalRequirement
 from django.views.decorators.csrf import csrf_exempt
+import random  # Assuming Customerdata model is defined in customer_app.models
 
-# Create your views here.
 def manufacturerhome(request):
-    return render(request,'manufacturer_app/index.html')
+    # Retrieve the current logged-in supplier based on session or other authentication method
+    supplier_id = request.session.get('supplier_id')  # Retrieve supplier_id from session
+    if supplier_id:
+        try:
+            # Retrieve supplier and its category
+            supplier = SupplierRegistration.objects.get(supplier_id=supplier_id)
+            supplier_category = supplier.supplier_category
+            
+            # Fetch final requirements matching the supplier's category
+            matching_requirements = FinalRequirement.objects.filter(meal_preference=supplier_category)
+            
+            context = {
+                'matching_requirements': matching_requirements
+            }
+            return render(request, 'manufacturer_app/index.html', context)
+        except SupplierRegistration.DoesNotExist:
+            # Handle case where supplier_id is not found
+            pass
+    
+    # Redirect or handle cases where supplier_id is not found or session is not valid
+    return render(request, 'manufacturer_app/index.html', {'matching_requirements': []})
+
+
 
 @csrf_exempt
 def supplierregistration(request):

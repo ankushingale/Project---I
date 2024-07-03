@@ -5,8 +5,14 @@ from customer_app.models import *
 import random
 from datetime import datetime
 from .models import Customerrequirements
+from .models import FinalRequirement, Customerdata
+from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import datetime
+# customer_app/views.py
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 # from django.conf import settings.
@@ -17,57 +23,73 @@ def customerhome(request):
     return render(request,'customer_app/home.html')
 @csrf_exempt
 
+# def customersignup(request):
+#     message=Nonegit 
+#     if request.method=="POST":
+#         fname=request.POST.get('fname')
+#         lname=request.POST.get('lname')
+#         email=request.POST.get('email')
+#         phno=request.POST.get('phno')
+#         password=request.POST.get('password')
+#         address=request.POST.get('addr')
+#         name = f"{fname} {lname}"
+
+#         customer_id=random.randint(1000, 9999)
+
+#         data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
+#         data.save()
+               
+#         message="Registration Done Sucessfully"
+        
+#         return render(request,'customer_app/signup1.html',{'msg':message})
+
+#     return render(request,'customer_app/signup1.html')
+
 def customersignup(request):
-    message=None
-    if request.method=="POST":
-        fname=request.POST.get('fname')
-        lname=request.POST.get('lname')
-        email=request.POST.get('email')
-        phno=request.POST.get('phno')
-        password=request.POST.get('password')
-        address=request.POST.get('addr')
+    message = None
+    if request.method == "POST":
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        phno = request.POST.get('phno')
+        password = request.POST.get('password')
+        address = request.POST.get('addr')
         name = f"{fname} {lname}"
 
-        customer_id=random.randint(1000, 9999)
+        customer_id = random.randint(1000, 9999)
 
-        data=Customerdata(customer_id=customer_id,name=name,email=email,phno=phno,password=password,address=address)
+        data = Customerdata(customer_id=customer_id, name=name, email=email, phno=phno, password=password, address=address)
         data.save()
                
-        message="Registration Done Sucessfully"
+        message = "Registration Done Successfully"
         
-        return render(request,'customer_app/signup1.html',{'msg':message})
-
-    return render(request,'customer_app/signup1.html')
+    return render(request, 'customer_app/signup1.html', {'msg': message})
 
 @csrf_exempt
 def customersignin(request):
-    msg_valid=None
-    msg_invalid=None
-    if request.method=="POST":
-        email=request.POST.get('email')
-        password=request.POST.get('password')
-
-        # Ensure login is called upon successful authentication
+    msg_valid = None
+    msg_invalid = None
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
         request.session['customer_email'] = email
         data = Customerdata.objects.filter(email=email, password=password)
        
-        if data.count()>0:
-            msg_valid="Authentication Successfull.....you will redirected to home page soon"            # user.save()
-            # user=authenticate(request,email=email,password=password)
-            # if user is not None:
-            #     login(request,user)
-            data_values = Customerdata.objects.filter(email=email, password=password).first()
+        if data.count() > 0:
+            msg_valid = "Authentication Successful... you will be redirected to the home page soon"
+            data_values = data.first()
             request.session['customer_id'] = data_values.customer_id
+            data_values.is_logged_in = True  # Set is_logged_in to True
+            data_values.save()
 
             return redirect('Cdashboard')
-
         else:
-            msg_invalid="Invalid username and password"
-            # return redirect('customersignin')
-        return render(request,'customer_app/signinnew.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
+            msg_invalid = "Invalid username and password"
+        
+        return render(request, 'customer_app/signinnew.html', {'msg_valid': msg_valid, 'msg_invalid': msg_invalid})
 
-    return render(request,'customer_app/signinnew.html')
+    return render(request, 'customer_app/signinnew.html')
 
 
 @csrf_exempt
@@ -200,9 +222,12 @@ def customerdashboard(request):
     if customer_id:
         # Query to retrieve customer data
         customer_data = Customerrequirements.objects.filter(customer_id=customer_id)
+        FinalRequirement_data = FinalRequirement.objects.filter(customer_id=customer_id)
+        customer_profil_data = Customerdata.objects.filter(customer_id=customer_id)
 
         # Count total orders for the customer
-        total_orders = customer_data.count()
+        total_orders = FinalRequirement_data.filter(approval_status='approved').count()
+        
 
         # Count completed orders
         completed_orders = customer_data.filter(working_status='completed').count()
@@ -212,18 +237,22 @@ def customerdashboard(request):
 
         # Calculate new orders received today
         # today = datetime.now().date()
-        # new_orders_today = customer_data.filter(qs__date=today).count()
+        new_order = customer_data.all().count()
 
         # Count working orders
-        working_orders = customer_data.filter(working_status='working').count()
+        working_orders = FinalRequirement_data.filter(working_status='working').count()
+    
 
         # Update context with customer_data and counts
         context.update({
+            'final_cdata' : FinalRequirement_data,
             'cdata': customer_data,
             'total_orders': total_orders,
             'completed_orders': completed_orders,
             'pending_orders': pending_orders,
             'working_orders': working_orders,
+            'customer_profil_data':customer_profil_data,
+            'new_order':new_order,
         })
     else:
         # Handle case where customer_id is not found in session
@@ -254,9 +283,9 @@ def displayModel(request,pk):
 
 def categorymodel(request, customer_id, category):
     try:
-        customer_data = Customerrequirements.objects.filter(customer_id=customer_id, meal_preference=category)
+        customer_data = FinalRequirement.objects.filter(customer_id=customer_id, meal_preference=category)
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': customer_data})
-    except Customerrequirements.DoesNotExist:
+    except FinalRequirement.DoesNotExist:
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
 
@@ -278,7 +307,7 @@ def edit_customer_requirement(request, project_id):
         quote_submission = request.POST.get('qs')
         target_value = request.POST.get('tv')
         start_of_production = request.POST.get('sop')
-        status = request.POST.get('status')  # Get the status value
+        working_status = request.POST.get('status')  # Get the status value
 
         # Update the requirement object with new values
         requirement.meal_preference = meal_preference
@@ -295,7 +324,7 @@ def edit_customer_requirement(request, project_id):
         requirement.qs = quote_submission
         requirement.tv = target_value
         requirement.sop = start_of_production
-        requirement.status = status  # Update the status field
+        requirement.working_status = working_status  # Update the status field
         requirement.save()  # Save the updated requirement object
 
         return redirect('customer-tables')  # Redirect to Cdashboard URL after saving
@@ -321,4 +350,33 @@ def categorymodel(request, customer_id, category):
     except Customerrequirements.DoesNotExist:
         return render(request, 'customer_app/customer_caategoory_modee.html', {'customer_data': None})
 
+def customer_final_requirements(request):
+    try:
+        # Retrieve customer ID from the session
+        customer_id = request.session.get('customer_id')
+        
+        if not customer_id:
+            # Handle case where customer ID is not in session
+            return redirect('customersignin')
+        
+        # Fetch all requirements for the logged-in customer
+        final_requirements = FinalRequirement.objects.all()
 
+        print(f"Customer ID: {customer_id}")  # Debug output
+        print(f"Final Requirements Query: {final_requirements.query}")  # Debug output
+
+        return render(request, 'customer_app/dashboard.html', {'final_requirements': final_requirements})
+    except Exception as e:
+        print(f"Error fetching final requirements: {str(e)}")
+        return render(request, 'customer_app/dashboard.html', {'final_requirements': None})
+    
+
+def custom_logout(request):
+    customer_id = request.session.get('customer_id')
+    if customer_id:
+        customer = Customerdata.objects.get(customer_id=customer_id)
+        customer.is_logged_in = False
+        customer.save()
+    logout(request)
+    # Redirect to a different path after logout
+    return redirect('/customer-sign') 

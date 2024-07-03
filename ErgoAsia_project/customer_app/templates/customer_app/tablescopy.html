@@ -391,8 +391,8 @@
                                     <input type="text" class="form-control" id="blank_name" value="{{customer_data.first.email}}" name="email">
                                 </div>
                                   <div class="form-group">
-                                      <label for="pdf_file">Upload File</label>
-                                      <input type="file" class="form-control" id="pdf_file" name="payable">
+                                    <label for="pdf_file">Upload File</label>
+                                    <input type="file" class="form-control" id="pdf_file" name="pdf_file" value="">
                                   </div>
                                   <div class="form-group">
                                       <label for="cpno">Part Number</label>
@@ -419,7 +419,7 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="pr">Phone number</label>
-                                    <input type="text" class="form-control" id="pr" value="{{customer_data.phno}}" name="phone_number" required>
+                                    <input type="text" class="form-control" id="pr" value="{{customer_data.first.phno}}" name="phone_number" required>
                                 </div>
                                   <div class="form-group">
                                       <label for="av">Annual Volume</label>
@@ -436,12 +436,10 @@
                                   </div>
                                   <div class="form-group">
                                       <label for="status">Status</label>
-                                      <select class="form-control" id="status" name="status">
-                                          <option value="working" {% if requirement.status == 'working' %}selected{% endif %}>Working</option>
-                                          <option value="pending" {% if requirement.status == 'pending' %}selected{% endif %}>Pending</option>
-                                          {% if user.is_staff %}
-                                          <option value="completed" {% if requirement.status == 'completed' %}selected{% endif %}>Completed</option>
-                                          {% endif %}
+                                      <select class="form-control" id="status" name="working_status">
+                                        <option value="pending" {% if requirement.working_status == 'pending' %}selected{% endif %}>Pending</option>
+                                          {% comment %} <option value="working" {% if requirement.working_status == 'working' %}selected{% endif %}>Working</option>
+                                          <option value="completed" {% if requirement.workingstatus == 'completed' %}selected{% endif %}>Completed</option> {% endcomment %}
                                       </select>
                                   </div>
                               </div>

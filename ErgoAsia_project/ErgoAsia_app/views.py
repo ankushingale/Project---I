@@ -1,10 +1,19 @@
+<<<<<<< HEAD
+=======
+from datetime import timezone
+from django.contrib import messages
+>>>>>>> 7daf321d86d5f76c4cee45427b7adaf444d08430
 import random
-from django.shortcuts import get_list_or_404, render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata, Customerrequirements, FinalRequirement
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 from datetime import datetime
 
+=======
+from django.http import JsonResponse
+>>>>>>> 7daf321d86d5f76c4cee45427b7adaf444d08430
 
 # Create your views here.
 
@@ -221,10 +230,12 @@ def supplier_list(request):
 def customer_detail(request, customer_id):
     customer = get_object_or_404(Customerdata, customer_id=customer_id)
     customer_requirements = Customerrequirements.objects.filter(customer_id=customer_id)
+    customer_requirements_final = FinalRequirement.objects.filter(customer_id=customer_id)
 
     context = {
         'customer': customer,
         'customer_requirements': customer_requirements,
+        'customer_requirements_final': customer_requirements_final,
     }
 
     return render(request, 'ErgoAsia_app/customer_detail.html', context)
@@ -272,11 +283,26 @@ def project_details(request, customer_id, project_id):
 
 def final_project_details(request, project_id):
     project = get_object_or_404(FinalRequirement, project_id=project_id)
-    customer_name = project.customer.name  # Assuming 'customer' is a ForeignKey to Customerdata
+    customer_name = project.customer.name
+    customer_id = project.customer.customer_id # Assuming 'customer' is a ForeignKey to Customerdata
 
     return render(request, 'ErgoAsia_app/final_project_details.html', {
         'project': project,
         'customer_name': customer_name,
+        'customer_id' : customer_id
     })
 
+def final_requirements_view(request):
+    msg_valid = None
+    if request.method == 'POST':
+        # customer_id=customer_id.POST.get('customer_id')
+        project_id = request.POST.get('project_id')
+        working_status = request.POST.get('working_status')
+        requirement = get_object_or_404(FinalRequirement, project_id=project_id)
+        requirement.working_status = working_status
+        requirement.save()
+        msg_valid = "succ"
+        return redirect('final_requirements_view')  # Redirect back to the same view after update
+    
+    return render(request, 'ErgoAsia_app/result.html', {'msg_valid': msg_valid})
 

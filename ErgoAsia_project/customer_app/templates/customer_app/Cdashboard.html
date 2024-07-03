@@ -57,6 +57,13 @@
     />
   </head> {% endcomment %}
   <style>
+    .category-item {
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .category-item:hover {
+      background-color: #f1f3f5;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
     .text-white {
       color: #fff !important;
     }
@@ -66,6 +73,34 @@
     .breadcrumb-item a {
       color: rgba(255, 255, 255, 0.5);
     }
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      border-radius: 8px;
+  }
+  
+  .card-body {
+      padding: 20px;
+  }
+  
+  .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+  }
+  
+  .profile-item {
+      margin-bottom: 15px;
+  }
+  
+  .item-label {
+      font-weight: bold;
+  }
+  
+  .item-value {
+      color: #555;
+  }
+  
   </style>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -294,29 +329,62 @@
       <!-- Sign In Modal -->
       <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password">
+                <div class="modal-body">
+                   
+                   
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Profile</h5>
+                        <div class="row">
+                            {% for i in customer_profil_data %}
+                            <div class="col-md-6">
+                                <div class="profile-item">
+                                    <div class="item-label">Customer ID:</div>
+                                    <div class="item-value">{{ i.customer_id }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Customer Name:</div>
+                                    <div class="item-value">{{ i.name }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Location:</div>
+                                    <div class="item-value">{{ i.address }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile-item">
+                                    <div class="item-label">Phone Number:</div>
+                                    <div class="item-value">{{ i.phno }}</div>
+                                </div>
+                                <div class="profile-item">
+                                    <div class="item-label">Email address:</div>
+                                    <div class="item-value">{{ i.email }}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Logout button -->
+                        <div class="text-right mt-3">
+                            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign In</button>
-              </form>
+                
+                
+                
+                    
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    
       </nav>
       <!-- End Navbar -->
       <div class="container-fluid py-4">
@@ -424,7 +492,7 @@
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">
                         New Order
                       </p>
-                      <h5 class="font-weight-bolder">2</h5>
+                      <h5 class="font-weight-bolder">{{ new_order }}</h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder"
                           >.</span
@@ -474,15 +542,35 @@
               {% endif %}
               {% for i in cdata %}
               <tr>
-                <td class="w-30">
-                  <div class="d-flex px-2 py-1 align-items-center">
-                    <div>
-                      <!-- <img src="{% static "img/customer dashboard/flags/US.png" %}" alt="Country flag" /> -->
-                    </div>
+                {% comment %} <td class="w-30">
+                  <div class="d-flex px-2 py-1">
                     <div class="ms-4">
                       <p class="text-xs font-weight-bold mb-0">Project Name:</p>
                       <h6 class="text-sm mb-0">{{ i.pname }}</h6>
                     </div>
+                  </div>
+                </td> {% endcomment %}
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Project Id</p>
+                    <h6 class="text-sm mb-0">{{ i.project_id }}</h6>
+                  </div>
+                </td>
+                {% comment %} <td class="w-30">
+                  <div class="d-flex px-2 py-1">
+                    
+                      <!-- <img src="{% static "img/customer dashboard/flags/US.png" %}" alt="Country flag" /> -->
+                    
+                    <div class="">
+                      <p class="text-xs font-weight-bold mb-0">Project id:</p>
+                      <h6 class="text-sm mb-0">{{ i.project_id }}</h6>
+                    </div>
+                  </div>
+                </td> {% endcomment %}
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Project Name</p>
+                    <h6 class="text-sm mb-0">{{ i.pname }}</h6>
                   </div>
                 </td>
                 <td>
@@ -517,12 +605,87 @@
     </div>
 
     <!-- Something is coming! -->
+    <!-- customer_app/Cdashboard.html -->
     <div class="card mt-4">
-      <div class="card-body">
-        <h6 class="card-title mb-0">Something is coming!</h6>
-        <p class="card-text">Stay tuned for updates.</p>
+      <div class="card-header">
+          <h6 class="card-title mb-0">Approved Tables</h6>
       </div>
-    </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table align-items-center">
+                  <tbody>
+                      {% if final_cdata.count == 0 %}
+                          <tr>
+                              <td colspan="5">
+                                  <div class="card-header pb-0 p-3">
+                                      <div class="d-flex justify-content-between">
+                                          <h6 class="mb-2">No Order Placed Yet</h6>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                      {% endif %}
+                      {% for i in final_cdata %}
+                          <tr>
+                            <td>
+                              <div class="text-center">
+                                  <p class="text-xs font-weight-bold mb-0">Project Name</p>
+                                  <h6 class="text-sm mb-0">{{ i.pname }}</h6>
+                              </div>
+                          </td>
+                              <td>
+                                  <div class="text-center">
+                                      <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                                      <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
+                                  </div>
+                              </td>
+                              <td>
+                                  <div class="text-center">
+                                      <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                                      <h6 class="text-sm mb-0">{{ i.sop }}</h6>
+                                  </div>
+                              </td>
+                              <td class="align-middle text-sm">
+                                  <div class="col text-center">
+                                      <p class="text-xs font-weight-bold mb-0">Category</p>
+                                      <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
+                                  </div>
+                              </td>
+                              <td>
+                                <td class="align-middle text-sm">
+                                  <div class="col text-center">
+                                      <p class="text-xs font-weight-bold mb-0">Category</p>
+                                      <h6 class="text-sm mb-0">{{ i.working_status }}</h6>
+                                  </div>
+                              </td>
+                              <td>
+                                <div class="d-flex px-0 py-0">
+                                    <div class="col text-center">
+                                        {% if i.approval_status == 'approved' %}
+                                            <i class="fa fa-check-circle text-success"> Approve</i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                              <td class="align-middle text-sm">
+                                  <div class="col text-center">
+                                      <a href="/edit/{{ i.customer_id }}" class="btn btn-primary">View</a>
+                                  </div>
+                              </td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+
+
+
   </div>
 
   <!-- Column 2: Notifications, Categories, and Additional Content -->
@@ -532,81 +695,104 @@
       <div class="card-header">
         <h6 class="card-title mb-0">Notifications</h6>
       </div>
-      <div class="card-body">
-        <div class="alert alert-info" role="alert">
-          New notification: Your order status has been updated.
-        </div>
-        <div class="alert alert-warning" role="alert">
-          Attention: Please review your project details.
-        </div>
-        <!-- Add more alerts for additional notifications -->
-      </div>
+      {% for i in final_cdata %}
+    
+      <div class="alert alert-info alert-dismissible text-white mx-4" role="alert">
+        <span class="text-sm">
+          <i class="fa fa-check-circle text-success"></i>   Project Name: {{ i.pname }} ,  Project ID: {{i.project_id }}.
+            {% comment %} <a href="{% url 'project_details' customer_id=customer.customer_id project_id=customer.project_id %}" class="alert-link text-white">See more</a> {% endcomment %}
+        </span>
+        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% endfor %}
+    <div class="alert alert-warning alert-dismissible text-white mx-4" role="alert">
+      <span class="text-sm">
+          Project Name: {{ i.project_name }} {{i.project_id}}, Project ID: {{i.project_id }}.
+          {% comment %} <a href="{% url 'project_details' customer_id=customer.customer_id project_id=customer.project_id %}" class="alert-link text-white">See more</a> {% endcomment %}
+      </span>
+      <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+
     </div>
 
     <!-- Categories Card -->
-    {% comment %} <div class="card mb-4">
+    <div class="card mb-4">
       <div class="card-header">
-        <h6 class="card-title mb-0">Categories</h6>
+          <h6 class="card-title mb-0">Categories</h6>
       </div>
       <div class="card-body">
-        <ul class="list-group mb-4">
-          <!-- Electrical Category -->
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-            <div class="d-flex align-items-center">
-              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                <i class="ni ni-mobile-button text-white opacity-10"></i>
-              </div>
-              <div class="d-flex flex-column">
-                <a href="{% url 'model_category' cdata.0.customer_id 'Electrical' %}">Electrical</a>
-                <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
-              </div>
-            </div>
-            <div class="d-flex">
-              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                <i class="ni ni-bold-right" aria-hidden="true"></i>
-              </button>
-            </div>
-          </li>
-    
-          <!-- Mechanical Category -->
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-            <div class="d-flex align-items-center">
-              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                <i class="ni ni-tag text-white opacity-10"></i>
-              </div>
-              <div class="d-flex flex-column">
-                <a href="{% url 'model_category' cdata.0.customer_id 'mechanical' %}">Mechanical</a>
-                <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
-              </div>
-            </div>
-            <div class="d-flex">
-              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                <i class="ni ni-bold-right" aria-hidden="true"></i>
-              </button>
-            </div>
-          </li>
-    
-          <!-- Hardware Category -->
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-            <div class="d-flex align-items-center">
-              <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                <i class="ni ni-box-2 text-white opacity-10"></i>
-              </div>
-              <div class="d-flex flex-column">
-                <a href="{% url 'model_category' cdata.0.customer_id 'hardware' %}">Hardware</a>
-                <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
-              </div>
-            </div>
-            <div class="d-flex">
-              <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                <i class="ni ni-bold-right" aria-hidden="true"></i>
-              </button>
-            </div>
-          </li>
-        </ul>
+          <ul class="list-group mb-4">
+              <!-- Electrical Category -->
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg category-item">
+                  <div class="d-flex align-items-center ps-2">
+                      <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center ">
+                          <i class="ni ni-mobile-button text-white opacity-10"></i>
+                      </div>
+                      <div class="d-flex flex-column">
+                          <a href="{% url 'model_category' cdata.0.customer_id 'Electrical' %}">Electrical</a>
+                          <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
+                      </div>
+                  </div>
+                  <div class="d-flex">
+                      <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                          <i class="ni ni-bold-right" aria-hidden="true"></i>
+                      </button>
+                  </div>
+              </li>
+  
+              <!-- Mechanical Category -->
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg category-item">
+                  <div class="d-flex align-items-center ps-2">
+                      <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                          <i class="ni ni-tag text-white opacity-10"></i>
+                      </div>
+                      <div class="d-flex flex-column">
+                          <a href="{% url 'model_category' cdata.0.customer_id 'mechanical' %}">Mechanical</a>
+                          <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
+                      </div>
+                  </div>
+                  <div class="d-flex">
+                      <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                          <i class="ni ni-bold-right" aria-hidden="true"></i>
+                      </button>
+                  </div>
+              </li>
+  
+              <!-- Hardware Category -->
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg category-item">
+                  <div class="d-flex align-items-center ps-2">
+                      <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                          <i class="ni ni-box-2 text-white opacity-10"></i>
+                      </div>
+                      <div class="d-flex flex-column">
+                          <a href="{% url 'model_category' cdata.0.customer_id 'Hardware' %}">Hardware</a>
+                          <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
+                      </div>
+                  </div>
+                  <div class="d-flex">
+                      <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                          <i class="ni ni-bold-right" aria-hidden="true"></i>
+                      </button>
+                  </div>
+              </li>
+          </ul>
       </div>
-    </div>
-     {% endcomment %}
+  </div>
+  
+  <style>
+ 
+  </style>
+  
+  
+  
+  
+  
+ 
 
     <!-- Additional Content -->
     <div class="card">

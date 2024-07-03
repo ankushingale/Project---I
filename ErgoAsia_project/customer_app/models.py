@@ -11,6 +11,8 @@ class Customerdata(models.Model):
     address = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     
+    is_logged_in = models.BooleanField(default=False)  # New field to track login status
+
     def __str__(self):
         return self.name
 
@@ -54,6 +56,8 @@ class Customerrequirements(models.Model):
     tv = models.IntegerField()
     sop = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='working')
+    working_status = models.CharField(max_length=20, choices=WORKING_STATUS_CHOICES, default='pending')
+    approval_status = models.CharField(max_length=20, choices=APPROVAL_STATUS_CHOICES, default='not_approved')
 
     def __str__(self):
         return f"{self.project_id} - {self.cname}"
