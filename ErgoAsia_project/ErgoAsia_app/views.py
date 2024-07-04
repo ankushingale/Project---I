@@ -45,13 +45,15 @@ def dashboard(request):
     count = Customerrequirements.objects.count()
     total_customer = Customerdata.objects.count()
     supplier_count = SupplierRegistration.objects.count()
+    supplier = SupplierRegistration.objects.all()
 
     return render(request, 'ErgoAsia_app/dashboard.html', {
         'approved_projects': approved_projects,
         'req': data,
         'cnt': count,
         'total_customer': total_customer,
-        'supplier_count': supplier_count
+        'supplier_count': supplier_count,
+        'supplier':supplier
     })
 
 def supplier(request):
@@ -305,4 +307,11 @@ def final_requirements_view(request):
         return redirect('final_requirements_view')  # Redirect back to the same view after update
     
     return render(request, 'ErgoAsia_app/result.html', {'msg_valid': msg_valid})
+
+
+
+
+def supplier_list(request):
+    suppliers = SupplierRegistration.objects.all()
+    return render(request, 'ErgoAsia_app/dashboard.html', {'suppliers': suppliers})
 

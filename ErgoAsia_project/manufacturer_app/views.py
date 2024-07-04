@@ -4,31 +4,6 @@ from customer_app.models import FinalRequirement
 from django.views.decorators.csrf import csrf_exempt
 import random  # Assuming Customerdata model is defined in customer_app.models
 
-def manufacturerhome(request):
-    # Retrieve the current logged-in supplier based on session or other authentication method
-    supplier_id = request.session.get('supplier_id')  # Retrieve supplier_id from session
-    if supplier_id:
-        try:
-            # Retrieve supplier and its category
-            supplier = SupplierRegistration.objects.get(supplier_id=supplier_id)
-            supplier_category = supplier.supplier_category
-            
-            # Fetch final requirements matching the supplier's category
-            matching_requirements = FinalRequirement.objects.filter(meal_preference=supplier_category)
-            
-            context = {
-                'matching_requirements': matching_requirements
-            }
-            return render(request, 'manufacturer_app/index.html', context)
-        except SupplierRegistration.DoesNotExist:
-            # Handle case where supplier_id is not found
-            pass
-    
-    # Redirect or handle cases where supplier_id is not found or session is not valid
-    return render(request, 'manufacturer_app/index.html', {'matching_requirements': []})
-
-
-
 @csrf_exempt
 def supplierregistration(request):
     message=None
@@ -73,6 +48,35 @@ def suppliersignin(request):
         return render(request,'manufacturer_app/login.html',{'msg_valid':msg_valid,'msg_invalid':msg_invalid})
 
     return render(request,'manufacturer_app/login.html')
+
+def manufacturerhome(request):
+    print("0---------------------------------")
+    email = request.session.get('email')
+    print("email", email)
+
+    if email:
+        try:
+            supplier = SupplierRegistration.objects.get(email=email)
+            supplier_category = supplier.supplier_category
+            print("supplier category", supplier_category)
+            
+            # Fetch all final requirements matching the supplier's category
+            matching_requirements = FinalRequirement.objects.filter(meal_preference=supplier_category)
+            print("matching_requirements", matching_requirements.query)  # Print the exact query being executed
+            print("matching_requirements", list(matching_requirements))  # Print the resulting QuerySet as a list
+            
+            context = {
+                'matching_requirements': matching_requirements
+            }
+            return render(request, 'manufacturer_app/index.html', context)
+        except SupplierRegistration.DoesNotExist:
+            print("Supplier with the given email does not exist.")
+    
+    return render(request, 'manufacturer_app/index.html', {'matching_requirements': []})
+
+
+
+
 
 def displaySuppliers(request):
 

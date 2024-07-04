@@ -1474,9 +1474,21 @@
                           <!-- Loop through matching_requirements and display each in a notification alert -->
                           {% for requirement in matching_requirements %}
                           <div class="alert alert-info alert-dismissible fade show" role="alert">
-                              <strong>New Notification!</strong> Project ID: {{ requirement.project_id }}, Customer: {{ requirement.customer }}, Part Name: {{ requirement.Part_Name }}
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <strong>New Notification!</strong> Project ID: {{ requirement.project_id }}, Customer: {{ requirement.customer }}, Part Name: {{ requirement.meal_preference }}
+                              
+                              <!-- Right tick button -->
+                              <button type="button" class="btn btn-success btn-sm ml-2" aria-label="Approve">
+                                  <span aria-hidden="true">&#10003;</span>
+                              </button>
+                              
+                              <!-- First close button (red) next to the right tick -->
+                              <button type="button" class="btn btn-danger btn-sm ml-2" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
+                              </button>
+                              
+                              <!-- Second close button (red) at the right-side end -->
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true" class="text-danger">&times;</span>
                               </button>
                           </div>
                           {% endfor %}
@@ -1488,6 +1500,8 @@
                       {% endif %}
                   </div>
               </div>
+              
+              
               
               </div>
             </div>
