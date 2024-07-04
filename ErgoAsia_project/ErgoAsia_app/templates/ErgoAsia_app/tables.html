@@ -484,60 +484,64 @@
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
-                <input type="text" id="customerSearchInput" class="form-control mb-3 search-bar" placeholder="Search in Customers...">
-                <div class="table-responsive p-0">
-                    <table id="customerTable" class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer ID</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for customer in customer_data %}
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
+              <input type="text" id="customerSearchInput" class="form-control mb-3 search-bar" placeholder="Search in Customers...">
+              <div class="table-responsive p-0">
+                  <table id="customerTable" class="table align-items-center mb-0">
+                      <thead>
+                          <tr>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer ID</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for customer in customer_data %}
+                          <tr id="row{{ forloop.counter }}" {% if forloop.counter > 5 %} style="display:none;" {% endif %}>
+                              <td>
+                                  <div class="d-flex px-2 py-1">
                                       <div>
-                                        <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg {% if customer.is_logged_in %}online{% else %}offline{% endif %}" alt="user1" />
-                                        {% if customer.is_logged_in %}
-                                        <span class="online-dot"></span> <!-- Green dot for online status -->
-                                        {% endif %}
-                                    </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">
-                                                <a href="{% url 'customer_detail' customer.customer_id %}">{{ customer.name }}</a>
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">{{ customer.email }}</p>
-                                            {% if customer.is_logged_in %}
-                                            <p class="text-xs text-success mb-0">Online</p>
-                                            {% else %}
-                                            <p class="text-xs text-danger mb-0">Offline</p>
-                                            {% endif %}
-
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><p class="text-xs font-weight-bold mb-0">{{ customer.customer_id }}</p></td>
-                                <td><p class="text-xs font-weight-bold mb-0">{{ customer.email }}</p></td>
-                                <td><p class="text-xs font-weight-bold mb-0">{{ customer.phno }}</p></td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">{{ customer.address }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="{% url 'edit_customer' customer.customer_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
-                                    <a href="{% url 'delete_customer' customer.customer_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                          <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg {% if customer.is_logged_in %}online{% else %}offline{% endif %}" alt="user1" />
+                                          {% if customer.is_logged_in %}
+                                          <span class="online-dot"></span> <!-- Green dot for online status -->
+                                          {% endif %}
+                                      </div>
+                                      <div class="d-flex flex-column justify-content-center">
+                                          <h6 class="mb-0 text-sm">
+                                              <a href="{% url 'customer_detail' customer.customer_id %}">{{ customer.name }}</a>
+                                          </h6>
+                                          <p class="text-xs text-secondary mb-0">{{ customer.email }}</p>
+                                          {% if customer.is_logged_in %}
+                                          <p class="text-xs text-success mb-0">Online</p>
+                                          {% else %}
+                                          <p class="text-xs text-danger mb-0">Offline</p>
+                                          {% endif %}
+                                      </div>
+                                  </div>
+                              </td>
+                              <td><p class="text-xs font-weight-bold mb-0">{{ customer.customer_id }}</p></td>
+                              <td><p class="text-xs font-weight-bold mb-0">{{ customer.email }}</p></td>
+                              <td><p class="text-xs font-weight-bold mb-0">{{ customer.phno }}</p></td>
+                              <td class="align-middle text-center text-sm">
+                                  <span class="badge badge-sm bg-gradient-success">{{ customer.address }}</span>
+                              </td>
+                              <td class="align-middle text-center">
+                                  <a href="{% url 'edit_customer' customer.customer_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
+                                  <a href="{% url 'delete_customer' customer.customer_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                  <button id="showMoreCustomerBtn" class="btn btn-secondary" onclick="showMoreCustomerRows()">Show More</button>
+                  <button id="showLessCustomerBtn" class="btn btn-secondary" onclick="showLessCustomerRows()" style="display:none;">Show Less</button>
+              </div>
+          </div>
+          
         </div>
     </div>
 </div>
@@ -557,45 +561,50 @@
                       </div>
                   </div>
                   <div class="card-body px-0 pb-2">
-                      <input type="text" id="supplierSearchInput" class="form-control mb-3 search-bar" placeholder="Search in Suppliers...">
-                      <div class="table-responsive p-0">
-                          <table id="supplierTable" class="table align-items-center mb-0">
-                              <thead>
-                                  <tr>
-                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Supplier ID</th>
-                                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
-                                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contact No</th>
-                                      <th class="text-secondary opacity-7"></th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  {% for supplier in supplier_data %}
-                                  <tr>
-                                      <td>
-                                          <div class="d-flex px-2 py-1">
-                                              <div>
-                                                  <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1" />
-                                              </div>
-                                              <div class="d-flex flex-column justify-content-center">
-                                                  <h6 class="mb-0 text-sm">{{ supplier.full_name }}</h6>
-                                                  <p class="text-xs text-secondary mb-0">{{ supplier.email }}</p>
-                                              </div>
-                                          </div>
-                                      </td>
-                                      <td><p class="text-xs font-weight-bold mb-0">{{ supplier.supplier_id }}</p></td>
-                                      <td><p class="text-xs font-weight-bold mb-0">{{ supplier.company_name }}</p></td>
-                                      <td><p class="text-xs font-weight-bold mb-0">{{ supplier.contact_no }}</p></td>
-                                      <td class="align-middle text-center">
-                                          <a href="{% url 'edit_supplier' supplier.supplier_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
-                                          <a href="{% url 'delete_supplier' supplier.supplier_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
-                                      </td>
-                                  </tr>
-                                  {% endfor %}
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
+                    <input type="text" id="supplierSearchInput" class="form-control mb-3 search-bar" placeholder="Search in Suppliers...">
+                    <div class="table-responsive p-0">
+                        <table id="supplierTable" class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Supplier ID</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contact No</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for supplier in supplier_data %}
+                                <tr id="row{{ forloop.counter }}" {% if forloop.counter > 5 %} style="display:none;" {% endif %}>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1" />
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ supplier.full_name }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ supplier.email }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.supplier_id }}</p></td>
+                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.company_name }}</p></td>
+                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.contact_no }}</p></td>
+                                    <td class="align-middle text-center">
+                                        <a href="{% url 'edit_supplier' supplier.supplier_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
+                                        <a href="{% url 'delete_supplier' supplier.supplier_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button id="showMoreSupplierBtn" class="btn btn-secondary" onclick="showMoreSupplierRows()">Show More</button>
+                        <button id="showLessSupplierBtn" class="btn btn-secondary" onclick="showLessSupplierRows()" style="display:none;">Show Less</button>
+                    </div>
+                </div>
+
               </div>
           </div>
       </div>
@@ -801,6 +810,92 @@ document.getElementById('supplierSearchInput').addEventListener('keyup', functio
       }
   }
 });
+
+function showMoreCustomerRows() {
+  var table, tr, i;
+  table = document.getElementById("customerTable");
+  tr = table.getElementsByTagName("tr");
+  var hiddenRows = Array.from(tr).filter(row => row.style.display === "none");
+
+  for (i = 0; i < 10 && i < hiddenRows.length; i++) {
+      hiddenRows[i].style.display = "";
+  }
+
+  if (hiddenRows.length <= 10) {
+      document.getElementById("showMoreCustomerBtn").style.display = "none";
+  }
+
+  document.getElementById("showLessCustomerBtn").style.display = "inline";
+}
+
+function showLessCustomerRows() {
+  var table, tr, i;
+  table = document.getElementById("customerTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 5; i < tr.length; i++) {
+      tr[i].style.display = "none";
+  }
+
+  document.getElementById("showMoreCustomerBtn").style.display = "inline";
+  document.getElementById("showLessCustomerBtn").style.display = "none";
+}
+
+window.onload = function() {
+  var table, tr, i;
+  table = document.getElementById("customerTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 5; i < tr.length; i++) {
+      tr[i].style.display = "none";
+  }
+
+  if (tr.length <= 5) {
+      document.getElementById("showMoreCustomerBtn").style.display = "none";
+  }
+}
+
+
+function showMoreSupplierRows() {
+  var table, tr, i;
+  table = document.getElementById("supplierTable");
+  tr = table.getElementsByTagName("tr");
+  var hiddenRows = Array.from(tr).filter(row => row.style.display === "none");
+
+  for (i = 0; i < hiddenRows.length; i++) {
+      hiddenRows[i].style.display = "";
+  }
+
+  document.getElementById("showMoreSupplierBtn").style.display = "none";
+  document.getElementById("showLessSupplierBtn").style.display = "inline";
+}
+
+function showLessSupplierRows() {
+  var table, tr, i;
+  table = document.getElementById("supplierTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 5; i < tr.length; i++) {
+      tr[i].style.display = "none";
+  }
+
+  document.getElementById("showMoreSupplierBtn").style.display = "inline";
+  document.getElementById("showLessSupplierBtn").style.display = "none";
+}
+
+window.onload = function() {
+  var table, tr, i;
+  table = document.getElementById("supplierTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 5; i < tr.length; i++) {
+      tr[i].style.display = "none";
+  }
+
+  if (tr.length <= 5) {
+      document.getElementById("showMoreSupplierBtn").style.display = "none";
+  }
+}
 </script>
 
 <!-- Additional JavaScript for Material Dashboard -->

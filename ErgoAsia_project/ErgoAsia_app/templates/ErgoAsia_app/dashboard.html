@@ -7,6 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <style></style>
     <link
       rel="apple-touch-icon"
       sizes="76x76"
@@ -452,120 +453,111 @@
         </div>
         <div class="row mt-4">
             <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <div class="row">
-                            <div class="col-lg-6 col-7">
-                                <h6>Projects list</h6>
-                                <p class="text-sm mb-0">
-                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">{{ cnt }} Customer requests</span> this month
-                                </p>
-                            </div>
-                            <div class="col-lg-6 col-5 my-auto text-end">
-                                <div class="dropdown float-lg-end pe-4">
-                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v text-secondary"></i>
-                                    </a>
-                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        <li><a class="dropdown-item border-radius-md" href="">Electrical</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="">Hardware</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+              <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Projects list</h6>
+                            <p class="text-sm mb-0">
+                                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                <span class="font-weight-bold ms-1">{{ cnt }} Customer requests</span> this month
+                            </p>
                         </div>
-                    </div>
-                    <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        customer Id
-                                    </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Project Id
-                                        </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                          Company Name
-                                      </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Project Name
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Part Name
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Part Preference
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Details
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for i in req %}
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="avatar avatar-sm ">
-                                                    {% comment %} <img src=""  alt="xd" /> {% endcomment %}
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ i.customer_id }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex px-2 py-1">
-                                              <div class="d-flex flex-column justify-content-center">
-                                                  <h6 class="mb-0 text-sm">{{ i.project_id }}</h6>
-                                              </div>
-                                          </div>
-                                      </td>
-                                        <td>
-                                          <div class="d-flex px-2 py-1">
-                                              
-                                              <div class="d-flex flex-column justify-content-center">
-                                                  <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
-                                              </div>
-                                          </div>
-                                      </td>
-                                        
-                                        <td>
-                                          <div class="d-flex px-2 py-1">
-                                              <div class="d-flex flex-column justify-content-center">
-                                                  <h6 class="mb-0 text-sm">{{ i.pname }}</h6>
-                                              </div>
-                                          </div>
-                                      </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ i.Part_Name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ i.meal_preference }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                          <a href="{% url 'project_details' i.customer_id i.project_id %}">
-                                              <button type="button" class="btn btn-primary">View</button>
-                                          </a>
-                                      </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                        <div class="col-lg-6 col-5 my-auto text-end">
+                            <div class="dropdown float-lg-end pe-4">
+                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v text-secondary"></i>
+                                </a>
+                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                    <li><a class="dropdown-item border-radius-md" href="#">Electrical</a></li>
+                                    <li><a class="dropdown-item border-radius-md" href="#">Hardware</a></li>
+                                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive">
+                        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for projects.." class="form-control mb-3" style="margin-left: 20px;">
+                        <table class="table align-items-center mb-0" id="projectsTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">customer Id</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Id</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Project Name</th>
+                                    {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Part Name</th> {% endcomment %}
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Part Preference</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in req %}
+                                <tr id="row{{ forloop.counter }}" {% if forloop.counter > 5 %} style="display:none;" {% endif %}>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="avatar avatar-sm ">
+                                                {% comment %} <img src=""  alt="xd" /> {% endcomment %}
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.customer_id }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.project_id }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.pname }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    {% comment %} <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.Part_Name }}</h6>
+                                            </div>
+                                        </div>
+                                    </td> {% endcomment %}
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ i.meal_preference }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'project_details' i.customer_id i.project_id %}">
+                                            <button type="button" class="btn btn-primary">View</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button id="showMoreBtn" class="btn btn-secondary" onclick="showMoreRows()">Show More</button>
+                        <button id="showLessBtn" class="btn btn-secondary" onclick="showLessRows()" style="display:none;">Show Less</button>
+                    </div>
+                </div>
+            </div>
+            
+            
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
@@ -577,8 +569,23 @@
                         </p>
                     </div>
                     <div class="card-body px-0 pb-2">
-                        <!-- Supplier list content -->
-                    </div>
+                      {% for suppliers1 in supplier %}
+                          {% if forloop.counter <= 5 %}
+                          <div class="alert alert-warning alert-dismissible text-white mb-3 mx-3" role="alert">
+                              <span class="text-sm">Supplier ID: {{ suppliers1.supplier_id }}, Full Name: {{ suppliers1.full_name }}.
+                                  <a href="javascript:;" class="alert-link text-white">See more</a>.
+                              </span>
+                              <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          {% endif %}
+                      {% endfor %}
+                  </div>
+                  
+                  
+                  
+                  
                 </div>
             </div>
         </div>
@@ -588,43 +595,28 @@
 
     <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
       <div class="card">
-          <div class="card-header pb-0">
-              <h6>Approved Projects</h6>
-          </div>
-          <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
-                  <table class="table align-items-center mb-0">
-                      <thead>
-                          <tr>
-                            
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Project Id
-                        </th>
-                            
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Company Name
-                              </th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                  Project Name
-                              </th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Part Name
-                              </th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Part Preference
-                              </th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Status
-                              </th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Details
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          {% for project in approved_projects %}
-                          <tr>
-                              <td>
+        <div class="card-header pb-0">
+            <h6>Approved Projects</h6>
+        </div>
+        <div class="card-body px-0 pb-2">
+            <div class="table-responsive">
+                <input type="text" id="approvedSearchInput" onkeyup="searchApprovedTable()" placeholder="Search for projects.." class="form-control mb-3" style="margin-left: 20px;">
+                <table class="table align-items-center mb-0" id="approvedProjectsTable">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Id</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Project Name</th>
+                            {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Part Name</th> {% endcomment %}
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Part Preference</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for project in approved_projects %}
+                        <tr>
+                            <td>
                                 <div class="d-flex px-2 py-1">
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="mb-0 text-sm">{{ project.project_id }}</h6>
@@ -632,54 +624,58 @@
                                 </div>
                             </td>
                             <td>
-                              <div class="d-flex px-2 py-1">
-                                  <div class="d-flex flex-column justify-content-center">
-                                      <h6 class="mb-0 text-sm">{{ project.cname }}</h6>
-                                  </div>
-                              </div>
-                          </td>
-                              <td>
-                                  <div class="d-flex px-1 py-1">
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-sm">{{ project.pname }}</h6>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <div class="d-flex px-1 py-1">
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-sm">{{ project.Part_Name }}</h6>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <div class="d-flex px-1 py-1">
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="py-1 text-sm">{{ project.meal_preference }}</h6>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <div class="d-flex px-1 py-1">
-                                      <div class="d-flex flex-column justify-content-center">
-                                          {% if project.approval_status == 'approved' %}
-                                              <i class="fa fa-check-circle text-success"> Approve</i>
-                                          {% endif %}
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <a href="{% url 'final_project_details' project.project_id %}">
-                                      <button type="button" class="btn btn-primary">View</button>
-                                  </a>
-                              </td>
-                          </tr>
-                          {% endfor %}
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ project.cname }}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex px-1 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ project.pname }}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            {% comment %} <td>
+                                <div class="d-flex px-1 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ project.Part_Name }}</h6>
+                                    </div>
+                                </div>
+                            </td> {% endcomment %}
+                            <td>
+                                <div class="d-flex px-1 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="py-1 text-sm">{{ project.meal_preference }}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex px-1 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        {% if project.approval_status == 'approved' %}
+                                            <i class="fa fa-check-circle text-success"> Approve</i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{% url 'final_project_details' project.project_id %}">
+                                    <button type="button" class="btn btn-primary">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button id="showMoreApprovedBtn" class="btn btn-secondary" onclick="showMoreApprovedRows()">Show More</button>
+                <button id="showLessApprovedBtn" class="btn btn-secondary" onclick="showLessApprovedRows()" style="display:none;">Show Less</button>
+            </div>
+        </div>
+    </div>
   </div>
   
   
@@ -1121,6 +1117,138 @@ $(document).ready(function() {
         };
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
       }
+
+      function searchTable() {
+        var input, filter, table, tr, td, i, j, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toLowerCase();
+        table = document.getElementById("projectsTable");
+        tr = table.getElementsByTagName("tr");
+    
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            td = tr[i].getElementsByTagName("td");
+            for (j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    function showMoreRows() {
+      var table = document.getElementById("projectsTable");
+      var rows = table.getElementsByTagName("tr");
+      
+      for (var i = 5; i < rows.length; i++) {
+          rows[i].style.display = "table-row";
+      }
+      
+      document.getElementById("showMoreBtn").style.display = "none";
+      document.getElementById("showLessBtn").style.display = "inline-block";
+  }
+
+  function showLessRows() {
+      var table = document.getElementById("projectsTable");
+      var rows = table.getElementsByTagName("tr");
+      
+      for (var i = 5; i < rows.length; i++) {
+          rows[i].style.display = "none";
+      }
+      
+      document.getElementById("showMoreBtn").style.display = "inline-block";
+      document.getElementById("showLessBtn").style.display = "none";
+  }
+
+  window.onload = function() {
+      var table = document.getElementById("projectsTable");
+      var rows = table.getElementsByTagName("tr");
+      
+      for (var i = 5; i < rows.length; i++) {
+          rows[i].style.display = "none";
+      }
+      
+      if (rows.length > 5) {
+          document.getElementById("showMoreBtn").style.display = "inline-block";
+          document.getElementById("showLessBtn").style.display = "none";
+      } else {
+          document.getElementById("showMoreBtn").style.display = "none";
+          document.getElementById("showLessBtn").style.display = "none";
+      }
+  };
+
+
+
+
+  function searchApprovedTable() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("approvedSearchInput");
+    filter = input.value.toLowerCase();
+    table = document.getElementById("approvedProjectsTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+        tr[i].style.display = "none";
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                }
+            }
+        }
+    }
+}
+
+function showMoreApprovedRows() {
+    var table, tr, i;
+    table = document.getElementById("approvedProjectsTable");
+    tr = table.getElementsByTagName("tr");
+    var hiddenRows = Array.from(tr).filter(row => row.style.display === "none");
+
+    for (i = 0; i < 5 && i < hiddenRows.length; i++) {
+        hiddenRows[i].style.display = "";
+    }
+
+    if (hiddenRows.length <= 5) {
+        document.getElementById("showMoreApprovedBtn").style.display = "none";
+    }
+
+    document.getElementById("showLessApprovedBtn").style.display = "inline";
+}
+
+function showLessApprovedRows() {
+    var table, tr, i;
+    table = document.getElementById("approvedProjectsTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 5; i < tr.length; i++) {
+        tr[i].style.display = "none";
+    }
+
+    document.getElementById("showMoreApprovedBtn").style.display = "inline";
+    document.getElementById("showLessApprovedBtn").style.display = "none";
+}
+
+window.onload = function() {
+    var table, tr, i;
+    table = document.getElementById("approvedProjectsTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 5; i < tr.length; i++) {
+        tr[i].style.display = "none";
+    }
+
+    if (tr.length <= 5) {
+        document.getElementById("showMoreApprovedBtn").style.display = "none";
+    }
+}
+
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
