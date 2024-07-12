@@ -57,6 +57,7 @@
     />
   </head> {% endcomment %}
   <style>
+   
     .category-item {
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -521,88 +522,74 @@
         <div class="row mt-4">
   <!-- Column 1: Your Order and Something is coming! -->
   <div class="col-lg-7 mb-lg-0 mb-4">
-    <div class="card">
-      <div class="card-header">
-        <h6 class="card-title mb-0">Your Order</h6>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table align-items-center">
-            <tbody>
-              {% if cdata.count == 0 %}
-              <tr>
-                <td colspan="5">
-                  <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                      <h6 class="mb-2">No Order Placed Yet</h6>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              {% endif %}
-              {% for i in cdata %}
-              <tr>
-                {% comment %} <td class="w-30">
-                  <div class="d-flex px-2 py-1">
-                    <div class="ms-4">
-                      <p class="text-xs font-weight-bold mb-0">Project Name:</p>
-                      <h6 class="text-sm mb-0">{{ i.pname }}</h6>
-                    </div>
-                  </div>
-                </td> {% endcomment %}
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0">Project Id</p>
-                    <h6 class="text-sm mb-0">{{ i.project_id }}</h6>
-                  </div>
-                </td>
-                {% comment %} <td class="w-30">
-                  <div class="d-flex px-2 py-1">
-                    
-                      <!-- <img src="{% static "img/customer dashboard/flags/US.png" %}" alt="Country flag" /> -->
-                    
-                    <div class="">
-                      <p class="text-xs font-weight-bold mb-0">Project id:</p>
-                      <h6 class="text-sm mb-0">{{ i.project_id }}</h6>
-                    </div>
-                  </div>
-                </td> {% endcomment %}
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0">Project Name</p>
-                    <h6 class="text-sm mb-0">{{ i.pname }}</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0">Part Name</p>
-                    <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
-                    <h6 class="text-sm mb-0">{{ i.sop }}</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <p class="text-xs font-weight-bold mb-0">Category</p>
-                    <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <a href="/edit/{{ i.customer_id }}"><button type="button" class="btn btn-primary">View</button></a>
-                  </div>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+      <h6 class="card-title mb-0">Your Order</h6>
+  </div>
+  <div class="card-body">
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search Orders">
     </div>
+    <div class="table-responsive">
+        <table class="table align-items-center">
+            <tbody id="orderTable">
+                {% if cdata.count == 0 %}
+                <tr>
+                    <td colspan="6">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-2">No Order Placed Yet</h6>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+                {% for i in cdata %}
+                <tr>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Project Id</p>
+                            <h6 class="text-sm mb-0">{{ i.project_id }}</h6>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Project Name</p>
+                            <h6 class="text-sm mb-0">{{ i.pname }}</h6>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                            <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                            <h6 class="text-sm mb-0">{{ i.sop }}</h6>
+                        </div>
+                    </td>
+                    <td class="align-middle text-sm">
+                        <div class="col text-center">
+                            <p class="text-xs font-weight-bold mb-0">Category</p>
+                            <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
+                        </div>
+                    </td>
+                    <td class="align-middle text-sm">
+                        <div class="col text-center">
+                            <a href="/edit/{{ i.customer_id }}"><button type="button" class="btn btn-primary">View</button></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>
 
     <!-- Something is coming! -->
     <!-- customer_app/Cdashboard.html -->
@@ -611,73 +598,74 @@
           <h6 class="card-title mb-0">Approved Tables</h6>
       </div>
       <div class="card-body">
-          <div class="table-responsive">
-              <table class="table align-items-center">
-                  <tbody>
-                      {% if final_cdata.count == 0 %}
-                          <tr>
-                              <td colspan="5">
-                                  <div class="card-header pb-0 p-3">
-                                      <div class="d-flex justify-content-between">
-                                          <h6 class="mb-2">No Order Placed Yet</h6>
-                                      </div>
-                                  </div>
-                              </td>
-                          </tr>
-                      {% endif %}
-                      {% for i in final_cdata %}
-                          <tr>
-                            <td>
-                              <div class="text-center">
-                                  <p class="text-xs font-weight-bold mb-0">Project Name</p>
-                                  <h6 class="text-sm mb-0">{{ i.pname }}</h6>
-                              </div>
-                          </td>
-                              <td>
-                                  <div class="text-center">
-                                      <p class="text-xs font-weight-bold mb-0">Part Name</p>
-                                      <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
-                                  </div>
-                              </td>
-                              <td>
-                                  <div class="text-center">
-                                      <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
-                                      <h6 class="text-sm mb-0">{{ i.sop }}</h6>
-                                  </div>
-                              </td>
-                              <td class="align-middle text-sm">
-                                  <div class="col text-center">
-                                      <p class="text-xs font-weight-bold mb-0">Category</p>
-                                      <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
-                                  </div>
-                              </td>
-                              <td>
-                                <td class="align-middle text-sm">
-                                  <div class="col text-center">
-                                      <p class="text-xs font-weight-bold mb-0">Category</p>
-                                      <h6 class="text-sm mb-0">{{ i.working_status }}</h6>
-                                  </div>
-                              </td>
-                              <td>
-                                <div class="d-flex px-0 py-0">
-                                    <div class="col text-center">
-                                        {% if i.approval_status == 'approved' %}
-                                            <i class="fa fa-check-circle text-success"> Approve</i>
-                                        {% endif %}
-                                    </div>
+        <div class="mb-3">
+            <input type="text" id="searchInput2" class="form-control" placeholder="Search Orders">
+        </div>
+        <div class="table-responsive">
+            <table class="table align-items-center">
+                <tbody id="orderTable2">
+                    {% if final_cdata.count == 0 %}
+                    <tr>
+                        <td colspan="7">
+                            <div class="card-header pb-0 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-2">No Order Placed Yet</h6>
                                 </div>
-                            </td>
-                              <td class="align-middle text-sm">
-                                  <div class="col text-center">
-                                      <a href="/edit/{{ i.customer_id }}" class="btn btn-primary">View</a>
-                                  </div>
-                              </td>
-                          </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-          </div>
-      </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% for i in final_cdata %}
+                    <tr>
+                        <td>
+                            <div class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">Project Name</p>
+                                <h6 class="text-sm mb-0">{{ i.pname }}</h6>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">Part Name</p>
+                                <h6 class="text-sm mb-0">{{ i.Part_Name }}</h6>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">SOP Date:</p>
+                                <h6 class="text-sm mb-0">{{ i.sop }}</h6>
+                            </div>
+                        </td>
+                        <td class="align-middle text-sm">
+                            <div class="col text-center">
+                                <p class="text-xs font-weight-bold mb-0">Category</p>
+                                <h6 class="text-sm mb-0">{{ i.meal_preference }}</h6>
+                            </div>
+                        </td>
+                        <td class="align-middle text-sm">
+                            <div class="col text-center">
+                                <p class="text-xs font-weight-bold mb-0">Working Status</p>
+                                <h6 class="text-sm mb-0">{{ i.working_status }}</h6>
+                            </div>
+                        </td>
+                        <td class="align-middle text-sm">
+                            <div class="col text-center">
+                                <p class="text-xs font-weight-bold mb-0">Approval Status</p>
+                                {% if i.approval_status == 'approved' %}
+                                <i class="fa fa-check-circle text-success"> Approved</i>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td class="align-middle text-sm">
+                            <div class="col text-center">
+                                <a href="/edit/{{ i.customer_id }}" class="btn btn-primary">View</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
   </div>
   
   
@@ -794,16 +782,45 @@
   
  
 
-    <!-- Additional Content -->
+    <!-- Additional Content with Icon Logos -->
     <div class="card">
       <div class="card-header">
-        <h6 class="card-title mb-0">Additional Content</h6>
+          <h6 class="card-title mb-0">Working Status</h6>
       </div>
       <div class="card-body">
-        <p>This is some additional content below the Categories section.</p>
-        <p>Feel free to customize this content as needed.</p>
+          <ul class="list-group">
+              <li class="list-group-item border-0 py-3">
+                  <a href="{% url 'final_requirement_list_filtered' 'completed' %}" class="text-success d-flex justify-content-between align-items-center card-link">
+                      <div class="d-flex align-items-center">
+                          <i class="ni ni-check-bold text-success ni-lg me-3"></i>
+                          <span class="ms-2 fs-6">Completed</span>
+                      </div>
+                      <span class="badge bg-success">View</span>
+                  </a>
+              </li>
+              <li class="list-group-item border-0 py-3">
+                  <a href="{% url 'final_requirement_list_filtered' 'working' %}" class="text-warning d-flex justify-content-between align-items-center card-link">
+                      <div class="d-flex align-items-center">
+                          <i class="ni ni-settings-gear-65 text-warning ni-lg me-3"></i>
+                          <span class="ms-2 fs-6">Working</span>
+                      </div>
+                      <span class="badge bg-warning">View</span>
+                  </a>
+              </li>
+              <li class="list-group-item border-0 py-3">
+                  <a href="{% url 'final_requirement_list_filtered' 'pending' %}" class="text-danger d-flex justify-content-between align-items-center card-link">
+                      <div class="d-flex align-items-center">
+                          <i class="ni ni-time-alarm text-danger ni-lg me-3"></i>
+                          <span class="ms-2 fs-6">Pending</span>
+                      </div>
+                      <span class="badge bg-danger">View</span>
+                  </a>
+              </li>
+          </ul>
       </div>
     </div>
+    
+
   </div>
 </div>
 
@@ -824,6 +841,63 @@
 
 
     <script>
+      document.getElementById('searchInput').addEventListener('keyup', function() {
+        var input, filter, table, rows, td, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toLowerCase();
+        table = document.getElementById('orderTable');
+        rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var match = false;
+            var tds = rows[i].getElementsByTagName('td');
+            for (var j = 0; j < tds.length; j++) {
+                if (tds[j]) {
+                    txtValue = tds[j].textContent || tds[j].innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+            }
+            if (match) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    });
+
+
+    document.getElementById('searchInput2').addEventListener('keyup', function() {
+      var input, filter, table, rows, td, txtValue;
+      input = document.getElementById('searchInput2');
+      filter = input.value.toLowerCase();
+      table = document.getElementById('orderTable2');
+      rows = table.getElementsByTagName('tr');
+
+      for (var i = 0; i < rows.length; i++) {
+          var match = false;
+          var tds = rows[i].getElementsByTagName('td');
+          for (var j = 0; j < tds.length; j++) {
+              if (tds[j]) {
+                  txtValue = tds[j].textContent || tds[j].innerText;
+                  if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                      match = true;
+                      break;
+                  }
+              }
+          }
+          if (match) {
+              rows[i].style.display = "";
+          } else {
+              rows[i].style.display = "none";
+          }
+      }
+  });
+
+  
+
       var ctx1 = document.getElementById("chart-line").getContext("2d");
 
       var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
@@ -926,10 +1000,10 @@
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
       }
     </>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    {% comment %} <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script> {% endcomment %}
+    // <!-- Github buttons -->
+    // <script async defer src="https://buttons.github.io/buttons.js"></scrip>
+    // <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    // {% comment %} <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script> {% endcomment %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
