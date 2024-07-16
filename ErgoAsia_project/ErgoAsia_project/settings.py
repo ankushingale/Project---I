@@ -101,8 +101,13 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'ergoasia',
-        # Other Djongo settings...
+        'NAME': os.environ.get('MONGO_DB_NAME'),
+        'CLIENT': {
+            'host': os.environ.get('MONGO_URI'),
+            'username': os.environ.get('MONGO_USER'),
+            'password': os.environ.get('MONGO_PASS'),
+            'authMechanism': 'SCRAM-SHA-1',
+        }
     }
 }
 
