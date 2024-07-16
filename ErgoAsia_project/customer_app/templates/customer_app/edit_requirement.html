@@ -87,8 +87,9 @@
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" id="status" name="status" value="{{requirement.working_status}}">
-                                <option value="working" {% if requirement.status == 'working' %}selected{% endif %}>Working</option>
                                 <option value="pending" {% if requirement.status == 'pending' %}selected{% endif %}>Pending</option>
+                                <option value="working" {% if requirement.status == 'working' %}selected{% endif %}>Working</option>
+                                
                                 {% if user.is_staff %}
                                 <option value="completed" {% if requirement.status == 'completed' %}selected{% endif %}>Completed</option>
                                 {% endif %}

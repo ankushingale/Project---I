@@ -380,3 +380,11 @@ def custom_logout(request):
     logout(request)
     # Redirect to a different path after logout
     return redirect('/customer-sign') 
+
+
+def final_requirement_list(request, status=None):
+    if status:
+        final_requirements = FinalRequirement.objects.filter(working_status=status)
+    else:
+        final_requirements = FinalRequirement.objects.all()
+    return render(request, 'customer_app/filtered_requirements.html', {'final_requirements': final_requirements})

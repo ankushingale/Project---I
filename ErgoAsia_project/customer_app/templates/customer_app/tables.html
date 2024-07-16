@@ -365,6 +365,9 @@
                 <h6>Supplier</h6>
               </div>
               <div class="card-body px-0 pt-0 pb-2">
+                <div class="mb-3" style="margin: 0 15px;">
+                  <input type="text" id="searchInputSupplier" class="form-control" placeholder="Search Suppliers">
+              </div>
                 <div class="table-responsive p-0">
                   <table class="table align-items-center mb-0">
                     <thead>
@@ -710,116 +713,96 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="card mb-4">
-              <div class="card-header pb-0">
-                <h6>Projects table</h6>
+              <div class="card mb-4">
+                  <div class="card-header pb-0">
+                      <h6>Projects table</h6>
+                  </div>
+                  <div class="card-body px-0 pt-0 pb-2">
+                    <div class="mb-3" style="margin: 0 15px;">
+                      <input type="text" id="searchInput3" class="form-control" placeholder="Search Projects">
+                  </div>
+                      <div class="table-responsive p-0">
+                          <table class="table align-items-center justify-content-center mb-0">
+                              <thead>
+                                  <tr>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          PROJECT NAME
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          PART NAME
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                          ANNUAL VOLUME
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          CATEGORY
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          SOP DATE
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          STATUS
+                                      </th>
+                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                          ACTIONS
+                                      </th>
+                                  </tr>
+                              </thead>
+                              <tbody id="projectTable">
+                                  {% for i in cdata %}
+                                  <tr>
+                                      <td>
+                                          <div class="d-flex px-2">
+                                              <div></div>
+                                              <div class="my-auto">
+                                                  <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <p class="text-sm font-weight-bold mb-0">{{ i.Part_Name }}</p>
+                                      </td>
+                                      <td>
+                                          <p class="text-sm font-weight-bold mb-0">{{ i.av }}</p>
+                                      </td>
+                                      <td>
+                                          <p class="text-sm font-weight-bold mb-0">{{ i.meal_preference }}</p>
+                                      </td>
+                                      <td>
+                                          <p class="text-sm font-weight-bold mb-0">{{ i.sop }}</p>
+                                      </td>
+                                      <td>
+                                          {% if i.working_status %}
+                                          {% if i.working_status == 'working' %}
+                                          <span class="badge bg-warning rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
+                                          {% elif i.working_status == 'pending' %}
+                                          <span class="badge bg-danger rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
+                                          {% elif i.working_status == 'completed' %}
+                                          <span class="badge bg-success rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
+                                          {% else %}
+                                          <span class="badge bg-secondary rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
+                                          {% endif %}
+                                          {% else %}
+                                          <span class="badge bg-secondary rounded-pill text-xs font-weight-bold">No status available</span>
+                                          {% endif %}
+                                      </td>
+                                      <td class="align-middle">
+                                          <a href="{% url 'edit_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
+                                              <i class="fa fa-edit text-xs"></i>
+                                          </a>
+                                          <a href="{% url 'delete_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
+                                              <i class="fa fa-trash text-xs"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
               </div>
-              <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                  <table
-                    class="table align-items-center justify-content-center mb-0"
-                  >
-                    <thead>
-                      <tr>
-                        <th
-                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                      >
-                        PROJECT NAME
-                      </th>
-                      <th
-                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                      >
-                      PART NAME
-                      </th>
-                        <th
-                          class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                        >
-                      ANNUAL VOLUM
-                        </th>
-                        <th
-                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                      >
-                      CATEGORY
-                      </th>
-                        
-                        
-                        <th
-                          class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                        >
-                        SOP DATE
-                        </th>
-                        <th
-                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                      >
-                        Status
-                      </th>
-                      <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                    >
-                      Status
-                    </th>
-                        
-                        
-                    </thead>
-                    <tbody>
-                      {% for i in cdata %}
-                      <tr>
-                        <td>
-                          <div class="d-flex px-2">
-                            <div></div>
-                            <div class="my-auto">
-                              <h6 class="mb-0 text-sm">{{ i.cname }}</h6>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">{{ i.Part_Name }}</p>
-                        </td>
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">{{ i.av }}</p>
-                        </td>
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">{{ i.meal_preference }}</p>
-                        </td>
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">{{ i.sop }}</p>
-                        </td>
-                        <td>
-                          {% if i.working_status %}
-                              {% if i.working_status == 'working' %}
-                                  <span class="badge bg-warning rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
-                              {% elif i.working_status == 'pending' %}
-                                  <span class="badge bg-danger rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
-                              {% elif i.working_status == 'completed' %}
-                                  <span class="badge bg-success rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
-                              {% else %}
-                                  <span class="badge bg-secondary rounded-pill text-xs font-weight-bold">{{ i.working_status }}</span>
-                              {% endif %}
-                          {% else %}
-                              <span class="badge bg-secondary rounded-pill text-xs font-weight-bold">No status available</span>
-                          {% endif %}
-                      </td>
-                      
-                      
-                      
-                        <td class="align-middle">
-                          <a href="{% url 'edit_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
-                            <i class="fa fa-edit text-xs"></i>
-                          </a>
-                          <a href="{% url 'delete_customer_requirement' i.project_id %}" class="btn btn-link text-secondary mb-0">
-                            <i class="fa fa-trash text-xs"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                    
-                  </table>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
+      </div>
       </div>
     </main>
     
@@ -830,6 +813,62 @@
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
+      document.getElementById('searchInput3').addEventListener('keyup', function() {
+        var input, filter, table, rows, td, txtValue;
+        input = document.getElementById('searchInput3');
+        filter = input.value.toLowerCase();
+        table = document.getElementById('projectTable');
+        rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var match = false;
+            var tds = rows[i].getElementsByTagName('td');
+            for (var j = 0; j < tds.length; j++) {
+                if (tds[j]) {
+                    txtValue = tds[j].textContent || tds[j].innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+            }
+            if (match) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    });
+
+    document.getElementById('searchInputSupplier').addEventListener('keyup', function() {
+      var input, filter, table, rows, td, txtValue;
+      input = document.getElementById('searchInputSupplier');
+      filter = input.value.toLowerCase();
+      table = document.querySelector('.table-responsive tbody');
+      rows = table.getElementsByTagName('tr');
+  
+      for (var i = 0; i < rows.length; i++) {
+          var match = false;
+          var tds = rows[i].getElementsByTagName('td');
+          for (var j = 0; j < tds.length; j++) {
+              if (tds[j]) {
+                  txtValue = tds[j].textContent || tds[j].innerText;
+                  if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                      match = true;
+                      break;
+                  }
+              }
+          }
+          if (match) {
+              rows[i].style.display = "";
+          } else {
+              rows[i].style.display = "none";
+          }
+      }
+  });
+  
+
+
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {
         var options = {
