@@ -291,3 +291,18 @@ def supplier_list(request):
     suppliers = SupplierRegistration.objects.all()
     return render(request, 'ErgoAsia_app/dashboard.html', {'suppliers': suppliers})
 
+
+def supplier_detail(request, supplier_id):
+    # Retrieve the supplier using supplier_id
+    supplier = get_object_or_404(SupplierRegistration, supplier_id=supplier_id)  # Fetch the supplier
+
+    # Fetch approved orders where the category matches the supplier's category
+    approved_orders = FinalRequirement.objects.filter(
+        approval_status='approved',
+        meal_preference=supplier.supplier_category  # Use the correct field for category
+    )
+
+    return render(request, 'ErgoAsia_app/supplier_detail.html', {
+        'supplier': supplier,
+        'approved_orders': approved_orders,
+    })
