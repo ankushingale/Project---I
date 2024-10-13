@@ -10,6 +10,7 @@ from datetime import datetime
 from django.http import JsonResponse
 
 # Create your views here.
+#Code By TechieDev
 
 def home(request):
     return render(request, 'home.html')
