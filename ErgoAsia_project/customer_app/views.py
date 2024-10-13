@@ -1,9 +1,11 @@
-from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, render,redirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from customer_app.models import *
 import random
-from datetime import datetime
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 from .models import Customerrequirements
 from .models import FinalRequirement, Customerdata
 from django.contrib.auth.models import User
@@ -92,53 +94,6 @@ def customersignin(request):
     return render(request, 'customer_app/signinnew.html')
 
 
-@csrf_exempt
-def customerrequirements(request): 
-    if request.method=="POST":
-                # first_name=request.POST.get('first_name')
-        # last_name=request.POST.get('last_name')
-        cid=request.POST.get('cid')
-        # email=request.POST.get('email')
-        # phone_no=request.POST.get('phone_number')
-        meal_preference=request.POST.get('meal_preference')
-        Part_Name=request.POST.get('Part_Name')
-        blank_name=request.POST.get('blank_name')
-        pdf_file=request.FILES.get('pdf_file')
-        company_name=request.POST.get('cname')
-        project_name=request.POST.get('pname')
-        part_no=request.POST.get('cpno')
-        description=request.POST.get('desc')
-        Part_revision=request.POST.get('pr')
-        Anual_volume=request.POST.get('av')
-        Quote_submission=request.POST.get('qs')
-        target_value=request.POST.get('tv')
-        start_of_production=request.POST.get('sop')
-        
-        project_id=random.randint(1000, 9999)
-        today_date = datetime.now().date()
-        formatted_today = today_date.strftime("%Y-%m-%d")
-        date_only = formatted_today.date()
-
-
-        
-
-
-
-
-        # def upload_pdf(request):
-        #     if request.method == 'POST':
-        #         pdf_file = request.FILES.get('pdf_file')
-        #         if pdf_file:
-        #             with open('media/' + pdf_file.name, 'wb') as f:
-        #                 for chunk in pdf_file.chunks():
-        #                     f.write(chunk)
-        #         return HttpResponse('File uploaded successfully!')
-        #     else:
-        #         return HttpResponse('No file uploaded!')
-
-        # upload_pdf(request)
-
-        data=Customerrequirements(project_id=project_id,meal_preference=meal_preference,Part_Name=Part_Name,blank_name=blank_name,upload_file=pdf_file,cname=company_name,pname=project_name,cpno=part_no,desc=description,pr=Part_revision,av=Anual_volume,qs=Quote_submission,tv=target_value,sop=start_of_production,request_date=date_only ,customer=Customerdata.objects.get(customer_id = cid))
 def customerrequirements(request):
     if request.method == "POST":
         cid = request.POST.get('cid')
