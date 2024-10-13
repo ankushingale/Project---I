@@ -1,19 +1,13 @@
-<<<<<<< HEAD
-=======
 from datetime import timezone
 from django.contrib import messages
->>>>>>> 7daf321d86d5f76c4cee45427b7adaf444d08430
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata, Customerrequirements, FinalRequirement
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
-<<<<<<< HEAD
 from datetime import datetime
 
-=======
 from django.http import JsonResponse
->>>>>>> 7daf321d86d5f76c4cee45427b7adaf444d08430
 
 # Create your views here.
 
@@ -35,9 +29,6 @@ def dashboard(request):
     
 
     # new_supplier_count = new_suppliers.count()
-
-
-
     return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count,'todays_date': today_date})
     # Querying all customer requirements
     approved_projects = FinalRequirement.objects.filter(approval_status='approved')

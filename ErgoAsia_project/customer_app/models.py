@@ -23,6 +23,18 @@ class PDFFileField(djongo_models.FileField):
         kwargs['format'] = 'pdf'
         super().__init__(*args, **kwargs)
 
+class FinalRequirement(models.Model):
+    WORKING_STATUS_CHOICES = (
+        ('working', 'Working'),
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+    )
+
+    APPROVAL_STATUS_CHOICES = (
+        ('approved', 'Approved'),
+        ('not_approved', 'Not Approved'),
+    )
+
 
 class Customerrequirements(models.Model):
     STATUS_CHOICES = (
@@ -56,21 +68,9 @@ class Customerrequirements(models.Model):
     tv = models.IntegerField()
     sop = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='working')
-    working_status = models.CharField(max_length=20, choices=WORKING_STATUS_CHOICES, default='pending')
-    approval_status = models.CharField(max_length=20, choices=APPROVAL_STATUS_CHOICES, default='not_approved')
+    working_status = models.CharField(max_length=20, choices=FinalRequirement.WORKING_STATUS_CHOICES, default='pending')
+    approval_status = models.CharField(max_length=20, choices=FinalRequirement.APPROVAL_STATUS_CHOICES, default='not_approved')
 
     def __str__(self):
         return f"{self.project_id} - {self.cname}"
     
-class FinalRequirement(models.Model):
-    WORKING_STATUS_CHOICES = (
-        ('working', 'Working'),
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
-    )
-
-    APPROVAL_STATUS_CHOICES = (
-        ('approved', 'Approved'),
-        ('not_approved', 'Not Approved'),
-    )
-
