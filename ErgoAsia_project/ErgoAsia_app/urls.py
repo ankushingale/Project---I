@@ -42,15 +42,7 @@ urlpatterns = [
     path('final_project_details/<int:project_id>/', views.final_project_details, name='final_project_details'),
     path('final-requirements/', views.final_requirements_view, name='final_requirements_view'),
     
-
-
-
-
-
-
-
-
-   
+    path('supplier/<int:supplier_id>/', views.supplier_detail, name='supplier_detail'),  # Add this line
 
 
 ]

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplier Detail</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <style>
+      /* Custom styles */
+      body {
+        background-color: #f8f9fa; /* Light grey background for body */
+      }
+
+      .card {
+        border: none; /* Remove border from card */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add subtle shadow to card */
+      }
+
+      .card-header {
+        background-color: #4e73df; /* Dark blue background for card header */
+        color: #ffffff; /* White text color for card header */
+        padding: 1rem 2rem; /* Padding for header */
+        border-bottom: 2px solid #2e59d9; /* Darker border bottom */
+      }
+
+      .card-body {
+        background-color: #ffffff; /* White background for card body */
+        border-bottom: 2px solid #dee2e6; /* Light border bottom */
+      }
+
+      .table {
+        margin-bottom: 0; /* Remove default bottom margin from table */
+      }
+
+      .table th {
+        font-weight: 600; /* Bold font for table headers */
+      }
+
+      .table th,
+      .table td {
+        vertical-align: middle; /* Center content vertically in table cells */
+      }
+
+      .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa; /* Alternate row background color */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3 class="mb-0">{{ supplier.name }}</h3>
+          <p class="mb-0">
+            <strong>Supplier ID:</strong> {{ supplier.supplier_id }}
+          </p>
+        </div>
+        <div class="card-body">
+          <p class="mb-1"><strong>Email:</strong> {{ supplier.email }}</p>
+          <p class="mb-1"><strong>Phone:</strong> {{ supplier.contact_no }}</p>
+          <p class="mb-0"><strong>Address:</strong> {{ supplier.address }}</p>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Approved Orders</h5>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if approved_orders %}
+                {% for order in approved_orders %}
+                  {% if order.meal_preference == supplier.supplier_category %}
+                  <tr>
+                    <td>{{ order.project_id }}</td>
+                    <td>{{ order.Part_Name }}</td>
+                    <td>{{ order.meal_preference }}</td>
+                    <td>{{ order.approval_status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center">
+                  No approved orders found for this supplier.
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+            
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -570,34 +570,43 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Supplier ID</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contact No</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">supplier category</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                {% for supplier in supplier_data %}
-                                <tr id="row{{ forloop.counter }}" {% if forloop.counter > 5 %} style="display:none;" {% endif %}>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1" />
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ supplier.full_name }}</h6>
-                                                <p class="text-xs text-secondary mb-0">{{ supplier.email }}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.supplier_id }}</p></td>
-                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.company_name }}</p></td>
-                                    <td><p class="text-xs font-weight-bold mb-0">{{ supplier.contact_no }}</p></td>
-                                    <td class="align-middle text-center">
-                                        <a href="{% url 'edit_supplier' supplier.supplier_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
-                                        <a href="{% url 'delete_supplier' supplier.supplier_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+                              {% for supplier in supplier_data %}
+                              <tr id="row{{ forloop.counter }}" {% if forloop.counter > 5 %} style="display:none;" {% endif %}>
+                                  <td>
+                                      <div class="d-flex px-2 py-1">
+                                          <div>
+                                              <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1" />
+                                          </div>
+                                          <div class="d-flex flex-column justify-content-center">
+                                              <!-- Make the supplier name clickable -->
+                                              <h6 class="mb-0 text-sm">
+                                                  <a href="{% url 'supplier_detail' supplier.supplier_id %}" class="text-secondary font-weight-bold text-xs">
+                                                      {{ supplier.full_name }}
+                                                  </a>
+                                              </h6>
+                                              <p class="text-xs text-secondary mb-0">{{ supplier.email }}</p>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td><p class="text-xs font-weight-bold mb-0">{{ supplier.supplier_id }}</p></td>
+                                  <td><p class="text-xs font-weight-bold mb-0">{{ supplier.company_name }}</p></td>
+                                  <td><p class="text-xs font-weight-bold mb-0">{{ supplier.contact_no }}</p></td>
+                                  <td><p class="text-xs font-weight-bold mb-0">{{ supplier.supplier_category }}</p></td>
+                                  <td class="align-middle text-center">
+                                      <a href="{% url 'edit_supplier' supplier.supplier_id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit">Edit</a>
+                                      <a href="{% url 'delete_supplier' supplier.supplier_id %}" class="text-danger font-weight-bold text-xs ms-2" data-toggle="tooltip" title="Delete">Delete</a>
+                                  </td>
+                              </tr>
+                              {% endfor %}
+                          </tbody> 
                         </table>
+                        
                     </div>
                     <div class="d-flex justify-content-center mt-3">
                         <button id="showMoreSupplierBtn" class="btn btn-secondary" onclick="showMoreSupplierRows()">Show More</button>

@@ -235,7 +235,7 @@
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
-            </li>
+            </li>            
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -328,63 +328,87 @@
       </div>
     
       <!-- Sign In Modal -->
-      <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+      <!-- Modal Structure for Sign In -->
+<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+  <!-- Modal dialog (holds the content of the modal) -->
+  <div class="modal-dialog">
+    <!-- Modal content (everything inside the modal) -->
+    <div class="modal-content">
+      <!-- Modal header (title and close button) -->
+      <div class="modal-header">
+        <!-- Modal title -->
+        <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+        <!-- Close button for the modal -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span> <!-- Close icon (x) -->
+        </button>
+      </div>
+
+      <!-- Modal body (where the content goes) -->
+      <div class="modal-body">
+        <!-- Card component to display customer profile details -->
+        <div class="card">
+          <!-- Card body that contains the actual customer details -->
+          <div class="card-body">
+            <!-- Card title (for Customer Profile) -->
+            <h5 class="card-title">Customer Profile</h5>
+
+            <!-- Row to organize customer data into two columns -->
+            <div class="row">
+              <!-- Loop through the customer profile data (Django template loop) -->
+              {% for i in customer_profil_data %}
+
+              <!-- First column: Customer ID, Name, and Location -->
+              <div class="col-md-6">
+                <!-- Customer ID section -->
+                <div class="profile-item">
+                  <div class="item-label">Customer ID:</div> <!-- Label -->
+                  <div class="item-value">{{ i.customer_id }}</div> <!-- Value from Django context -->
                 </div>
-                <div class="modal-body">
-                   
-                   
-                  <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Profile</h5>
-                        <div class="row">
-                            {% for i in customer_profil_data %}
-                            <div class="col-md-6">
-                                <div class="profile-item">
-                                    <div class="item-label">Customer ID:</div>
-                                    <div class="item-value">{{ i.customer_id }}</div>
-                                </div>
-                                <div class="profile-item">
-                                    <div class="item-label">Customer Name:</div>
-                                    <div class="item-value">{{ i.name }}</div>
-                                </div>
-                                <div class="profile-item">
-                                    <div class="item-label">Location:</div>
-                                    <div class="item-value">{{ i.address }}</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="profile-item">
-                                    <div class="item-label">Phone Number:</div>
-                                    <div class="item-value">{{ i.phno }}</div>
-                                </div>
-                                <div class="profile-item">
-                                    <div class="item-label">Email address:</div>
-                                    <div class="item-value">{{ i.email }}</div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <!-- Logout button -->
-                        <div class="text-right mt-3">
-                            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-                        </div>
-                    </div>
+
+                <!-- Customer Name section -->
+                <div class="profile-item">
+                  <div class="item-label">Customer Name:</div> <!-- Label -->
+                  <div class="item-value">{{ i.name }}</div> <!-- Value from Django context -->
                 </div>
-                
-                
-                
-                    
+
+                <!-- Customer Location section -->
+                <div class="profile-item">
+                  <div class="item-label">Location:</div> <!-- Label -->
+                  <div class="item-value">{{ i.address }}</div> <!-- Value from Django context -->
                 </div>
+              </div>
+
+              <!-- Second column: Phone Number and Email Address -->
+              <div class="col-md-6">
+                <!-- Customer Phone Number section -->
+                <div class="profile-item">
+                  <div class="item-label">Phone Number:</div> <!-- Label -->
+                  <div class="item-value">{{ i.phno }}</div> <!-- Value from Django context -->
+                </div>
+
+                <!-- Customer Email Address section -->
+                <div class="profile-item">
+                  <div class="item-label">Email Address:</div> <!-- Label -->
+                  <div class="item-value">{{ i.email }}</div> <!-- Value from Django context -->
+                </div>
+              </div>
+
+              {% endfor %} <!-- End of the loop -->
+            </div> <!-- End of row -->
+
+            <!-- Logout Button -->
+            <div class="text-right mt-3">
+              <!-- Logout link that redirects to the logout URL -->
+              <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
             </div>
-        </div>
-    </div>
+          </div> <!-- End of card-body -->
+        </div> <!-- End of card -->
+      </div> <!-- End of modal-body -->
+    </div> <!-- End of modal-content -->
+  </div> <!-- End of modal-dialog -->
+</div> <!-- End of modal -->
+
     
       </nav>
       <!-- End Navbar -->
@@ -838,6 +862,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
 
     <script>

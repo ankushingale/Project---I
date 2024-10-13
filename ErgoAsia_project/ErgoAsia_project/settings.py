@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 import sys
 import os
 import djongo
@@ -89,22 +88,43 @@ WSGI_APPLICATION = 'ErgoAsia_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# ergoasia
+
 
 # ergoasia
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': os.environ.get('MONGO_DB_NAME'),
-        'CLIENT': {
-            'host': os.environ.get('MONGO_URI'),
-            'username': os.environ.get('MONGO_USER'),
-            'password': os.environ.get('MONGO_PASS'),
-            'authMechanism': 'SCRAM-SHA-1',
-        }
+        'NAME': 'ergoasia',
+        # Other Djongo settings...
     }
 }
 
 
+
+# DATABASES = {   
+#     'default': {   
+#         'ENGINE': 'django.db.backends.mysql',   
+#         'NAME': 'ergoasia',   
+#         'USER': 'root',   
+#         'PASSWORD': 'mysqlroot',   
+#         'HOST': '127.0.0.1',   
+#         'PORT': '3306',   
+#         'OPTIONS': {   
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"   
+#         }   
+#     }   
+# } 
+
+
+# Password validation
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
