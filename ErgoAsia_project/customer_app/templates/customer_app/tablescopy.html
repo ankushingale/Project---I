@@ -383,9 +383,14 @@
                                       <input type="text" class="form-control" id="Part_Name" name="Part_Name" value="">
                                   </div>
                                   <div class="form-group">
-                                      <label for="blank_name">category</label>
-                                      <input type="text" class="form-control" id="blank_name" name="meal_preference" value="">
-                                  </div>
+                                    <label for="blank_name">Category</label>
+                                    <select class="form-control" id="blank_name" name="meal_preference">
+                                        <option value="Hardware" {% if requirement.meal_preference == 'Hardware' %}selected{% endif %}>Hardware</option>
+                                        <option value="Electrical" {% if requirement.meal_preference == 'Electrical' %}selected{% endif %}>Electrical</option>
+                                        <option value="Mechanical" {% if requirement.meal_preference == 'Mechanical' %}selected{% endif %}>Mechanical</option>
+                                    </select>
+                                </div>
+                                
                                   <div class="form-group">
                                     <label for="blank_name">Email</label>
                                     <input type="text" class="form-control" id="blank_name" value="{{customer_data.first.email}}" name="email">

@@ -338,8 +338,17 @@ def custom_logout(request):
 
 
 def final_requirement_list(request, status=None):
+    # Get customer_id from session
+    customer_id = request.session.get('customer_id')
+
+    if not customer_id:
+        # Redirect to login if customer_id not found in session
+        return redirect('signin')
+
+    # Filter by customer and working status
     if status:
-        final_requirements = FinalRequirement.objects.filter(working_status=status)
+        final_requirements = FinalRequirement.objects.filter(customer__customer_id=customer_id, working_status=status)
     else:
-        final_requirements = FinalRequirement.objects.all()
+        final_requirements = FinalRequirement.objects.filter(customer__customer_id=customer_id)
+
     return render(request, 'customer_app/filtered_requirements.html', {'final_requirements': final_requirements})
