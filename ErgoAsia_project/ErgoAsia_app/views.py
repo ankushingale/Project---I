@@ -5,9 +5,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from customer_app.models import Customerdata, Customerrequirements, FinalRequirement
 from manufacturer_app.models import SupplierRegistration
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+
 from django.http import JsonResponse
 
 # Create your views here.
+#Code By TechieDev
 
 def home(request):
     return render(request, 'home.html')
@@ -16,6 +19,19 @@ def ErgoAsiahome(request):
     return render(request, 'ErgoAsia_app/home.html')
 
 def dashboard(request):
+    
+    today_date = datetime.now().date()
+    formatted_today = today_date.strftime("%Y-%m-%d")
+    print(formatted_today)
+    data=Customerrequirements.objects.filter(request_date=formatted_today)
+    count = Customerrequirements.objects.count()
+    total_coustomer=Customerdata.objects.count()
+    supplier_count=SupplierRegistration.objects.count()
+    
+
+    # new_supplier_count = new_suppliers.count()
+    return render(request,'ErgoAsia_app/dashboard.html',{'req':data,'cnt':count,'total_coustomer' :total_coustomer,'supplier_count':supplier_count,'todays_date': today_date})
+    # Querying all customer requirements
     approved_projects = FinalRequirement.objects.filter(approval_status='approved')
     data = Customerrequirements.objects.all()
     count = Customerrequirements.objects.count()
